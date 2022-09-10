@@ -2,11 +2,7 @@
 	"name": "select",
 	"version": "0.0.1",
 	"description": "Scrollable select component.",
-	"author": {
-		"name": "Nikola Hristov",
-		"email": "nikola@lightrix.dev",
-		"url": "https://nikolahristov.tech"
-	},
+	"author": "lightrix",
 	"license": "MIT",
 	"private": true,
 	"main": "index.js",
