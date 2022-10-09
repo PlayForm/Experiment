@@ -3,8 +3,6 @@
 	"name": "select",
 	"version": "0.0.1",
 	"description": "Scrollable select component.",
-	"author": "nikolaxhristov",
-	"license": "MIT",
 	"private": true,
 	"main": "index.js",
 	"scripts": {
