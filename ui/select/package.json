@@ -8,6 +8,6 @@
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"devDependencies": {
-		"@lightrix/config": "0.0.5"
+		"@lightrix/config": "0.0.6"
 	}
 }
