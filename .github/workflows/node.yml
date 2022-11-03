@@ -40,3 +40,6 @@ jobs:
                   cache-dependency-path: ./ui/select/pnpm-lock.yaml
             - run: pnpm install
               working-directory: ./ui/select
+
+            - run: pnpm run test
+              working-directory: ./ui/select
