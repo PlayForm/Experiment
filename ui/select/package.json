@@ -16,7 +16,7 @@
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"devDependencies": {
-		"typescript-esbuild": "0.3.9"
+		"typescript-esbuild": "0.3.10"
 	},
 	"publishConfig": {
 		"access": "public"
