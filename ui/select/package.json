@@ -6,7 +6,7 @@
 	"license": "SEE LICENSE IN LICENSE",
 	"author": {
 		"name": "Playform",
-		"email": "Hello@Playform.Cloud",
+		"email": "hello@playform.cloud",
 		"url": "https://playform.cloud"
 	},
 	"type": "module",
@@ -16,7 +16,7 @@
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"devDependencies": {
-		"typescript-esbuild": "0.4.8"
+		"typescript-esbuild": "0.4.9"
 	},
 	"publishConfig": {
 		"access": "public"
