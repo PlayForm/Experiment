@@ -1,11 +1,14 @@
 {
-	"name": "select",
+	"name": "@playform/select",
 	"version": "1.1.2",
 	"private": false,
 	"description": "Scrollable select component.",
+	"keywords": [
+		"playform"
+	],
 	"license": "SEE LICENSE IN LICENSE",
 	"author": {
-		"name": "Source/Open",
+		"name": "⛲ Source ⁄ 🚪 Open —",
 		"email": "Source/Open@Playform.Cloud",
 		"url": "HTTPS://Playform.Cloud"
 	},
