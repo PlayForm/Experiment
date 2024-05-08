@@ -8,7 +8,7 @@
 	],
 	"license": "SEE LICENSE IN LICENSE",
 	"author": {
-		"name": "⛲ Source ⁄ 🚪 Open —",
+		"name": "🖋️ Source — 👐🏻 Open —",
 		"email": "Source/Open@PlayForm.Cloud",
 		"url": "HTTPS://PlayForm.Cloud"
 	},
@@ -19,7 +19,7 @@
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"devDependencies": {
-		"@playform/build": "0.0.7"
+		"@playform/build": "0.0.8"
 	},
 	"publishConfig": {
 		"access": "public"
