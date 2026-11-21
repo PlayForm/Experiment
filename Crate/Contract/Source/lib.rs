@@ -114,7 +114,7 @@ pub const TRUST_SIGNATURE_PATH: &str = "trust::bridge::signature::Signature";
 
 /// The v3 release decision no example or generated artifact may fabricate
 /// (`docs/00-system-constitution.md:53-55`).
-pub const EXPERIMENT_RELEASE_PATH: &str = "experiment::evaluate::Release";
+pub const EXPERIMENT_RELEASE_PATH: &str = "experiment::queue::release::Release";
 
 /// The v5 signed claim a v6.1 knowledge-release record may reference, by typed
 /// name (`docs/17-v61-constitution.md:96`).

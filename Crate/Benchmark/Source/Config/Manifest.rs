@@ -66,7 +66,7 @@ impl Manifest {
 
     /// Decode JSON text into a typed manifest plus its warnings.
     pub fn decode(text: &str) -> Result<(Self, Vec<Warning>), Fault> {
-        let value: Value = serde_json::from_str(text).map_err(|error| Fault::Json {
+        let value: Value = serde_json::from_str(text).map_err(|error| Fault::JSON {
             path: "config".to_owned(),
             detail: error.to_string(),
         })?;
@@ -79,7 +79,7 @@ impl Manifest {
                 .into_iter()
                 .flatten(),
         );
-        let mut manifest: Self = serde_json::from_value(value).map_err(|error| Fault::Json {
+        let mut manifest: Self = serde_json::from_value(value).map_err(|error| Fault::JSON {
             path: "config".to_owned(),
             detail: error.to_string(),
         })?;

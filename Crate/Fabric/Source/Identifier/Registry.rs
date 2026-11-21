@@ -8,7 +8,7 @@
 
 use crate::verdict::Verdict;
 use super::collision::Collision;
-use super::id::Id;
+use super::id::ID;
 
 /// A read-only view of the registry used for structural reservation checks.
 #[derive(Clone, Debug, Default, Eq, PartialEq)]
@@ -23,8 +23,8 @@ impl Registry {
     #[must_use]
     pub fn classify<'a>(
         &self,
-        admitted: impl IntoIterator<Item = &'a Id>,
-        candidate: &Id,
+        admitted: impl IntoIterator<Item = &'a ID>,
+        candidate: &ID,
     ) -> Collision {
         admitted.into_iter().fold(Collision::Clear, |found, entry| {
             match found {
@@ -42,8 +42,8 @@ impl Registry {
     #[must_use]
     pub fn reserve<'a>(
         &self,
-        admitted: impl IntoIterator<Item = &'a Id>,
-        candidate: &Id,
+        admitted: impl IntoIterator<Item = &'a ID>,
+        candidate: &ID,
     ) -> Verdict {
         candidate
             .shaped()

@@ -84,8 +84,8 @@ pub const DNS_TTL_SECONDS: u32 = 60;
 /// Typed name of the v3 attestation model the v5 bridge extends with signed
 /// scientific claims. Recorded as a name, not a Rust dependency on a crate a
 /// later card owns (`V4_TRUST_BRIDGE.md:23`).
-pub const EXPERIMENT_ATTESTATION_PATH: &str = "experiment::attestation::Attestation";
+pub const EXPERIMENT_ATTESTATION_PATH: &str = "experiment::interface::attestation::Attestation";
 
 /// Typed name of the v3 release decision a `publication.release` payload feeds
 /// (`V4_TRUST_BRIDGE.md:25`); a coupling by name, never an import.
-pub const EXPERIMENT_RELEASE_PATH: &str = "experiment::evaluate::Release";
+pub const EXPERIMENT_RELEASE_PATH: &str = "experiment::queue::release::Release";

@@ -13,7 +13,7 @@ use std::fmt;
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub enum Fault {
     /// Bytes could not be decoded as JSON at the named document path.
-    Json { path: &'static str, detail: String },
+    JSON { path: &'static str, detail: String },
     /// A required named input was absent and no documented default applies.
     Missing { key: &'static str },
     /// A fixed-length field had a different length than the protocol requires.
@@ -28,7 +28,7 @@ impl Fault {
     /// Wrap a `serde_json` error without leaking it as a panic.
     #[must_use]
     pub fn json(path: &'static str, error: &serde_json::Error) -> Self {
-        Self::Json {
+        Self::JSON {
             path,
             detail: error.to_string(),
         }
@@ -38,7 +38,7 @@ impl Fault {
     #[must_use]
     pub fn line(&self) -> String {
         match self {
-            Self::Json { path, detail } => {
+            Self::JSON { path, detail } => {
                 format!("fault: malformed JSON at {path}: {detail}")
             }
             Self::Missing { key } => format!("fault: required input {key} is missing"),

@@ -105,7 +105,7 @@ pub const TRUST_IDENTITY_PATH: &str = "trust::identity::identity::Identity";
 
 /// The v3 release decision no generated stamp can fabricate, by typed name
 /// (`docs/00-system-constitution.md:53-55`).
-pub const EXPERIMENT_RELEASE_PATH: &str = "experiment::evaluate::Release";
+pub const EXPERIMENT_RELEASE_PATH: &str = "experiment::queue::release::Release";
 
 /// The v5 federated economy this laboratory's publication bridge feeds, by
 /// typed name (`docs/17-v61-constitution.md:96`, `docs/26:22-24`).

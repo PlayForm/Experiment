@@ -32,12 +32,11 @@ members = [
 	"Crate/Custody",
 	# v6.2 - prun_laboratory_v62: cryptographic schema fabric.
 	"Crate/Fabric",
+	# The single `prun` command surface that composes the eleven models above.
+	"Crate/Integration",
+	# The bounded auto-recursive loop above the composed command surface.
+	"Crate/Loop",
 ]
-
-# Pending members, added by the consistency gate as each implementation card
-# lands its directory: Integration, Loop. Cargo
-# refuses a workspace whose member manifest does not exist yet, so a member is
-# listed here only once its crate is on disk.
 
 [workspace.package]
 edition = "2024"

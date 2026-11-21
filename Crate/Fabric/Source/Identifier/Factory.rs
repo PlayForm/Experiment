@@ -8,6 +8,7 @@
 //! (`docs/01:7-15`, `docs/03:5-18`).
 
 use crate::verdict::Verdict;
+use super::noncanonical::Noncanonical;
 
 /// Largest accepted logical label, matching the reference spec.
 pub const MAX_BYTES: usize = 128;
@@ -21,8 +22,8 @@ pub struct Factory {
     pub max_bytes: usize,
     /// Extra continuation bytes, fixed to `_.:/-` in this design.
     pub continuation_extra: &'static str,
-    /// Whether canonicalization rejects rather than rewrites input.
-    pub reject_noncanonical: bool,
+    /// How noncanonical input is treated.
+    pub noncanonical: Noncanonical,
 }
 
 impl Factory {
@@ -33,7 +34,7 @@ impl Factory {
             min_bytes: 1,
             max_bytes: MAX_BYTES,
             continuation_extra: "_.:/-",
-            reject_noncanonical: true,
+            noncanonical: Noncanonical::Reject,
         }
     }
 

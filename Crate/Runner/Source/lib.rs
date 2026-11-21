@@ -42,3 +42,6 @@ pub const PACKAGE: &str = "prun";
 pub const VERSION: &str = "0.3.0";
 /// The default exclusion glob (`README.md:118`, `Command.rs:54`).
 pub const DEFAULT_EXCLUDE: &str = "**/{node_modules,.git,target,dist,vendor}/**/*";
+
+/// The v0 config model consumed as a typed path name from Benchmark.
+pub const BENCHMARK_CONFIG_PATH: &str = "benchmark::config::Manifest";

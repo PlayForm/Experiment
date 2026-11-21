@@ -9,6 +9,8 @@
 //! `sql/v5_migration.sql:230-240` (signed publication release). Nothing is
 //! scanned, decrypted, sanitized, stamped or released here.
 
+#[path = "Source.rs"]
+pub mod source;
 #[path = "Sanitizer.rs"]
 pub mod sanitizer;
 #[path = "Declassification.rs"]
@@ -21,4 +23,5 @@ pub mod provenance;
 pub use declassification::Declassification;
 pub use provenance::Provenance;
 pub use sanitizer::Sanitizer;
+pub use source::Source;
 pub use stamp::Stamp;

@@ -8,35 +8,33 @@
 //! policy applied to findings supplied by a trusted caller; no document is read.
 
 use crate::{paper::Sanitization, Warning};
+use super::source::Source;
 
 /// A policy-driven sensitive-material scan.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct Sanitizer {
-    /// Whether the source is an unknown external repository
-    /// (`PUBLISHING.md:65-66`).
-    pub unknown_external_source: bool,
+    /// The provenance class of the source (`PUBLISHING.md:65-66`).
+    pub source: Source,
 }
 
 impl Sanitizer {
     /// Construct a sanitizer with the source trust fact.
     #[must_use]
-    pub const fn of(unknown_external_source: bool) -> Self {
-        Self {
-            unknown_external_source,
-        }
+    pub const fn of(source: Source) -> Self {
+        Self { source }
     }
 
     /// Apply the scan to already-classified findings. An empty finding set over
     /// a known source passes; any finding or unknown source is denied with a
     /// warning and routed to human review (`PUBLISHING.md:68-69`).
     pub fn scan(&self, findings: &[&str]) -> Result<Sanitization, Warning> {
-        match (self.unknown_external_source, findings.is_empty()) {
-            (false, true) => Ok(Sanitization::Passed),
-            (true, _) => Err(Warning::Denied {
+        match (self.source, findings.is_empty()) {
+            (Source::Known, true) => Ok(Sanitization::Passed),
+            (Source::External, _) => Err(Warning::Denied {
                 subject: "sanitization",
                 reason: "unknown external repository requires human review",
             }),
-            (false, false) => Err(Warning::Denied {
+            (Source::Known, false) => Err(Warning::Denied {
                 subject: "sanitization",
                 reason: findings.first().copied().unwrap_or("sensitive material"),
             }),

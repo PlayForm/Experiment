@@ -6,24 +6,20 @@
 //! (`Parallel.rs:46`, `Sequential.rs:30`) and take `parent()`.
 
 use std::path::Path;
+use super::kind::Kind;
 
 /// One non-excluded walk result, with only the flags the SUT inspects.
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Entry {
     path: String,
-    is_file: bool,
-    is_symlink: bool,
+    kind: Kind,
 }
 
 impl Entry {
     /// Build an entry from a path and its observed file-type flags.
     #[must_use]
-    pub const fn build(path: String, is_file: bool, is_symlink: bool) -> Self {
-        Self {
-            path,
-            is_file,
-            is_symlink,
-        }
+    pub const fn build(path: String, kind: Kind) -> Self {
+        Self { path, kind }
     }
 
     /// The path handed to `GlobSet::is_match` and later to `parent()`.
@@ -35,13 +31,13 @@ impl Entry {
     /// `DirEntry::file_type().is_file()` (`Entry.rs:50`).
     #[must_use]
     pub const fn is_file(&self) -> bool {
-        self.is_file
+        matches!(self.kind, Kind::File)
     }
 
     /// Whether this entry is a link; always false while `follow_links(false)`.
     #[must_use]
     pub const fn is_symlink(&self) -> bool {
-        self.is_symlink
+        matches!(self.kind, Kind::Symlink)
     }
 
     /// `Path::file_name()` as compared to `Option.Pattern`.

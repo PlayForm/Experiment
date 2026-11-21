@@ -95,7 +95,7 @@ pub const NON_DISCLOSURE: &str =
 /// Storage owns the durable tables; this crate only names the digest chain.
 pub const STORAGE_MIGRATION_PATH: &str = "storage::migration::chain::Chain";
 /// Custody grants gate any release of a data-encryption key.
-pub const CUSTODY_RECEIPT_PATH: &str = "custody::receipt::Receipt";
+pub const CUSTODY_RECEIPT_PATH: &str = "custody::custody::receipt::Receipt";
 /// The journal names canonical events without duplicating the catalog.
 pub const CONTRACT_EVENT_PATH: &str = "contract::event::kind::Kind";
 /// No generated artifact may amend the laboratory constitution.
@@ -105,4 +105,4 @@ pub const TRUST_SIGNATURE_PATH: &str = "trust::bridge::signature::Signature";
 /// Released knowledge claims may reference a bound capability.
 pub const MARKET_CLAIM_PATH: &str = "market::claim::claim::Claim";
 /// No worker claim or generated stamp can fabricate a release decision.
-pub const EXPERIMENT_RELEASE_PATH: &str = "experiment::evaluate::Release";
+pub const EXPERIMENT_RELEASE_PATH: &str = "experiment::queue::release::Release";

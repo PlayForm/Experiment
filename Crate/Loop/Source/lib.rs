@@ -86,12 +86,13 @@ pub const VERDICT_PATH: &str = "experiment::evaluate::verdict::Verdict";
 /// The v3 novelty gate consumed as a typed import.
 pub const GATE_IDENTITY_PATH: &str = "experiment::gate::identity::Identity";
 /// The single `prun` command surface that launches the loop.
-pub const INTEGRATION_LOOP_PATH: &str = "integration::dispatch::loop::Loop";
+pub const INTEGRATION_LOOP_PATH: &str = "integration::dispatch::loop_::Loop";
 /// A report is a projection, never authoritative measurement.
 pub const INTEGRATION_REPORT_PATH: &str = "integration::report::view::View";
 /// Custody grants gate any release of staged material.
-pub const CUSTODY_RECEIPT_PATH: &str = "custody::receipt::Receipt";
+pub const CUSTODY_RECEIPT_PATH: &str = "custody::custody::receipt::Receipt";
 /// The append-only result store owns durable evidence.
 pub const STORAGE_CHAIN_PATH: &str = "storage::migration::chain::Chain";
-/// The v6.2 schema fabric binds release claims; no generated stamp can emit one.
-pub const FABRIC_CLAIM_PATH: &str = "fabric::market::claim::Claim";
+/// The v6.2 fabric policy decision gates any release claim; no generated
+/// stamp can emit a decision.
+pub const FABRIC_DECISION_PATH: &str = "fabric::policy::decision::Decision";

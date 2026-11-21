@@ -23,7 +23,7 @@ pub struct Document {
 impl Document {
     /// Decode a result file, accumulating warnings for version drift.
     pub fn decode(text: &str, warnings: &mut Vec<Warning>) -> Result<Self, Fault> {
-        let value: Value = serde_json::from_str(text).map_err(|error| Fault::Json {
+        let value: Value = serde_json::from_str(text).map_err(|error| Fault::JSON {
             path: "hyperfine".to_owned(),
             detail: error.to_string(),
         })?;
@@ -32,7 +32,7 @@ impl Document {
             .and_then(Value::as_u64)
             .unwrap_or(SchemaVersion::NUMBER);
         let _ = SchemaVersion::accept(found, warnings);
-        serde_json::from_value(value).map_err(|error| Fault::Json {
+        serde_json::from_value(value).map_err(|error| Fault::JSON {
             path: "hyperfine".to_owned(),
             detail: error.to_string(),
         })

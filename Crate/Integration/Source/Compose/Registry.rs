@@ -70,7 +70,7 @@ impl Registry {
             Self::Contract => "contract::catalog::Catalog",
             Self::Storage => "storage::migration::chain::Chain",
             Self::Custody => "custody::custody::receipt::Receipt",
-            Self::Fabric => "fabric::identifier::id::Id",
+            Self::Fabric => "fabric::identifier::id::ID",
         }
     }
 

@@ -13,7 +13,7 @@ pub enum Fault {
     /// A path could not be read (prun_lab.py:190, :522).
     Io { path: String, detail: String },
     /// JSON was malformed or did not fit the typed model (:190, :606).
-    Json { path: String, detail: String },
+    JSON { path: String, detail: String },
     /// A schema version was outside the supported one (:191, :608).
     Version { found: String, expected: String },
     /// A required field was absent (schema.json `required`, :194).
@@ -44,7 +44,7 @@ impl Fault {
     pub fn line(&self) -> String {
         match self {
             Self::Io { path, detail } => format!("fault: cannot read {path}: {detail}"),
-            Self::Json { path, detail } => format!("fault: malformed JSON in {path}: {detail}"),
+            Self::JSON { path, detail } => format!("fault: malformed JSON in {path}: {detail}"),
             Self::Version { found, expected } => {
                 format!("fault: version {found} unsupported, expected {expected}")
             }

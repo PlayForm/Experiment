@@ -126,11 +126,11 @@ pub const TRUST_SIGNATURE_PATH: &str = "trust::bridge::signature::Signature";
 
 /// The v3 attestation type an `experiment.result.attest` payload feeds
 /// (`V4_TRUST_BRIDGE.md:23`, `EXPERIMENT_ATTESTATION` in `Crate/Experiment`).
-pub const EXPERIMENT_ATTESTATION_PATH: &str = "experiment::attestation::Attestation";
+pub const EXPERIMENT_ATTESTATION_PATH: &str = "experiment::interface::attestation::Attestation";
 
 /// The v3 release decision a publication stamp must not fabricate
 /// (`V4_TRUST_BRIDGE.md:25`, `SYSTEM.md:96-99`).
-pub const EXPERIMENT_RELEASE_PATH: &str = "experiment::evaluate::Release";
+pub const EXPERIMENT_RELEASE_PATH: &str = "experiment::queue::release::Release";
 
 /// The v2 requirement catalog a research case inherits its campaign from
 /// (`README.md:66-68`, `Crate/Campaign`).

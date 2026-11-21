@@ -9,6 +9,8 @@
 pub mod kind;
 #[path = "Id.rs"]
 pub mod id;
+#[path = "Noncanonical.rs"]
+pub mod noncanonical;
 #[path = "Scope.rs"]
 pub mod scope;
 #[path = "Factory.rs"]

@@ -11,7 +11,7 @@ use super::kind::Kind;
 
 /// One typed identifier with an immutable semantic kind and revision.
 #[derive(Clone, Debug, Eq, PartialEq)]
-pub struct Id {
+pub struct ID {
     /// Private semantic namespace of this identifier.
     pub kind: Kind,
     /// Canonical logical label, privately stored.
@@ -20,7 +20,7 @@ pub struct Id {
     pub revision: u64,
 }
 
-impl Id {
+impl ID {
     /// Construct an identifier from trusted, already canonical fields.
     #[must_use]
     pub fn of(kind: Kind, value: &str, revision: u64) -> Self {

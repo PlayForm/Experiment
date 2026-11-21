@@ -74,14 +74,14 @@ pub const LABORATORY_CONSTITUTION_PATH: &str = "laboratory::constitution::invari
 
 /// The two-phase custody receipt model owned by the sibling custody card;
 /// migration v6.1 stores its digests but never creates a receipt.
-pub const CUSTODY_RECEIPT_PATH: &str = "custody::receipt::Receipt";
+pub const CUSTODY_RECEIPT_PATH: &str = "custody::custody::receipt::Receipt";
 
 /// The signed claim a knowledge release may reference, by typed name
 /// (`docs/17-v61-constitution.md:96`).
 pub const MARKET_CLAIM_PATH: &str = "market::claim::claim::Claim";
 
 /// The v3 release decision no generated stamp can fabricate.
-pub const EXPERIMENT_RELEASE_PATH: &str = "experiment::evaluate::Release";
+pub const EXPERIMENT_RELEASE_PATH: &str = "experiment::queue::release::Release";
 
 /// The v4 signature model that signs a journal event; this crate records the
 /// digest, it does not verify the signature.

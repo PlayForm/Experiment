@@ -119,7 +119,7 @@ pub const CONTRACT_EVENT_PATH: &str = "contract::event::kind::Kind";
 /// The constitution no generated artifact may amend.
 pub const LABORATORY_CONSTITUTION_PATH: &str = "laboratory::constitution::invariant::Invariant";
 /// The release decision no worker claim can fabricate.
-pub const EXPERIMENT_RELEASE_PATH: &str = "experiment::evaluate::Release";
+pub const EXPERIMENT_RELEASE_PATH: &str = "experiment::queue::release::Release";
 /// The signature model trusted audit uses; this crate verifies nothing.
 pub const TRUST_SIGNATURE_PATH: &str = "trust::bridge::signature::Signature";
 /// The signed claim a sanitized knowledge release may reference.

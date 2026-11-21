@@ -68,3 +68,5 @@ pub const BENCHMARK_CONFIG_PATH: &str = "benchmark::config::Manifest";
 /// The v0 matrix type the campaign dimensions sit on top of
 /// (`Benchmark/Source/Plan/Matrix.rs`, `REQUIREMENTS.md:381-403`).
 pub const BENCHMARK_PLAN_PATH: &str = "benchmark::plan::Matrix";
+/// The SUT event model consumed as a typed path name from Runner.
+pub const RUNNER_EVENT_PATH: &str = "runner::event::Kind";

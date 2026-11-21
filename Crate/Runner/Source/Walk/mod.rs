@@ -10,6 +10,8 @@
 pub mod walker;
 #[path = "Entry.rs"]
 pub mod entry;
+#[path = "Kind.rs"]
+pub mod kind;
 #[path = "Glob.rs"]
 pub mod glob;
 #[path = "Exclusion.rs"]

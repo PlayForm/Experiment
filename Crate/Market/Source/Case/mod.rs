@@ -8,6 +8,8 @@
 
 #[path = "ResearchCase.rs"]
 pub mod research_case;
+#[path = "Falsifier.rs"]
+pub mod falsifier;
 #[path = "Hypothesis.rs"]
 pub mod hypothesis;
 #[path = "Prediction.rs"]
@@ -24,6 +26,7 @@ pub mod privacy;
 pub mod holdout;
 
 pub use holdout::Holdout;
+pub use falsifier::Falsifier;
 pub use hypothesis::Hypothesis;
 pub use prediction::Prediction;
 pub use privacy::Privacy;

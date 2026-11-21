@@ -29,6 +29,9 @@ use crate::cli::command::Command;
 use crate::compose::wiring::Wiring;
 use crate::report::view::View;
 
+/// The v6.2 fabric decision consumed as a typed path name at the merge point.
+pub const FABRIC_DECISION_PATH: &str = "fabric::policy::decision::Decision";
+
 /// Entry point: parse, compose, render. No branch and no loop lives here.
 fn main() {
     let words = std::env::args().skip(1).collect::<Vec<String>>();

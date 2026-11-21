@@ -12,7 +12,7 @@ use std::fmt;
 #[derive(Clone, Debug, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub enum Fault {
     /// Bytes could not be decoded as JSON at the named document path.
-    Json { path: &'static str, detail: String },
+    JSON { path: &'static str, detail: String },
     /// A required named field was absent and no documented default applies.
     Missing { key: &'static str },
     /// A path or `$ref` had none of the recognized shapes.
@@ -25,14 +25,14 @@ impl Fault {
     /// Wrap a `serde_json` error without leaking it as a panic.
     #[must_use]
     pub fn json(path: &'static str, error: &serde_json::Error) -> Self {
-        Self::Json { path, detail: error.to_string() }
+        Self::JSON { path, detail: error.to_string() }
     }
 
     /// Render one human-readable diagnostic line.
     #[must_use]
     pub fn line(&self) -> String {
         match self {
-            Self::Json { path, detail } => format!("fault: malformed JSON at {path}: {detail}"),
+            Self::JSON { path, detail } => format!("fault: malformed JSON at {path}: {detail}"),
             Self::Missing { key } => format!("fault: required input {key} is missing"),
             Self::Shape { domain, detail } => format!("fault: invalid {domain} shape ({detail})"),
             Self::Conflicting { domain, detail } => {

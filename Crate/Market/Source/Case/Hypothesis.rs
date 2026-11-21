@@ -6,6 +6,7 @@
 //! fingerprint) and `SYSTEM.md:120` (a hypothesis is not source verification).
 
 use crate::Permission;
+use super::falsifier::Falsifier;
 
 /// One independently proposed mechanism hypothesis.
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -14,8 +15,8 @@ pub struct Hypothesis {
     pub mechanism_key: &'static str,
     /// The falsifiable statement registered before outcomes (`AGENTS.md:9`).
     pub statement: &'static str,
-    /// Whether a concrete falsifier was declared (`README.md:44`).
-    pub has_falsifier: bool,
+    /// The declared falsifier status (`README.md:44`).
+    pub falsifier: Falsifier,
     /// Author-supplied information-gain basis; advisory only (`MARKET.md:45`).
     pub information_gain_basis: &'static str,
 }
@@ -27,7 +28,7 @@ impl Hypothesis {
         Self {
             mechanism_key: "mechanism_key",
             statement: "a falsifiable statement about one atomic mutation",
-            has_falsifier: false,
+            falsifier: Falsifier::Absent,
             information_gain_basis: "registered_basis",
         }
     }
@@ -36,9 +37,9 @@ impl Hypothesis {
     /// (`AGENTS.md:9`, `PUBLISHING.md:15`).
     #[must_use]
     pub const fn is_preregistered(&self) -> Permission {
-        match self.has_falsifier {
-            true => Permission::Allow,
-            false => Permission::Deny,
+        match self.falsifier {
+            Falsifier::Declared => Permission::Allow,
+            Falsifier::Absent => Permission::Deny,
         }
     }
 
