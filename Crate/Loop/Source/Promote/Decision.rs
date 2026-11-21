@@ -3,7 +3,7 @@
 //! source-of-truth measurements or an LLM-only verdict) and
 //! `26-acceptance-and-build-plan.md:49-53` (release denied under embargo until
 //! a separately approved change). Coupled to `experiment`'s authoritative
-/// verdict and to the local signed policy.
+//! verdict and to the local signed policy.
 
 use experiment::evaluate::verdict::Verdict;
 

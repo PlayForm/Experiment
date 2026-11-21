@@ -2,7 +2,7 @@
 //! Grounded in `00-system-constitution.md:35-36` (trace-off is the authoritative
 //! baseline) and `AGENT_CONTRACT.md:58-61` (keep failures and contaminated
 //! trials; quarantine on drift instead of editing data). Coupled to the
-/// authoritative verdict owned by `experiment::evaluate`.
+//! authoritative verdict owned by `experiment::evaluate`.
 
 use experiment::evaluate::verdict::Verdict;
 

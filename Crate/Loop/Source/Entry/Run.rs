@@ -1,7 +1,7 @@
 //! A typed description of one bounded loop launch.
 //! Grounded in `26-acceptance-and-build-plan.md:34-58` (the first vertical
 //! slice runs as a bounded sequence of trusted stages) and the Integration
-/// crate's `prun loop` dispatch. This value never starts a process.
+//! crate's `prun loop` dispatch. This value never starts a process.
 
 use super::args::Args;
 
