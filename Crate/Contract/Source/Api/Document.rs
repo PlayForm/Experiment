@@ -60,8 +60,8 @@ impl Document {
     /// Whether this document is a request/response API.
     #[must_use]
     pub const fn is_http(self) -> crate::Permission {
-        match self.spec.as_bytes().first() {
-            Some(b'o') => crate::Permission::Allow,
+        match self.spec {
+            "openapi 3.1.1" => crate::Permission::Allow,
             _ => crate::Permission::Deny,
         }
     }
