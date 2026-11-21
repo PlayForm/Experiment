@@ -1,1 +1,39 @@
-# Workspace
+# PlayForm/Run - clean-room re-synthesis workspace.
+#
+# Members are listed in dependency order: each crate consumes the typed model
+# of the crate before it, following the research corpus from v0 (the only
+# runnable benchmark) through v6.2 (the cryptographic schema fabric). The
+# single research directory each member re-implements is named on its line.
+# Member directories are created by the implementation cards that follow this
+# charter; this manifest is the map those cards build against.
+
+[workspace]
+resolver = "3"
+members = [
+	# v0 - prun_lab: runnable Docker/Hyperfine benchmark matrix and controller.
+	"Crate/Benchmark",
+	# v0 - prun_lab: release/diagnostic runner groups around the Module/Run SUT.
+	"Crate/Runner",
+	# v2 - prun_optimization_v2: campaign dimensions and autonomous-week playbook.
+	"Crate/Campaign",
+	# v3 - prun_optimization_v3: experiment lifecycle, 5-way fanout, research gate.
+	"Crate/Experiment",
+	# v4 - prun_optimization_v4: trust/security delta, mTLS/HPKE identities.
+	"Crate/Trust",
+	# v5 - prun_optimization_v5: federated research economy and signed claims.
+	"Crate/Market",
+	# v6.1 - prun_laboratory_v6_1: deterministic laboratory control plane.
+	"Crate/Laboratory",
+	# v6.1 - prun_laboratory_v6_1: machine-readable contracts and event catalog.
+	"Crate/Contract",
+]
+
+# Pending members, added by the consistency gate as each implementation card
+# lands its directory: Storage, Custody, Fabric, Integration, Loop. Cargo
+# refuses a workspace whose member manifest does not exist yet, so a member is
+# listed here only once its crate is on disk.
+
+[workspace.package]
+edition = "2024"
+authors = ["PlayForm <Community@PlayForm.Cloud>"]
+license = "CC0-1.0"
