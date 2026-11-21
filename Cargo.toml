@@ -35,5 +35,4 @@ members = [
 
 [workspace.package]
 edition = "2024"
-authors = ["PlayForm <Community@PlayForm.Cloud>"]
 license = "CC0-1.0"
