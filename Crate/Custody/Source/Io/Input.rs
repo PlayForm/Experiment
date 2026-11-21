@@ -99,6 +99,6 @@ impl Input {
     /// The inbound schema that validates this value.
     #[must_use]
     pub fn schema(&self) -> Schema {
-        Schema::OfflineTask
+        Schema::Task
     }
 }

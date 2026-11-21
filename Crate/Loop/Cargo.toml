@@ -1,0 +1,20 @@
+[package]
+name = "prun-loop"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+
+# Crate/Loop: the bounded, auto-recursive self-improvement loop.
+# Model-only: every leaf is a typed value or a named transition. No candidate
+# code is executed, no build is launched, no git write is performed. Promotion
+# is a typed decision owned by the trusted evaluator and release gate.
+
+[lib]
+name = "prun_loop"
+path = "Source/lib.rs"
+
+[dependencies]
+campaign = { path = "../Campaign" }
+experiment = { path = "../Experiment" }
+benchmark = { path = "../Benchmark" }
+runner = { path = "../Runner" }

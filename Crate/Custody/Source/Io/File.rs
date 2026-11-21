@@ -54,8 +54,8 @@ impl File {
     #[must_use]
     pub fn schema(&self) -> Option<Schema> {
         match self.role {
-            Role::Task => Some(Schema::OfflineTask),
-            Role::Submission => Some(Schema::OfflineSubmission),
+            Role::Task => Some(Schema::Task),
+            Role::Submission => Some(Schema::Submission),
             Role::Repository | Role::References | Role::Feedback | Role::Artifact | Role::Unknown => {
                 None
             }

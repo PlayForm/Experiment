@@ -18,7 +18,7 @@ pub enum LocalTool {
     /// Ordinary local file reader.
     Reader,
     /// Bounded `git diff` in a throwaway worktree.
-    GitDiff,
+    Diff,
 }
 
 impl LocalTool {
@@ -30,8 +30,8 @@ impl LocalTool {
             Self::Rustfmt => "rustfmt",
             Self::Check => "cargo-check",
             Self::Test => "cargo-test-local",
-            Self::ReadFile => "read-file",
-            Self::GitDiff => "git-diff",
+            Self::Reader => "read-file",
+            Self::Diff => "git-diff",
         }
     }
 
@@ -40,7 +40,7 @@ impl LocalTool {
     pub fn authoritative(&self) -> bool {
         match self {
             Self::Ripgrep | Self::Rustfmt | Self::Check | Self::Test | Self::Reader
-            | Self::GitDiff => false,
+            | Self::Diff => false,
         }
     }
 
@@ -53,7 +53,7 @@ impl LocalTool {
             "cargo-check" => Some(Self::Check),
             "cargo-test-local" => Some(Self::Test),
             "read-file" => Some(Self::Reader),
-            "git-diff" => Some(Self::GitDiff),
+            "git-diff" => Some(Self::Diff),
             _ => None,
         }
     }

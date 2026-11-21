@@ -28,10 +28,14 @@ members = [
 	"Crate/Contract",
 	# v6.1 - prun_laboratory_v6_1: additive migration chain and result store.
 	"Crate/Storage",
+	# v6.1 - prun_laboratory_v6_1: two-phase custody and offline worker protocol.
+	"Crate/Custody",
+	# v6.2 - prun_laboratory_v62: cryptographic schema fabric.
+	"Crate/Fabric",
 ]
 
 # Pending members, added by the consistency gate as each implementation card
-# lands its directory: Custody, Fabric, Integration, Loop. Cargo
+# lands its directory: Integration, Loop. Cargo
 # refuses a workspace whose member manifest does not exist yet, so a member is
 # listed here only once its crate is on disk.
 

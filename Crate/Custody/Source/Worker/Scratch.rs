@@ -55,7 +55,9 @@ impl Scratch {
     pub fn accepts(&self, path: &str, bytes: u64) -> Permission {
         self.within(path)
             .and(Permission::of(bytes > 0))
-            .and(Permission::of(self.used_bytes + bytes <= self.quota_bytes))
+            .and(Permission::of(
+                self.used_bytes.saturating_add(bytes) <= self.quota_bytes,
+            ))
             .and(self.network_mode.offline())
             .and(Permission::of(self.sealed == Switch::Off))
     }

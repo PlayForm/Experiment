@@ -1,0 +1,25 @@
+[package]
+name = "integration"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+
+# The single user-facing surface: one binary whose command modules delegate to
+# the typed models already owned by the eleven sibling crates. No domain logic
+# is re-implemented here.
+[[bin]]
+name = "prun"
+path = "Source/Library.rs"
+
+[dependencies]
+benchmark = { path = "../Benchmark" }
+runner = { path = "../Runner" }
+campaign = { path = "../Campaign" }
+experiment = { path = "../Experiment" }
+trust = { path = "../Trust" }
+market = { path = "../Market" }
+laboratory = { path = "../Laboratory" }
+contract = { path = "../Contract" }
+storage = { path = "../Storage" }
+custody = { path = "../Custody" }
+fabric = { path = "../Fabric" }

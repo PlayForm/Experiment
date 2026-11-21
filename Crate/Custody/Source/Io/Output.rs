@@ -112,6 +112,6 @@ impl Output {
     /// The outbound schema that validates this value.
     #[must_use]
     pub fn schema(&self) -> Schema {
-        Schema::OfflineSubmission
+        Schema::Submission
     }
 }

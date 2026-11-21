@@ -16,13 +16,13 @@ pub enum Recovery {
     /// Preserve staged bytes but exclude them from commit.
     Quarantine,
     /// Retry with the same idempotency token and a fresh fence.
-    RetryFenced,
+    Fenced,
     /// Ask the scheduler to reschedule on another eligible holder.
     Reschedule,
     /// Stop and request an authorized human owner decision.
-    RequestReview,
+    Review,
     /// Raise an incident priority without notifying the worker.
-    EscalateOwner,
+    Escalate,
     /// Preserve an inconclusive result as an outcome.
     Retain,
     /// End a signed campaign lifecycle with no further proposals.
@@ -35,10 +35,10 @@ impl Recovery {
     pub fn for_case(case: &Case) -> Self {
         match (case.severity, case.cause) {
             (Severity::Critical, Cause::Sandbox) => Self::Terminate,
-            (Severity::Critical, Cause::Rights | Cause::Disclosure) => Self::RequestReview,
+            (Severity::Critical, Cause::Rights | Cause::Disclosure) => Self::Review,
             (Severity::Critical, _) => Self::Quarantine,
             (Severity::High, Cause::Capacity) => Self::Reschedule,
-            (Severity::High, Cause::Idempotency | Cause::Epoch) => Self::RetryFenced,
+            (Severity::High, Cause::Idempotency | Cause::Epoch) => Self::Fenced,
             (Severity::High, Cause::Evidence | Cause::Oracle) => Self::Retain,
             (Severity::High, _) => Self::Deny,
             (Severity::Medium, Cause::Recursion) => Self::Terminate,
@@ -53,10 +53,10 @@ impl Recovery {
         match self {
             Self::Deny
             | Self::Quarantine
-            | Self::RetryFenced
+            | Self::Fenced
             | Self::Reschedule
-            | Self::RequestReview
-            | Self::EscalateOwner
+            | Self::Review
+            | Self::Escalate
             | Self::Retain
             | Self::Terminate => false,
         }

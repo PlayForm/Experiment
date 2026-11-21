@@ -9,24 +9,24 @@
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum Schema {
     /// Inbound `/workspace/task.json`.
-    OfflineTask,
+    Task,
     /// Outbound `/workspace/out/submission.json`.
-    OfflineSubmission,
+    Submission,
 }
 
 impl Schema {
     /// The two schemas in protocol order.
     #[must_use]
     pub fn all() -> [Self; 2] {
-        [Self::OfflineTask, Self::OfflineSubmission]
+        [Self::Task, Self::Submission]
     }
 
     /// The schema `$id` recorded in the research corpus.
     #[must_use]
     pub fn id(&self) -> &'static str {
         match self {
-            Self::OfflineTask => crate::TASK_SCHEMA_ID,
-            Self::OfflineSubmission => crate::SUBMISSION_SCHEMA_ID,
+            Self::Task => crate::TASK_SCHEMA_ID,
+            Self::Submission => crate::SUBMISSION_SCHEMA_ID,
         }
     }
 
@@ -34,8 +34,8 @@ impl Schema {
     #[must_use]
     pub fn path(&self) -> &'static str {
         match self {
-            Self::OfflineTask => crate::TASK_PATH,
-            Self::OfflineSubmission => crate::SUBMISSION_PATH,
+            Self::Task => crate::TASK_PATH,
+            Self::Submission => crate::SUBMISSION_PATH,
         }
     }
 
@@ -43,8 +43,8 @@ impl Schema {
     #[must_use]
     pub fn inbound(&self) -> bool {
         match self {
-            Self::OfflineTask => true,
-            Self::OfflineSubmission => false,
+            Self::Task => true,
+            Self::Submission => false,
         }
     }
 }
