@@ -1,0 +1,77 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6.1/v61-physical-allocation.schema.json",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"allocation_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"holder_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"research_track_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"allocated_cpu_cores": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"allocated_gpu_devices": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"allocated_memory_bytes": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"allocated_storage_bytes": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"benchmark_lease_ids": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+			},
+			"maxItems": 1000
+		},
+		"hardware_exclusivity": {
+			"type": "boolean"
+		},
+		"allocation_policy_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"active_from": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"expires_at": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"excluded_from_performance_scoring": {
+			"const": true
+		}
+	},
+	"required": [
+		"allocation_id",
+		"holder_id",
+		"research_track_id",
+		"allocated_cpu_cores",
+		"allocated_gpu_devices",
+		"allocated_memory_bytes",
+		"allocated_storage_bytes",
+		"benchmark_lease_ids",
+		"hardware_exclusivity",
+		"allocation_policy_digest",
+		"active_from",
+		"expires_at",
+		"excluded_from_performance_scoring"
+	]
+}

@@ -1,0 +1,13 @@
+{
+	"study_assignment_id": "study-a",
+	"curriculum_id": "course-1",
+	"research_track_id": "track-a",
+	"view_id": "view-a",
+	"challenge_family": "implementation",
+	"worker_visible_task_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"allowed_output_classes": ["patch", "research-claim"],
+	"assigned_by": "trusted-curriculum-service",
+	"allocation_id": "allocation-a",
+	"assignment_policy_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"created_at": "2026-11-21T01:00:00Z"
+}

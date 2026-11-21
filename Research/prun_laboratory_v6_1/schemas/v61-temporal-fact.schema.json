@@ -1,0 +1,85 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6.1/v61-temporal-fact.schema.json",
+	"title": "v61-temporal-fact",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"fact_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"subject_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"event_time": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"observed_at": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"valid_from": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"valid_to": {
+			"anyOf": [
+				{
+					"type": "string",
+					"format": "date-time"
+				},
+				{
+					"type": "null"
+				}
+			]
+		},
+		"recorded_at": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"supersedes_fact_id": {
+			"anyOf": [
+				{
+					"type": "string",
+					"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+				},
+				{
+					"type": "null"
+				}
+			]
+		},
+		"source_event_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"clock_domain": {
+			"type": "string",
+			"enum": ["utc", "host-monotonic"]
+		},
+		"clock_uncertainty_ns": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"fact_payload_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		}
+	},
+	"required": [
+		"fact_id",
+		"subject_id",
+		"event_time",
+		"observed_at",
+		"valid_from",
+		"valid_to",
+		"recorded_at",
+		"supersedes_fact_id",
+		"source_event_id",
+		"clock_domain",
+		"clock_uncertainty_ns",
+		"fact_payload_digest"
+	]
+}

@@ -1,0 +1,10 @@
+# Demonstration only. Production must pin base image digest and use rootless runtime.
+FROM rust:1-bookworm AS builder
+WORKDIR /src
+COPY rust/market-prototype/Cargo.toml Cargo.toml
+COPY rust/market-prototype/src src
+RUN cargo build --release
+FROM debian:bookworm-slim
+COPY --from=builder /src/target/release/prun-research-market-prototype /usr/local/bin/research-market
+USER 65532:65532
+ENTRYPOINT ["/usr/local/bin/research-market"]

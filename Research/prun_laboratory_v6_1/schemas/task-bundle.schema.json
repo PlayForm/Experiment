@@ -1,0 +1,96 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/task-bundle.schema.json",
+	"title": "task-bundle",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"task_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"campaign_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"case_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"role": {
+			"type": "string",
+			"enum": [
+				"researcher",
+				"skeptic",
+				"patcher",
+				"test-author",
+				"publication-drafter",
+				"integration-researcher",
+				"scout"
+			]
+		},
+		"source_snapshot": {
+			"$ref": "./source-snapshot.schema.json"
+		},
+		"input_artifacts": {
+			"type": "array",
+			"items": {
+				"$ref": "./artifact-ref.schema.json"
+			}
+		},
+		"policy_capsule_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"scope_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"feedback_digest": {
+			"type": ["string", "null"]
+		},
+		"deadline_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		},
+		"output_contract": {
+			"type": "string",
+			"enum": [
+				"patch",
+				"research-claim",
+				"test-proposal",
+				"draft-paper",
+				"integration-proposal"
+			]
+		},
+		"generation": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"task_nonce": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		}
+	},
+	"required": [
+		"task_id",
+		"campaign_id",
+		"case_id",
+		"role",
+		"source_snapshot",
+		"input_artifacts",
+		"policy_capsule_digest",
+		"scope_digest",
+		"deadline_utc",
+		"output_contract",
+		"generation",
+		"task_nonce"
+	]
+}

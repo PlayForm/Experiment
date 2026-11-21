@@ -1,0 +1,18 @@
+{
+	"holder_id": "worker-17",
+	"holder_role": "offline-agent",
+	"environment_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"trust_domain": "tenant-1",
+	"tenant_id": "tenant-1",
+	"media_types": ["text/x-rust"],
+	"accepted_classes": ["public", "internal"],
+	"supported_purposes": ["research"],
+	"max_bytes": 1024000,
+	"free_bytes": 204800,
+	"encryption_at_rest": true,
+	"ephemeral_storage": true,
+	"network_mode": "none",
+	"credential_fingerprint": "0000000000000000000000000000000000000000000000000000000000000000",
+	"attestation_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"expires_at": "2026-11-21T01:00:00Z"
+}

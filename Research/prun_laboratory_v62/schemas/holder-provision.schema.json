@@ -1,0 +1,77 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://contracts.example.invalid/v6.2/holder-provision.schema.json",
+	"title": "Trusted supervisor statement; NOT worker-asserted",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"holder": {
+			"type": "string",
+			"pattern": "^(?:[A-Za-z0-9_-]{43})(?![\\s\\S])"
+		},
+		"image_digest": {
+			"type": "string",
+			"pattern": "^(?:[a-f0-9]{64})(?![\\s\\S])"
+		},
+		"role": {
+			"type": "string",
+			"enum": [
+				"schema_factory",
+				"opaque_resolver",
+				"key_broker",
+				"identity_issuer",
+				"policy_engine",
+				"journal",
+				"telemetry_control",
+				"telemetry_product",
+				"operator_gateway",
+				"offline_supervisor",
+				"llm_worker",
+				"builder",
+				"oracle",
+				"benchmark"
+			]
+		},
+		"network_class": {
+			"type": "string",
+			"enum": ["offline", "internal", "operator"]
+		},
+		"allowed_secret_classes": {
+			"type": "array",
+			"uniqueItems": true,
+			"items": {
+				"type": "string",
+				"enum": [
+					"none",
+					"workload_cert",
+					"scoped_signer",
+					"artifact_dek",
+					"intermediate_ca",
+					"private_crosswalk"
+				]
+			}
+		},
+		"attestation_digest": {
+			"type": "string",
+			"pattern": "^(?:[a-f0-9]{64})(?![\\s\\S])"
+		},
+		"policy_digest": {
+			"type": "string",
+			"pattern": "^(?:[a-f0-9]{64})(?![\\s\\S])"
+		},
+		"valid_until": {
+			"type": "string",
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"holder",
+		"image_digest",
+		"role",
+		"network_class",
+		"allowed_secret_classes",
+		"attestation_digest",
+		"policy_digest",
+		"valid_until"
+	]
+}

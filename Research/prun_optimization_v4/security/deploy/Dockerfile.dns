@@ -1,0 +1,9 @@
+# Development image. Pin the resolved digest in production.
+FROM rust:1-slim AS build
+RUN cargo install --locked hickory-dns --version 0.26.3 --root /usr/local
+FROM debian:stable-slim
+COPY --from=build /usr/local/bin/hickory-dns /usr/local/bin/hickory-dns
+COPY dns/named.toml /etc/hickory/named.toml
+COPY dns/lab.internal.zone /etc/hickory/zones/lab.internal.zone
+EXPOSE 53/udp 53/tcp
+ENTRYPOINT ["hickory-dns", "--config", "/etc/hickory/named.toml", "--zonedir", "/etc/hickory/zones"]

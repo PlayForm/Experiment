@@ -1,0 +1,93 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/research-claim.schema.json",
+	"title": "research-claim",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"claim_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"case_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"task_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"stance": {
+			"type": "string",
+			"enum": ["proponent", "skeptic", "alternative", "neutral"]
+		},
+		"hypothesis": {
+			"type": "string",
+			"minLength": 1
+		},
+		"predicted_effect_pct": {
+			"type": "number"
+		},
+		"prediction_probability": {
+			"type": "number",
+			"minimum": 0,
+			"maximum": 1
+		},
+		"conditions": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			}
+		},
+		"falsification_tests": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			}
+		},
+		"references": {
+			"type": "array",
+			"items": {
+				"$ref": "./artifact-ref.schema.json"
+			}
+		},
+		"claim_artifact": {
+			"$ref": "./artifact-ref.schema.json"
+		},
+		"conflict_of_interest": {
+			"type": "string",
+			"minLength": 0
+		},
+		"blind_cohort_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"created_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"claim_id",
+		"case_id",
+		"task_id",
+		"stance",
+		"hypothesis",
+		"predicted_effect_pct",
+		"prediction_probability",
+		"conditions",
+		"falsification_tests",
+		"references",
+		"claim_artifact",
+		"conflict_of_interest",
+		"blind_cohort_id",
+		"created_utc"
+	]
+}

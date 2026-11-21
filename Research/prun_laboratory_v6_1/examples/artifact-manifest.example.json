@@ -1,0 +1,8 @@
+{
+	"manifest_id": "sample-id",
+	"artifacts": [],
+	"root_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"subject_id": "sample-id",
+	"manifest_type": "task",
+	"created_utc": "2026-11-21T10:00:00Z"
+}

@@ -1,0 +1,13 @@
+{
+	"study_outcome_id": "outcome-a",
+	"study_assignment_id": "study-a",
+	"proposal_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"trusted_oracle_result_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"trusted_benchmark_result_digest": null,
+	"verdict": "inconclusive",
+	"reproducibility": "not-measured",
+	"published_insight_digest": null,
+	"evaluator_id": "trusted-study-evaluator",
+	"policy_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"recorded_at": "2026-11-21T01:00:00Z"
+}

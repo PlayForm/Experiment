@@ -1,0 +1,6 @@
+{
+	"credential_serial": "sample-id",
+	"reason_code": "compromised",
+	"request_id": "sample-id",
+	"requested_by": "sample-id"
+}

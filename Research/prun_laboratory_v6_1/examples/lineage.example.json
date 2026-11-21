@@ -1,0 +1,10 @@
+{
+	"subject_id": "sample-id",
+	"subject_kind": "mutation",
+	"parents": [],
+	"children": [],
+	"evidence_attestation_ids": [],
+	"current_state": "sample-id",
+	"lineage_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"as_of_seq": 1
+}

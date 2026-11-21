@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.lab.invalid/v6.1/v61-offline-submission.schema.json",
+  "title": "Only model-visible outgoing manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "local_nonce": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_-]{1,64}$"
+    },
+    "patch_file": {
+      "anyOf": [
+        {
+          "const": "/workspace/out/change.patch"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "claims_file": {
+      "anyOf": [
+        {
+          "const": "/workspace/out/claims.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "test_proposals_dir": {
+      "anyOf": [
+        {
+          "const": "/workspace/out/proposed-tests"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "paper_draft_file": {
+      "anyOf": [
+        {
+          "const": "/workspace/out/paper-draft.md"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "claim_of_success": {
+      "type": "string",
+      "enum": [
+        "not-claimed",
+        "local-test-only",
+        "unknown"
+      ]
+    }
+  },
+  "required": [
+    "local_nonce",
+    "patch_file",
+    "claims_file",
+    "test_proposals_dir",
+    "paper_draft_file",
+    "claim_of_success"
+  ]
+}

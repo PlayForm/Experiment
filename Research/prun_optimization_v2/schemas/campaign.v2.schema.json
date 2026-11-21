@@ -1,0 +1,724 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://example.invalid/prun-campaign.v2.schema.json",
+	"title": "PlayForm/Run Adaptive Performance Campaign v2",
+	"description": "Proposed specification only; not consumed by original prun_lab.py v1",
+	"type": "object",
+	"additionalProperties": false,
+	"required": [
+		"schema_version",
+		"project",
+		"campaign",
+		"containers",
+		"hardware",
+		"builds",
+		"feature_groups",
+		"heuristics",
+		"fixtures",
+		"workloads",
+		"benchmark",
+		"agents",
+		"storage"
+	],
+	"properties": {
+		"schema_version": {
+			"const": 2
+		},
+		"project": {
+			"type": "object",
+			"properties": {
+				"name": {
+					"type": "string",
+					"minLength": 1
+				},
+				"repository": {
+					"type": "string",
+					"minLength": 1
+				},
+				"source_ref": {
+					"type": "string",
+					"minLength": 1
+				},
+				"target_binary": {
+					"type": "string",
+					"minLength": 1
+				},
+				"compatibility": {
+					"type": "string",
+					"enum": ["exact", "conditional", "experimental"]
+				}
+			},
+			"required": [
+				"name",
+				"repository",
+				"source_ref",
+				"target_binary",
+				"compatibility"
+			],
+			"additionalProperties": false
+		},
+		"campaign": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "string",
+					"pattern": "^[a-z0-9][a-z0-9._-]*$"
+				},
+				"description": {
+					"type": "string"
+				},
+				"mode": {
+					"type": "string",
+					"enum": [
+						"manual",
+						"human_reviewed_autonomous",
+						"fully_trusted_local"
+					]
+				},
+				"duration_hours": {
+					"type": "integer",
+					"minimum": 1
+				},
+				"workload_split_seed": {
+					"type": "integer",
+					"minimum": 0
+				},
+				"objectives": {
+					"type": "object",
+					"properties": {
+						"primary": {
+							"type": "string",
+							"enum": [
+								"paired_wall_time",
+								"throughput",
+								"cpu_time"
+							]
+						},
+						"weights": {
+							"type": "object",
+							"additionalProperties": {
+								"type": "number",
+								"minimum": 0
+							}
+						},
+						"secondary": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							},
+							"minItems": 0
+						},
+						"min_practical_speedup_fraction": {
+							"type": "number",
+							"minimum": 0,
+							"maximum": 1
+						},
+						"maximum_critical_regression_fraction": {
+							"type": "number",
+							"minimum": 0,
+							"maximum": 1
+						},
+						"confidence_level": {
+							"type": "number",
+							"exclusiveMinimum": 0,
+							"exclusiveMaximum": 1
+						}
+					},
+					"required": [
+						"primary",
+						"weights",
+						"min_practical_speedup_fraction",
+						"maximum_critical_regression_fraction",
+						"confidence_level"
+					],
+					"additionalProperties": false
+				},
+				"budgets": {
+					"type": "object",
+					"properties": {
+						"max_mutations": {
+							"type": "integer",
+							"minimum": 1
+						},
+						"max_builds": {
+							"type": "integer",
+							"minimum": 1
+						},
+						"max_trial_blocks": {
+							"type": "integer",
+							"minimum": 1
+						},
+						"max_concurrent_coding_agents": {
+							"type": "integer",
+							"minimum": 1
+						},
+						"max_concurrent_builds": {
+							"type": "integer",
+							"minimum": 1
+						},
+						"max_concurrent_benchmarks_per_host": {
+							"type": "integer",
+							"minimum": 1
+						},
+						"max_disk_gb": {
+							"type": "integer",
+							"minimum": 1
+						},
+						"min_free_disk_gb": {
+							"type": "integer",
+							"minimum": 1
+						},
+						"max_agent_attempts_per_mutation": {
+							"type": "integer",
+							"minimum": 1
+						},
+						"max_trial_runtime_seconds": {
+							"type": "integer",
+							"minimum": 1
+						}
+					},
+					"required": [
+						"max_mutations",
+						"max_concurrent_benchmarks_per_host",
+						"min_free_disk_gb"
+					],
+					"additionalProperties": false
+				},
+				"safety": {
+					"type": "object",
+					"properties": {
+						"require_human_release_approval": {
+							"type": "boolean"
+						},
+						"allow_agent_oracle_edits": {
+							"type": "boolean"
+						},
+						"allow_network_in_bench_runner": {
+							"type": "boolean"
+						},
+						"allow_privileged_benchmark_runner": {
+							"type": "boolean"
+						},
+						"allow_agent_docker_socket": {
+							"type": "boolean"
+						},
+						"allow_unapproved_external_commands": {
+							"type": "boolean"
+						},
+						"stop_on_host_health_alarm": {
+							"type": "boolean"
+						}
+					},
+					"required": [
+						"require_human_release_approval",
+						"allow_agent_oracle_edits",
+						"allow_agent_docker_socket"
+					],
+					"additionalProperties": false
+				}
+			},
+			"required": [
+				"id",
+				"mode",
+				"duration_hours",
+				"objectives",
+				"budgets",
+				"safety"
+			],
+			"additionalProperties": false
+		},
+		"containers": {
+			"type": "object",
+			"properties": {
+				"builder": {
+					"type": "string",
+					"minLength": 1
+				},
+				"runner_release": {
+					"type": "string",
+					"minLength": 1
+				},
+				"runner_diagnostic": {
+					"type": "string",
+					"minLength": 1
+				},
+				"training_runner": {
+					"type": "string",
+					"minLength": 1
+				},
+				"pin_image_digests_for_campaign": {
+					"type": "boolean"
+				},
+				"binary_mount_mode": {
+					"type": "string",
+					"enum": ["read_only"]
+				},
+				"fixture_mount_mode": {
+					"type": "string",
+					"enum": [
+						"read_only_by_default",
+						"disposable_writable_copies"
+					]
+				}
+			},
+			"required": [
+				"builder",
+				"runner_release",
+				"runner_diagnostic",
+				"pin_image_digests_for_campaign"
+			],
+			"additionalProperties": false
+		},
+		"hardware": {
+			"type": "object",
+			"properties": {
+				"host_id": {
+					"type": "string",
+					"pattern": "^[a-z0-9][a-z0-9._-]*$"
+				},
+				"class_id": {
+					"type": "string",
+					"pattern": "^[a-z0-9][a-z0-9._-]*$"
+				},
+				"cpu_set": {
+					"type": "string"
+				},
+				"smt_policy": {
+					"type": "string",
+					"enum": ["isolate_siblings", "allow_recorded", "unknown"]
+				},
+				"numa_policy": {
+					"type": "string",
+					"enum": ["local", "interleaved", "auto", "unknown"]
+				},
+				"measurement_exclusive": {
+					"type": "boolean"
+				},
+				"physical_isolation_required_for_promotion": {
+					"type": "boolean"
+				},
+				"effective_cpu_quota": {
+					"type": "string"
+				},
+				"storage_cohort": {
+					"type": "string",
+					"pattern": "^[a-z0-9][a-z0-9._-]*$"
+				},
+				"hardware_profile_artifact": {
+					"type": ["string", "null"]
+				}
+			},
+			"required": [
+				"host_id",
+				"class_id",
+				"measurement_exclusive",
+				"storage_cohort"
+			],
+			"additionalProperties": false
+		},
+		"builds": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string",
+						"pattern": "^[a-z0-9][a-z0-9._-]*$"
+					},
+					"cargo_profile": {
+						"type": "string",
+						"enum": ["release", "dev"]
+					},
+					"target_cpu": {
+						"type": "string",
+						"minLength": 1
+					},
+					"features": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						},
+						"minItems": 0
+					},
+					"runtime_strategy": {
+						"type": "string",
+						"minLength": 1
+					},
+					"rustflags": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						},
+						"minItems": 0
+					}
+				},
+				"required": [
+					"id",
+					"cargo_profile",
+					"target_cpu",
+					"features",
+					"runtime_strategy"
+				],
+				"additionalProperties": false
+			},
+			"minItems": 1
+		},
+		"feature_groups": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string",
+						"pattern": "^[a-z0-9][a-z0-9._-]*$"
+					},
+					"kind": {
+						"type": "string",
+						"enum": [
+							"runtime_strategy",
+							"cargo_capability",
+							"compiler_variant",
+							"measurement"
+						]
+					},
+					"members": {
+						"type": "array",
+						"items": {
+							"type": "string",
+							"minLength": 1
+						},
+						"minItems": 1
+					},
+					"exclusive_active_selection": {
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"id",
+					"kind",
+					"members",
+					"exclusive_active_selection"
+				],
+				"additionalProperties": false
+			},
+			"minItems": 0
+		},
+		"heuristics": {
+			"type": "object",
+			"properties": {
+				"feature_family": {
+					"type": "string",
+					"pattern": "^[a-z0-9][a-z0-9._-]*$"
+				},
+				"modes": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"enum": [
+							"off",
+							"static",
+							"fs-bounded",
+							"hardware",
+							"cost-v1",
+							"cost-v2",
+							"shadow"
+						]
+					},
+					"minItems": 1
+				},
+				"default_mode": {
+					"type": "string",
+					"minLength": 1
+				},
+				"analyzer_time_budget_us": {
+					"type": "integer",
+					"minimum": 0
+				},
+				"filesystem_sampling_enabled": {
+					"type": "boolean"
+				},
+				"allow_active_command_probing": {
+					"type": "boolean"
+				},
+				"confidence_threshold": {
+					"type": "number",
+					"minimum": 0,
+					"maximum": 1
+				},
+				"fallback_strategy": {
+					"type": "string",
+					"minLength": 1
+				},
+				"persist_raw_commands": {
+					"type": "boolean"
+				},
+				"policy_artifact": {
+					"type": ["string", "null"]
+				},
+				"explain_plan_opt_in": {
+					"type": "boolean"
+				}
+			},
+			"required": [
+				"feature_family",
+				"modes",
+				"default_mode",
+				"analyzer_time_budget_us",
+				"fallback_strategy"
+			],
+			"additionalProperties": false
+		},
+		"fixtures": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string",
+						"pattern": "^[a-z0-9][a-z0-9._-]*$"
+					},
+					"generator": {
+						"type": "string",
+						"minLength": 1
+					},
+					"seed": {
+						"type": "integer",
+						"minimum": 0
+					},
+					"directories": {
+						"type": "integer",
+						"minimum": 1
+					},
+					"depth": {
+						"type": "integer",
+						"minimum": 1
+					},
+					"files_per_dir": {
+						"type": "integer",
+						"minimum": 0
+					},
+					"match_density": {
+						"type": "number",
+						"minimum": 0,
+						"maximum": 1
+					},
+					"writable": {
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"id",
+					"generator",
+					"seed",
+					"directories",
+					"depth",
+					"match_density",
+					"writable"
+				],
+				"additionalProperties": false
+			},
+			"minItems": 1
+		},
+		"workloads": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string",
+						"pattern": "^[a-z0-9][a-z0-9._-]*$"
+					},
+					"fixture": {
+						"type": "string",
+						"pattern": "^[a-z0-9][a-z0-9._-]*$"
+					},
+					"command": {
+						"type": "array",
+						"items": {
+							"type": "string",
+							"minLength": 1
+						},
+						"minItems": 1
+					},
+					"pattern": {
+						"type": "string",
+						"minLength": 1
+					},
+					"parallel": {
+						"type": "boolean"
+					},
+					"split": {
+						"type": "string",
+						"enum": [
+							"training",
+							"development",
+							"holdout",
+							"sealed_holdout"
+						]
+					},
+					"oracle": {
+						"type": "string",
+						"pattern": "^[a-z0-9][a-z0-9._-]*$"
+					}
+				},
+				"required": [
+					"id",
+					"fixture",
+					"command",
+					"pattern",
+					"parallel",
+					"split",
+					"oracle"
+				],
+				"additionalProperties": false
+			},
+			"minItems": 1
+		},
+		"benchmark": {
+			"type": "object",
+			"properties": {
+				"engine": {
+					"type": "string",
+					"enum": ["hyperfine"]
+				},
+				"engine_version": {
+					"type": "string",
+					"minLength": 1
+				},
+				"warmups_per_candidate": {
+					"type": "integer",
+					"minimum": 0
+				},
+				"samples_per_block": {
+					"type": "integer",
+					"minimum": 2
+				},
+				"minimum_blocks": {
+					"type": "integer",
+					"minimum": 1
+				},
+				"paired_comparison": {
+					"type": "boolean"
+				},
+				"block_order": {
+					"type": "string",
+					"enum": ["abba_with_seeded_reversal", "randomized_blocks"]
+				},
+				"periodic_reference_blocks": {
+					"type": "integer",
+					"minimum": 1
+				},
+				"profile_during_primary_timing": {
+					"type": "boolean"
+				},
+				"keep_raw_samples": {
+					"type": "boolean"
+				},
+				"holdout_visible_to_mutator": {
+					"type": "boolean"
+				},
+				"invalid_environment_policy": {
+					"type": "string",
+					"enum": ["quarantine_and_reschedule", "fail_closed"]
+				}
+			},
+			"required": [
+				"engine",
+				"engine_version",
+				"samples_per_block",
+				"paired_comparison",
+				"block_order",
+				"keep_raw_samples"
+			],
+			"additionalProperties": false
+		},
+		"agents": {
+			"type": "object",
+			"properties": {
+				"provider": {
+					"type": "string",
+					"minLength": 1
+				},
+				"roles": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"pattern": "^[a-z0-9][a-z0-9._-]*$"
+					},
+					"minItems": 1
+				},
+				"worktree_root": {
+					"type": "string",
+					"minLength": 1
+				},
+				"playbook": {
+					"type": "string",
+					"minLength": 1
+				},
+				"require_hypothesis_card": {
+					"type": "boolean"
+				},
+				"require_single_concept_patch": {
+					"type": "boolean"
+				},
+				"require_committed_snapshot": {
+					"type": "boolean"
+				},
+				"auto_merge": {
+					"type": "boolean"
+				}
+			},
+			"required": [
+				"provider",
+				"roles",
+				"worktree_root",
+				"require_single_concept_patch",
+				"auto_merge"
+			],
+			"additionalProperties": false
+		},
+		"storage": {
+			"type": "object",
+			"properties": {
+				"database": {
+					"type": "string",
+					"minLength": 1
+				},
+				"artifact_root": {
+					"type": "string",
+					"minLength": 1
+				},
+				"journal": {
+					"type": "string",
+					"minLength": 1
+				},
+				"append_only_evidence": {
+					"type": "boolean"
+				},
+				"store_agent_prompts": {
+					"type": "boolean"
+				},
+				"prompt_redaction": {
+					"type": "string",
+					"minLength": 1
+				},
+				"artifact_integrity": {
+					"type": "string",
+					"enum": ["sha256"]
+				},
+				"schema_migration_mode": {
+					"type": "string",
+					"enum": ["explicit"]
+				}
+			},
+			"required": [
+				"database",
+				"artifact_root",
+				"journal",
+				"append_only_evidence",
+				"artifact_integrity"
+			],
+			"additionalProperties": false
+		}
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"version": 5,
+	"claim_id": "claim-1",
+	"case_id": "case-1",
+	"researcher_identity": "researcher-skeptic-1",
+	"stance": "skeptic",
+	"claim_type": "hypothesis",
+	"body": "Unbounded concurrency may increase context switches on deep trees.",
+	"confidence": 0.61,
+	"supports": [],
+	"contradicts": [],
+	"evidence_artifact_sha256": null,
+	"source_ref_id": null,
+	"context_snapshot_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+	"registered_utc": "2026-11-21T00:02:00Z",
+	"signature_b64": "DEMO_UNVERIFIED_SIGNATURE"
+}

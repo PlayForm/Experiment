@@ -1,0 +1,80 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/benchmark-result.schema.json",
+	"title": "benchmark-result",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"benchmark_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"experiment_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"state": {
+			"type": "string",
+			"enum": [
+				"complete",
+				"inconclusive",
+				"contaminated",
+				"infrastructure_error"
+			]
+		},
+		"samples": {
+			"type": "array",
+			"items": {
+				"$ref": "./sample.schema.json"
+			}
+		},
+		"raw_samples_artifact": {
+			"$ref": "./artifact-ref.schema.json"
+		},
+		"baseline_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"candidate_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"host_fingerprint_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"protocol_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"attestation_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"completed_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"benchmark_id",
+		"experiment_id",
+		"state",
+		"samples",
+		"raw_samples_artifact",
+		"baseline_digest",
+		"candidate_digest",
+		"host_fingerprint_digest",
+		"protocol_digest",
+		"attestation_id",
+		"completed_utc"
+	]
+}

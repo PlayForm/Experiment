@@ -1,0 +1,75 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6.1/v61-offline-task.schema.json",
+	"title": "Only model-visible input file: task.json",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"local_nonce": {
+			"type": "string",
+			"pattern": "^[a-zA-Z0-9_-]{1,64}$"
+		},
+		"problem": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 12000
+		},
+		"repository_path": {
+			"const": "/workspace/repo"
+		},
+		"references_path": {
+			"const": "/workspace/references"
+		},
+		"feedback_path": {
+			"anyOf": [
+				{
+					"const": "/workspace/feedback.txt"
+				},
+				{
+					"type": "null"
+				}
+			]
+		},
+		"allowed_tools": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"enum": [
+					"rg",
+					"rustfmt",
+					"cargo-check",
+					"cargo-test-local",
+					"read-file",
+					"git-diff"
+				]
+			},
+			"uniqueItems": true
+		},
+		"output_directory": {
+			"const": "/workspace/out"
+		},
+		"expected_artifacts": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"enum": [
+					"change.patch",
+					"claims.json",
+					"proposed-tests",
+					"paper-draft.md"
+				]
+			},
+			"uniqueItems": true
+		}
+	},
+	"required": [
+		"local_nonce",
+		"problem",
+		"repository_path",
+		"references_path",
+		"feedback_path",
+		"allowed_tools",
+		"output_directory",
+		"expected_artifacts"
+	]
+}

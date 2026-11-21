@@ -1,0 +1,12 @@
+{
+	"mutation_id": "sample-id",
+	"proposal_id": "sample-id",
+	"parent_mutation_id": "sample-id",
+	"baseline_commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"candidate_tree_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"algorithm_family": "sample-id",
+	"feature_set_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"state": "proposed",
+	"reason_code": "sample-id",
+	"created_utc": "2026-11-21T10:00:00Z"
+}

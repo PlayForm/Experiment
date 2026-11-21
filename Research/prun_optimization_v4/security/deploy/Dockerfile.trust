@@ -1,0 +1,10 @@
+FROM rust:1-slim AS build
+WORKDIR /code
+COPY Cargo.toml Cargo.lock* ./
+COPY src ./src
+RUN cargo build --release
+FROM debian:stable-slim
+RUN useradd --system --uid 11001 --create-home trust-worker
+COPY --from=build /code/target/release/prun-lab-trust /usr/local/bin/prun-lab-trust
+USER 11001
+ENTRYPOINT ["/usr/local/bin/prun-lab-trust"]

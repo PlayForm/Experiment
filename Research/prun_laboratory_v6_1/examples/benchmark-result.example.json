@@ -1,0 +1,20 @@
+{
+	"benchmark_id": "sample-id",
+	"experiment_id": "sample-id",
+	"state": "complete",
+	"samples": [],
+	"raw_samples_artifact": {
+		"digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+		"media_type": "sample-id",
+		"size_bytes": 1,
+		"storage_class": "private",
+		"encryption": "none",
+		"created_utc": "2026-11-21T10:00:00Z"
+	},
+	"baseline_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"candidate_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"host_fingerprint_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"protocol_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"attestation_id": "sample-id",
+	"completed_utc": "2026-11-21T10:00:00Z"
+}

@@ -1,0 +1,10 @@
+{
+	"case_id": "sample-id",
+	"campaign_id": "sample-id",
+	"mutation_id": "sample-id",
+	"hypothesis_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"state": "opened",
+	"blind_cohort_id": "sample-id",
+	"privacy_class": "private",
+	"created_utc": "2026-11-21T10:00:00Z"
+}

@@ -1,0 +1,98 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/audit-event.schema.json",
+	"title": "audit-event",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"event_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"global_seq": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"aggregate_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"aggregate_seq": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"event_kind": {
+			"type": "string",
+			"minLength": 1
+		},
+		"actor": {
+			"$ref": "./actor-ref.schema.json"
+		},
+		"occurred_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		},
+		"recorded_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		},
+		"correlation_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"causation_id": {
+			"type": ["string", "null"]
+		},
+		"idempotency_key": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"payload_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"prev_event_hash": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"event_hash": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"signature_ref": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"privacy_class": {
+			"type": "string",
+			"enum": ["public-meta", "internal-meta", "restricted", "sealed"]
+		}
+	},
+	"required": [
+		"event_id",
+		"global_seq",
+		"aggregate_id",
+		"aggregate_seq",
+		"event_kind",
+		"actor",
+		"occurred_utc",
+		"recorded_utc",
+		"correlation_id",
+		"idempotency_key",
+		"payload_digest",
+		"prev_event_hash",
+		"event_hash",
+		"signature_ref",
+		"privacy_class"
+	]
+}

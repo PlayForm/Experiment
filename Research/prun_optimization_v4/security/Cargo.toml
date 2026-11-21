@@ -1,0 +1,37 @@
+[package]
+name = "prun-lab-trust"
+version = "0.4.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+description = "Prototype private PKI, signed encrypted envelopes and authenticated relay for the Run laboratory"
+
+[features]
+default = []
+openpgp = ["dep:pgp-compat"]
+
+[dependencies]
+pgp-compat = { package = "pgp-lib", version = "=1.0.0", default-features = false, features = [
+	"tokio",
+	"rustls"
+], optional = true }
+anyhow = "1"
+base64 = "0.22"
+chrono = { version = "0.4", features = ["serde", "clock"] }
+ed25519-dalek = { version = "2.2", features = ["rand_core"] }
+hex = "0.4"
+hpke = { version = "=0.15.1", features = ["x25519"] }
+rand = "0.8"
+rcgen = { version = "=0.14.10", features = ["pem", "x509-parser"] }
+rustls = "0.23"
+rustls-pemfile = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+ssh-key = { version = "=0.6.7", features = ["ed25519", "rand_core"] }
+tokio = { version = "1", features = ["full"] }
+tokio-rustls = "0.26"
+
+[profile.release]
+lto = true
+codegen-units = 1
+panic = "abort"

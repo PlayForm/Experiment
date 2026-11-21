@@ -1,0 +1,21 @@
+{
+	"items": [
+		{
+			"receipt_id": "receipt-1",
+			"request_id": "xfer-1",
+			"decision_id": "decision-1",
+			"artifact_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+			"source_holder_id": "vault-1",
+			"target_holder_id": "worker-17",
+			"transfer_nonce": "nonce-a",
+			"encrypted_payload_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+			"verified_plaintext_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+			"holder_attestation_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+			"storage_lease_id": "lease-a",
+			"committed_event_id": "event-a",
+			"committed_at": "2026-11-21T01:00:00Z"
+		}
+	],
+	"next_cursor": null,
+	"has_more": false
+}

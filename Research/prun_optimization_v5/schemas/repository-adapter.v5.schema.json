@@ -1,0 +1,163 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://example.invalid/prun-lab/repository-adapter.v5.schema.json",
+	"title": "Prun Research Economy repository-adapter v5",
+	"type": "object",
+	"required": [
+		"version",
+		"adapter_id",
+		"repo_id",
+		"origin",
+		"base_ref",
+		"authorized_owner",
+		"visibility",
+		"license_policy",
+		"toolchain",
+		"source_scope",
+		"commands",
+		"outputs",
+		"oracle_id",
+		"workloads",
+		"default_network",
+		"publication_policy",
+		"adapter_artifact_sha256"
+	],
+	"properties": {
+		"version": {
+			"const": 5
+		},
+		"adapter_id": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 128
+		},
+		"repo_id": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 128
+		},
+		"origin": {
+			"type": "string",
+			"format": "uri"
+		},
+		"base_ref": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 128
+		},
+		"authorized_owner": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 128
+		},
+		"visibility": {
+			"enum": ["public", "private", "internal"]
+		},
+		"license_policy": {
+			"enum": ["public_allowed", "private_only", "review_required"]
+		},
+		"toolchain": {
+			"type": "object",
+			"required": ["name", "version", "builder_image_digest"],
+			"properties": {
+				"name": {
+					"type": "string",
+					"minLength": 1,
+					"maxLength": 128
+				},
+				"version": {
+					"type": "string",
+					"minLength": 1,
+					"maxLength": 128
+				},
+				"builder_image_digest": {
+					"type": "string",
+					"pattern": "^sha256:[a-f0-9]{64}$"
+				}
+			},
+			"additionalProperties": false
+		},
+		"source_scope": {
+			"type": "array",
+			"minItems": 1,
+			"items": {
+				"type": "string",
+				"minLength": 1,
+				"maxLength": 128
+			}
+		},
+		"commands": {
+			"type": "object",
+			"required": ["build", "oracle", "benchmark"],
+			"properties": {
+				"build": {
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"type": "string"
+					}
+				},
+				"oracle": {
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"type": "string"
+					}
+				},
+				"benchmark": {
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"type": "string"
+					}
+				}
+			},
+			"additionalProperties": false
+		},
+		"outputs": {
+			"type": "object",
+			"required": ["artifact_path", "metrics"],
+			"properties": {
+				"artifact_path": {
+					"type": "string",
+					"minLength": 1,
+					"maxLength": 128
+				},
+				"metrics": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 128
+					}
+				}
+			},
+			"additionalProperties": false
+		},
+		"oracle_id": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 128
+		},
+		"workloads": {
+			"type": "array",
+			"minItems": 1,
+			"items": {
+				"type": "string",
+				"minLength": 1,
+				"maxLength": 128
+			}
+		},
+		"default_network": {
+			"enum": ["off", "scoped_reference_only"]
+		},
+		"publication_policy": {
+			"enum": ["internal_only", "manual_review", "preapproved_public"]
+		},
+		"adapter_artifact_sha256": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		}
+	},
+	"additionalProperties": false
+}

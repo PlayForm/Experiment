@@ -1,0 +1,80 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6.1/v61-custody-request.schema.json",
+	"title": "v61-custody-request",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"request_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"idempotency_key": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"artifact_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"artifact_policy_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"source_holder_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"target_holder_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"requested_purpose": {
+			"type": "string",
+			"enum": [
+				"build",
+				"test",
+				"benchmark",
+				"research",
+				"publication",
+				"replication",
+				"transfer",
+				"archive"
+			]
+		},
+		"requested_bytes": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"lease_expires_at": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"repository_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"policy_revision": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"transfer_nonce": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		}
+	},
+	"required": [
+		"request_id",
+		"idempotency_key",
+		"artifact_digest",
+		"artifact_policy_id",
+		"source_holder_id",
+		"target_holder_id",
+		"requested_purpose",
+		"requested_bytes",
+		"lease_expires_at",
+		"repository_id",
+		"policy_revision",
+		"transfer_nonce"
+	]
+}

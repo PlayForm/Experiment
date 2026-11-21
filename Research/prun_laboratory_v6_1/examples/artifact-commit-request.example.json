@@ -1,0 +1,14 @@
+{
+	"artifact": {
+		"digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+		"media_type": "sample-id",
+		"size_bytes": 1,
+		"storage_class": "private",
+		"encryption": "none",
+		"created_utc": "2026-11-21T10:00:00Z"
+	},
+	"bytes_verified_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"uploader_id": "sample-id",
+	"subject_id": "sample-id",
+	"idempotency_key": "sample-id"
+}

@@ -1,0 +1,195 @@
+{
+	"version": 6,
+	"trust_domains": [
+		{
+			"name": "human-observation",
+			"may_connect": ["public-api"],
+			"credentials": ["human-client-mtls"],
+			"network": "loopback or explicitly authenticated remote"
+		},
+		{
+			"name": "trusted-core",
+			"may_connect": [
+				"internal-api",
+				"event-bus",
+				"artifact-store",
+				"control-otlp"
+			],
+			"credentials": ["scoped-service-mtls"],
+			"network": "trusted-internal"
+		},
+		{
+			"name": "product-diagnostics",
+			"may_connect": ["product-otlp"],
+			"credentials": ["diagnostic-collector-mtls"],
+			"network": "isolated-diagnostics"
+		},
+		{
+			"name": "build-execution",
+			"may_connect": ["artifact-staging"],
+			"credentials": ["job-specific-write-token"],
+			"network": "none during compilation/execution"
+		},
+		{
+			"name": "llm-worker",
+			"may_connect": [],
+			"credentials": [],
+			"network": "none"
+		},
+		{
+			"name": "private-root-ca",
+			"may_connect": [],
+			"credentials": ["offline-key"],
+			"network": "none"
+		}
+	],
+	"roles": {
+		"observer": {
+			"allow": ["read-public-projections", "subscribe-sanitized-events"],
+			"deny": [
+				"write",
+				"read-prompt-content",
+				"read-private-cas",
+				"approve",
+				"issue-identity"
+			]
+		},
+		"operator": {
+			"allow": ["read-projections", "submit-predeclared-command"],
+			"deny": [
+				"write-ledger-direct",
+				"modify-trusted-evidence",
+				"read-private-prompt-unless-explicit-grant"
+			]
+		},
+		"coordinator": {
+			"allow": [
+				"transition-state",
+				"schedule-build",
+				"schedule-oracle",
+				"schedule-benchmark",
+				"publish-metadata"
+			],
+			"deny": [
+				"sign-measurement",
+				"decrypt-private-agent-reasoning",
+				"run-agent-code",
+				"alter-policy"
+			]
+		},
+		"supervisor": {
+			"allow": [
+				"prepare-scope",
+				"mount-task",
+				"run-model-locally",
+				"seal-conversation",
+				"submit-worker-artifact"
+			],
+			"deny": [
+				"sign-benchmark",
+				"publish",
+				"access-holdout",
+				"change-policy"
+			]
+		},
+		"llm-worker": {
+			"allow": [
+				"read-mounted-task",
+				"write-scratch-output",
+				"invoke-local-scoped-tools"
+			],
+			"deny": [
+				"network",
+				"docker-socket",
+				"host-sockets",
+				"read-credentials",
+				"read-telemetry",
+				"read-ledger",
+				"read-sibling",
+				"read-holdout",
+				"schedule-job",
+				"approve-evidence",
+				"change-policy"
+			]
+		},
+		"builder": {
+			"allow": ["build-from-pinned-source", "seal-build-result"],
+			"deny": [
+				"alter-oracle",
+				"select-benchmark-winner",
+				"read-private-conversations"
+			]
+		},
+		"oracle": {
+			"allow": ["execute-trusted-tests", "seal-test-result"],
+			"deny": [
+				"modify-tests",
+				"read-agent-private-context",
+				"publish-result-as-release"
+			]
+		},
+		"runner": {
+			"allow": [
+				"lease-exclusive-host",
+				"measure-frozen-binary",
+				"seal-raw-samples"
+			],
+			"deny": [
+				"modify-source",
+				"read-private-conversations",
+				"edit-statistical-policy"
+			]
+		},
+		"evaluator": {
+			"allow": [
+				"read-authorized-raw-samples",
+				"apply-frozen-statistical-protocol",
+				"sign-evaluation"
+			],
+			"deny": ["edit-samples", "promote-source", "modify-benchmark"]
+		},
+		"publisher": {
+			"allow": [
+				"access-approved-submissions",
+				"write-sanitized-derivative"
+			],
+			"deny": [
+				"read-unsubmitted-notebooks",
+				"reclassify-measurement",
+				"auto-release-public"
+			]
+		},
+		"pki": {
+			"allow": [
+				"issue-scoped-certificates",
+				"revoke",
+				"append-issuance-audit"
+			],
+			"deny": ["sign-scientific-evidence", "decrypt-private-messages"]
+		},
+		"telemetry": {
+			"allow": [
+				"read-metadata",
+				"store-approved-metrics",
+				"store-approved-spans"
+			],
+			"deny": [
+				"read-plaintext-reasoning",
+				"promote-result",
+				"change-policy"
+			]
+		}
+	},
+	"authorization_principles": [
+		"default-deny",
+		"auth-before-payload-parse",
+		"scoped-service-identity",
+		"idempotent-write",
+		"fenced-lease",
+		"no-LLM-trust",
+		"no-key-shares-to-workers",
+		"no-control-api-in-LLM-namespaces",
+		"no-public-listen-by-default",
+		"strict-artifact-grants"
+	]
+}

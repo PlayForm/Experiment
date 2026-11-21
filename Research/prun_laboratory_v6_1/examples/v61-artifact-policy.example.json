@@ -1,0 +1,15 @@
+{
+	"policy_id": "policy-a",
+	"artifact_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"origin_repository": "repo-a",
+	"classification": "restricted",
+	"custody_scope": ["supervisor", "oracle"],
+	"permitted_purposes": ["test"],
+	"prohibited_derivations": [],
+	"license_grant_id": "license-a",
+	"embargo_rule_ids": ["embargo-a"],
+	"disclosure": "none",
+	"retention_seconds": 3600,
+	"policy_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"effective_at": "2026-11-21T01:00:00Z"
+}

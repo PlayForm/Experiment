@@ -1,0 +1,72 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6.1/v61-storage-lease.schema.json",
+	"title": "v61-storage-lease",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"storage_lease_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"holder_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"artifact_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"granted_bytes": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"actual_bytes": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"encryption_key_scope": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"storage_class": {
+			"type": "string",
+			"enum": [
+				"ephemeral-scratch",
+				"encrypted-cas",
+				"offline-bundle",
+				"cold-archive",
+				"sealed-holdout"
+			]
+		},
+		"retention_deadline": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"delete_or_revoke_policy": {
+			"type": "string",
+			"enum": ["crypto-shred", "explicit-delete", "archive-legal-hold"]
+		},
+		"allocation_event_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"lease_state": {
+			"type": "string",
+			"enum": ["reserved", "active", "released", "quarantined"]
+		}
+	},
+	"required": [
+		"storage_lease_id",
+		"holder_id",
+		"artifact_digest",
+		"granted_bytes",
+		"actual_bytes",
+		"encryption_key_scope",
+		"storage_class",
+		"retention_deadline",
+		"delete_or_revoke_policy",
+		"allocation_event_id",
+		"lease_state"
+	]
+}

@@ -1,0 +1,10 @@
+{
+	"worker_id": "sample-id",
+	"worker_kind": "model-runtime",
+	"state": "idle",
+	"task_id": "sample-id",
+	"last_seen_utc": "2026-11-21T10:00:00Z",
+	"host_id": "sample-id",
+	"image_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"network_mode": "none"
+}

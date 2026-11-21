@@ -1,0 +1,73 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/worker-status.schema.json",
+	"title": "worker-status",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"worker_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"worker_kind": {
+			"type": "string",
+			"enum": [
+				"model-runtime",
+				"patcher-supervisor",
+				"build-worker",
+				"oracle-worker",
+				"runner",
+				"research-worker"
+			]
+		},
+		"state": {
+			"type": "string",
+			"enum": [
+				"idle",
+				"assigned",
+				"running",
+				"staging",
+				"failed",
+				"quarantined",
+				"terminated"
+			]
+		},
+		"task_id": {
+			"type": ["string", "null"]
+		},
+		"last_seen_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		},
+		"host_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"image_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"network_mode": {
+			"type": "string",
+			"enum": ["none", "trusted-internal"]
+		},
+		"cpu_set": {
+			"type": "string",
+			"minLength": 0
+		}
+	},
+	"required": [
+		"worker_id",
+		"worker_kind",
+		"state",
+		"task_id",
+		"last_seen_utc",
+		"host_id",
+		"image_digest",
+		"network_mode"
+	]
+}

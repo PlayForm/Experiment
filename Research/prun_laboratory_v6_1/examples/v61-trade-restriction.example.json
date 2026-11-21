@@ -1,0 +1,11 @@
+{
+	"restriction_id": "restrict-a",
+	"source_group_id": "siblings-1",
+	"target_group_id": "siblings-2",
+	"direction": "both",
+	"restriction_kind": "anti-collusion",
+	"allowed_metadata": ["anonymous-track-count"],
+	"policy_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"effective_at": "2026-11-21T01:00:00Z",
+	"expires_at": "2026-11-21T01:00:00Z"
+}

@@ -1,0 +1,153 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://example.invalid/prun-lab/research-case.v5.schema.json",
+	"title": "Prun Research Economy research-case v5",
+	"type": "object",
+	"required": [
+		"version",
+		"case_id",
+		"repo_id",
+		"campaign_id",
+		"parent_mutation_id",
+		"source_commit",
+		"source_scope_sha256",
+		"workload_id",
+		"state",
+		"question",
+		"hypothesis_family",
+		"roles",
+		"privacy",
+		"holdout_policy",
+		"budget_ceiling",
+		"created_utc"
+	],
+	"properties": {
+		"version": {
+			"const": 5
+		},
+		"case_id": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 128
+		},
+		"repo_id": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 128
+		},
+		"campaign_id": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 128
+		},
+		"parent_mutation_id": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 128
+		},
+		"source_commit": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 128
+		},
+		"source_scope_sha256": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"workload_id": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 128
+		},
+		"state": {
+			"enum": [
+				"opened",
+				"blind_assigned",
+				"preregistered",
+				"measured",
+				"evaluated",
+				"reviewed",
+				"published",
+				"closed"
+			]
+		},
+		"question": {
+			"type": "string",
+			"minLength": 10
+		},
+		"hypothesis_family": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 128
+		},
+		"roles": {
+			"type": "array",
+			"minItems": 2,
+			"uniqueItems": true,
+			"items": {
+				"enum": [
+					"proponent",
+					"skeptic",
+					"alternative",
+					"replicator",
+					"methodologist",
+					"librarian"
+				]
+			}
+		},
+		"privacy": {
+			"enum": ["private", "tenant", "public"]
+		},
+		"holdout_policy": {
+			"enum": ["sealed", "development_only", "none"]
+		},
+		"budget_ceiling": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": [
+				"input_tokens",
+				"output_tokens",
+				"cpu_core_seconds",
+				"benchmark_seconds",
+				"gpu_seconds",
+				"storage_byte_days",
+				"reference_requests"
+			],
+			"properties": {
+				"input_tokens": {
+					"type": "integer",
+					"minimum": 0
+				},
+				"output_tokens": {
+					"type": "integer",
+					"minimum": 0
+				},
+				"cpu_core_seconds": {
+					"type": "integer",
+					"minimum": 0
+				},
+				"benchmark_seconds": {
+					"type": "integer",
+					"minimum": 0
+				},
+				"gpu_seconds": {
+					"type": "integer",
+					"minimum": 0
+				},
+				"storage_byte_days": {
+					"type": "integer",
+					"minimum": 0
+				},
+				"reference_requests": {
+					"type": "integer",
+					"minimum": 0
+				}
+			}
+		},
+		"created_utc": {
+			"type": "string",
+			"format": "date-time"
+		}
+	},
+	"additionalProperties": false
+}

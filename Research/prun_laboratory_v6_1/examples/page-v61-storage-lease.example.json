@@ -1,0 +1,19 @@
+{
+	"items": [
+		{
+			"storage_lease_id": "lease-a",
+			"holder_id": "worker-17",
+			"artifact_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+			"granted_bytes": 10000,
+			"actual_bytes": 1234,
+			"encryption_key_scope": "keyscope-a",
+			"storage_class": "ephemeral-scratch",
+			"retention_deadline": "2026-11-21T01:00:00Z",
+			"delete_or_revoke_policy": "crypto-shred",
+			"allocation_event_id": "event-a",
+			"lease_state": "reserved"
+		}
+	],
+	"next_cursor": null,
+	"has_more": false
+}

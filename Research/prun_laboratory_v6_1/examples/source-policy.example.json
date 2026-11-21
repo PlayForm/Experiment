@@ -1,0 +1,14 @@
+{
+	"policy_id": "sample-id",
+	"version": 1,
+	"policy_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"owner_actor_id": "sample-id",
+	"allowed_repositories": [],
+	"allowed_outbound_network": false,
+	"llm_service_access": false,
+	"runner_exclusive": true,
+	"trusted_tests_immutable": true,
+	"holdout_sealed": true,
+	"authorized_roles": [],
+	"created_utc": "2026-11-21T10:00:00Z"
+}

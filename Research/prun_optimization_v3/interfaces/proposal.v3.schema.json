@@ -1,0 +1,138 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://prun.local/schemas/proposal.v3.json",
+	"title": "PlayForm/Run proposal v3",
+	"type": "object",
+	"additionalProperties": false,
+	"required": [
+		"schema_version",
+		"proposal_id",
+		"work_order_id",
+		"generation_id",
+		"parent_source_commit",
+		"patch_sha256",
+		"source_tree_sha256",
+		"mechanism_family",
+		"mechanism_hypothesis",
+		"changed_paths",
+		"build_spec_sha256",
+		"role_policy_sha256",
+		"novelty_fingerprint_version",
+		"semantic_contract_sha256"
+	],
+	"properties": {
+		"schema_version": {
+			"const": 3
+		},
+		"proposal_id": {
+			"type": "string",
+			"minLength": 1
+		},
+		"work_order_id": {
+			"type": "string",
+			"minLength": 1
+		},
+		"generation_id": {
+			"type": "string",
+			"minLength": 1
+		},
+		"parent_source_commit": {
+			"type": "string",
+			"minLength": 1
+		},
+		"patch_sha256": {
+			"type": "string",
+			"pattern": "^[0-9a-f]{64}$"
+		},
+		"source_tree_sha256": {
+			"type": "string",
+			"pattern": "^[0-9a-f]{64}$"
+		},
+		"mechanism_family": {
+			"enum": [
+				"allocation",
+				"scheduling",
+				"filesystem",
+				"matching",
+				"process_executor",
+				"heuristic_policy",
+				"serialization",
+				"syscall_overhead",
+				"compiler",
+				"integration",
+				"other"
+			]
+		},
+		"mechanism_hypothesis": {
+			"type": "string",
+			"minLength": 1
+		},
+		"changed_paths": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			},
+			"uniqueItems": true
+		},
+		"changed_symbols": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			},
+			"uniqueItems": true
+		},
+		"build_spec_sha256": {
+			"type": "string",
+			"pattern": "^[0-9a-f]{64}$"
+		},
+		"role_policy_sha256": {
+			"type": "string",
+			"pattern": "^[0-9a-f]{64}$"
+		},
+		"novelty_fingerprint_version": {
+			"type": "string",
+			"minLength": 1
+		},
+		"semantic_contract_sha256": {
+			"type": "string",
+			"pattern": "^[0-9a-f]{64}$"
+		},
+		"risk_notes": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			}
+		},
+		"expected_workload_effect": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"additionalProperties": false,
+				"required": ["workload_family", "prediction"],
+				"properties": {
+					"workload_family": {
+						"type": "string",
+						"minLength": 1
+					},
+					"prediction": {
+						"enum": ["speedup", "neutral", "regression", "unknown"]
+					}
+				}
+			}
+		},
+		"parent_mutation_id": {
+			"type": ["string", "null"]
+		},
+		"prompt_context_sha256": {
+			"type": "string",
+			"pattern": "^[0-9a-f]{64}$"
+		},
+		"agent_session_id": {
+			"type": "string",
+			"minLength": 1
+		}
+	}
+}

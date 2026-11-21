@@ -1,0 +1,96 @@
+version: "6.1"
+states:
+    custody:
+        - requested
+        - preflight
+        - reserved
+        - staged
+        - verified
+        - committed
+        - quarantined
+        - denied
+        - expired
+        - released
+    knowledge_release:
+        - draft
+        - rights_pending
+        - sanitization_pending
+        - reviewed
+        - authorized
+        - published
+        - denied
+        - revoked
+    feedback:
+        - pending
+        - evidence_sealed
+        - rights_checked
+        - projected
+        - released
+        - blocked
+transitions:
+    custody:
+        - - requested
+          - preflight
+          - custody-broker
+        - - preflight
+          - reserved
+          - policy-service
+        - - preflight
+          - denied
+          - policy-service
+        - - reserved
+          - staged
+          - storage-broker
+        - - staged
+          - verified
+          - holder-supervisor
+        - - verified
+          - committed
+          - custody-broker
+        - - reserved
+          - quarantined
+          - custody-broker
+        - - staged
+          - quarantined
+          - custody-broker
+        - - committed
+          - released
+          - custody-broker
+    feedback:
+        - - pending
+          - evidence_sealed
+          - evaluator
+        - - evidence_sealed
+          - rights_checked
+          - policy-service
+        - - rights_checked
+          - projected
+          - feedback-projector
+        - - projected
+          - released
+          - feedback-projector
+        - - rights_checked
+          - blocked
+          - policy-service
+    knowledge_release:
+        - - draft
+          - rights_pending
+          - publication-bridge
+        - - rights_pending
+          - sanitization_pending
+          - policy-service
+        - - rights_pending
+          - denied
+          - policy-service
+        - - sanitization_pending
+          - reviewed
+          - sanitizer
+        - - reviewed
+          - authorized
+          - publication-bridge
+        - - authorized
+          - published
+          - publication-bridge
+        - - published
+          - revoked
+          - publication-bridge

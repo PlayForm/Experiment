@@ -1,0 +1,78 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6.1/v61-study-outcome.schema.json",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"study_outcome_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"study_assignment_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"proposal_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"trusted_oracle_result_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"trusted_benchmark_result_digest": {
+			"anyOf": [
+				{
+					"type": "string",
+					"pattern": "^[a-f0-9]{64}$"
+				},
+				{
+					"type": "null"
+				}
+			]
+		},
+		"verdict": {
+			"type": "string",
+			"enum": ["correct", "incorrect", "inconclusive", "not-applicable"]
+		},
+		"reproducibility": {
+			"type": "string",
+			"enum": ["replicated", "not-replicated", "not-measured"]
+		},
+		"published_insight_digest": {
+			"anyOf": [
+				{
+					"type": "string",
+					"pattern": "^[a-f0-9]{64}$"
+				},
+				{
+					"type": "null"
+				}
+			]
+		},
+		"evaluator_id": {
+			"const": "trusted-study-evaluator"
+		},
+		"policy_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"recorded_at": {
+			"type": "string",
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"study_outcome_id",
+		"study_assignment_id",
+		"proposal_digest",
+		"trusted_oracle_result_digest",
+		"trusted_benchmark_result_digest",
+		"verdict",
+		"reproducibility",
+		"published_insight_digest",
+		"evaluator_id",
+		"policy_digest",
+		"recorded_at"
+	]
+}

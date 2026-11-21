@@ -1,0 +1,77 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6.1/v61-curriculum.schema.json",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"curriculum_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"repository_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"reference_commit_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"curriculum_policy_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"challenge_families": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"enum": [
+					"exploration",
+					"implementation",
+					"skepticism",
+					"test-design",
+					"replication",
+					"hardware-specialization",
+					"cross-repository-transfer",
+					"publication"
+				]
+			},
+			"maxItems": 1000
+		},
+		"prerequisite_oracle_digests": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"pattern": "^[a-f0-9]{64}$"
+			},
+			"maxItems": 1000
+		},
+		"assignment_diversity_policy_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"sealed_evaluation_policy_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"owner_signature_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"active_from": {
+			"type": "string",
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"curriculum_id",
+		"repository_id",
+		"reference_commit_digest",
+		"curriculum_policy_digest",
+		"challenge_families",
+		"prerequisite_oracle_digests",
+		"assignment_diversity_policy_digest",
+		"sealed_evaluation_policy_digest",
+		"owner_signature_digest",
+		"active_from"
+	]
+}

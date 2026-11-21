@@ -1,0 +1,26 @@
+{
+	"paper": {
+		"paper_id": "sample-id",
+		"case_ids": ["sample-id"],
+		"title": "sample-id",
+		"document": {
+			"digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+			"media_type": "sample-id",
+			"size_bytes": 1,
+			"storage_class": "private",
+			"encryption": "none",
+			"created_utc": "2026-11-21T10:00:00Z"
+		},
+		"claims": [],
+		"evidence_ids": [],
+		"status": "draft",
+		"visibility": "private",
+		"revision": 1,
+		"sanitization_report_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+		"citation_manifest_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+		"created_utc": "2026-11-21T10:00:00Z"
+	},
+	"requested_visibility": "private",
+	"sanitization_policy_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"request_id": "sample-id"
+}

@@ -1,0 +1,10 @@
+{
+	"local_nonce": "task-local-123",
+	"problem": "Inspect Rust directory-walk allocation behavior; propose a semantics-preserving alternative.",
+	"repository_path": "/workspace/repo",
+	"references_path": "/workspace/references",
+	"feedback_path": null,
+	"allowed_tools": ["rg", "cargo-check", "cargo-test-local", "git-diff"],
+	"output_directory": "/workspace/out",
+	"expected_artifacts": ["change.patch", "claims.json"]
+}

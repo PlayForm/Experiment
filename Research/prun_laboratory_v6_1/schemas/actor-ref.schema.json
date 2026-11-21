@@ -1,0 +1,46 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/actor-ref.schema.json",
+	"title": "actor-ref",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"actor_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"actor_kind": {
+			"type": "string",
+			"enum": [
+				"owner",
+				"coordinator",
+				"supervisor",
+				"researcher",
+				"patcher",
+				"scout",
+				"builder",
+				"oracle",
+				"runner",
+				"evaluator",
+				"publisher",
+				"integrator",
+				"pki",
+				"auditor",
+				"host",
+				"system"
+			]
+		},
+		"credential_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"trust_domain": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		}
+	},
+	"required": ["actor_id", "actor_kind", "credential_id", "trust_domain"]
+}

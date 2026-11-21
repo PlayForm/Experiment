@@ -1,0 +1,152 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://example.invalid/prun-lab/paper.v5.schema.json",
+	"title": "Prun Research Economy paper v5",
+	"type": "object",
+	"required": [
+		"version",
+		"paper_id",
+		"repo_id",
+		"case_ids",
+		"status",
+		"title",
+		"abstract",
+		"claim_links",
+		"baseline_artifact_sha256",
+		"methods_artifact_sha256",
+		"manuscript_sha256",
+		"limitations",
+		"negative_results",
+		"sanitization_status",
+		"declassification_grant_id",
+		"publisher_identity",
+		"created_utc",
+		"signature_b64"
+	],
+	"properties": {
+		"version": {
+			"const": 5
+		},
+		"paper_id": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 128
+		},
+		"repo_id": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 128
+		},
+		"case_ids": {
+			"type": "array",
+			"minItems": 1,
+			"uniqueItems": true,
+			"items": {
+				"type": "string",
+				"minLength": 1,
+				"maxLength": 128
+			}
+		},
+		"status": {
+			"enum": [
+				"hypothesis_note",
+				"internal_observation",
+				"measured_lab_report",
+				"replicated_report",
+				"sanitized_preprint",
+				"externally_reviewed",
+				"corrected",
+				"retracted"
+			]
+		},
+		"title": {
+			"type": "string",
+			"minLength": 12
+		},
+		"abstract": {
+			"type": "string",
+			"minLength": 20
+		},
+		"claim_links": {
+			"type": "array",
+			"minItems": 1,
+			"items": {
+				"type": "object",
+				"required": ["claim_id", "evidence_ids", "evidence_status"],
+				"properties": {
+					"claim_id": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 128
+					},
+					"evidence_ids": {
+						"type": "array",
+						"uniqueItems": true,
+						"items": {
+							"type": "string",
+							"minLength": 1,
+							"maxLength": 128
+						}
+					},
+					"evidence_status": {
+						"enum": [
+							"unsupported",
+							"external_reference",
+							"oracle_checked",
+							"measured",
+							"independently_replicated"
+						]
+					}
+				},
+				"additionalProperties": false
+			}
+		},
+		"baseline_artifact_sha256": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"methods_artifact_sha256": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"manuscript_sha256": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"limitations": {
+			"type": "array",
+			"minItems": 1,
+			"items": {
+				"type": "string"
+			}
+		},
+		"negative_results": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1,
+				"maxLength": 128
+			}
+		},
+		"sanitization_status": {
+			"enum": ["pending", "passed", "denied"]
+		},
+		"declassification_grant_id": {
+			"type": ["string", "null"]
+		},
+		"publisher_identity": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 128
+		},
+		"created_utc": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"signature_b64": {
+			"type": "string",
+			"minLength": 16
+		}
+	},
+	"additionalProperties": false
+}

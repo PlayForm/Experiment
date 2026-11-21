@@ -1,0 +1,8 @@
+{
+	"receipt_id": "neutral-1",
+	"task_local_nonce": "local-nonce",
+	"status": "submission_received",
+	"receipt_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"visible_message": "Submission received.",
+	"issued_at": "2026-11-21T01:00:00Z"
+}

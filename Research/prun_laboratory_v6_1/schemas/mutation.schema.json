@@ -1,0 +1,78 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/mutation.schema.json",
+	"title": "mutation",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"mutation_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"proposal_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"parent_mutation_id": {
+			"type": ["string", "null"]
+		},
+		"baseline_commit": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"candidate_tree_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"algorithm_family": {
+			"type": "string",
+			"minLength": 1
+		},
+		"feature_set_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"state": {
+			"type": "string",
+			"enum": [
+				"proposed",
+				"admitted",
+				"built",
+				"oracle_failed",
+				"oracle_passed",
+				"measured",
+				"evaluated",
+				"eligible",
+				"rejected",
+				"archived",
+				"promoted"
+			]
+		},
+		"reason_code": {
+			"type": "string",
+			"minLength": 0
+		},
+		"created_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"mutation_id",
+		"proposal_id",
+		"parent_mutation_id",
+		"baseline_commit",
+		"candidate_tree_digest",
+		"algorithm_family",
+		"feature_set_digest",
+		"state",
+		"reason_code",
+		"created_utc"
+	]
+}

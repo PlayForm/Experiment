@@ -1,0 +1,23 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/page-mutation.schema.json",
+	"title": "page-mutation",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"data": {
+			"type": "array",
+			"items": {
+				"$ref": "./mutation.schema.json"
+			}
+		},
+		"next_cursor": {
+			"type": ["string", "null"]
+		},
+		"snapshot_seq": {
+			"type": "integer",
+			"minimum": 0
+		}
+	},
+	"required": ["data", "next_cursor", "snapshot_seq"]
+}

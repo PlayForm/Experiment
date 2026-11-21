@@ -1,0 +1,102 @@
+# Proposed orchestrator playbook; not executable by existing prun_lab.py v1.
+playbook_version: 1
+id: autonomous-week
+mission: >
+    Improve PlayForm/Run total runtime without changing contract semantics.
+    Explore one conceptual source mutation per branch; keep full lineage.
+base_commit: Current
+resource_policy:
+    duration_hours: 168
+    require_dedicated_measurement_lease: true
+    max_mutations: 160
+    max_concurrent_agents: 3
+    max_concurrent_builds: 2
+    max_concurrent_timing_jobs_per_host: 1
+    max_build_attempts_per_mutation: 3
+    stop_at_free_disk_gb: 25
+    checkpoint_after_every_transition: true
+    disallow_agent_docker_socket: true
+    no_network_in_runner: true
+    no_direct_release_or_merge: true
+    require_human_approval_for_oracle_changes: true
+    fail_closed_on_host_health_alarm: true
+phases:
+    - id: baseline
+      role: runner
+      action: baseline_capture
+      requires: [fixture_integrity, host_doctor, oracle_version_pinned]
+      output: [baseline_artifact, baseline_samples, environment_fingerprint]
+      approval: automatic_if_valid
+    - id: scout
+      role: scout
+      action: profile_reference_and_rank_bottlenecks
+      requires: [baseline]
+      output: [hypothesis_cards, stage_cost_decomposition]
+      approval: constrained_auto
+    - id: mutate
+      role: mutator
+      action: implement_one_conceptual_diff_in_new_worktree
+      requires: [approved_hypothesis, parent_commit]
+      output: [git_commit, patch_digest, mutation_manifest]
+      approval: constrained_auto
+    - id: static_gate
+      role: builder
+      action: check_format_lints_build
+      requires: [committed_patch]
+      output: [static_check_results, built_binary_hash]
+      approval: automatic_if_valid
+    - id: semantic_gate
+      role: oracle
+      action: independent_equivalence_and_contract_tests
+      requires: [built_binary_hash, fixed_oracle_version]
+      output: [oracle_pass_fail, oracle_diff]
+      approval: automatic_if_valid
+    - id: measure
+      role: runner
+      action: exclusive_cpu_paired_hyperfine_blocks
+      requires: [semantic_gate_passed, host_lease, fixture_digest]
+      output: [raw_sample_artifacts, trial_environment, reference_samples]
+      approval: automatic_if_valid
+    - id: analyze
+      role: analyst
+      action: robust_paired_comparison
+      requires: [valid_samples]
+      output: [effect_size, confidence_interval, regression_warnings, verdict]
+      approval: automatic_if_thresholds_met
+    - id: independent_confirm
+      role: runner
+      action: heldout_validation
+      requires: [promising_development_result, sealed_holdout]
+      output: [confirmation_samples, overall_verdict]
+      approval: automatic_to_eligible_only
+    - id: curate
+      role: curator
+      action: append_evidence_and_publish_local_report
+      requires: [verdict]
+      output: [lineage_edges, experiment_record, report]
+      approval: automatic
+    - id: integrate
+      role: integrator
+      action: propose_mutation_merge_as_new_experiment
+      requires: [eligible_mutations, compatibility_validation]
+      output: [integration_branch, fresh_combination_benchmark_request]
+      approval: human_for_main_branch
+recovery:
+    interrupted_build: retry_idempotently_if_inputs_match
+    interrupted_measurement: mark_partial_quarantine_then_reschedule
+    worker_heartbeat_expired: revoke_lease_and_audit
+    host_reboot: resume_from_last_durable_state
+    out_of_disk: stop_new_builds_checkpoint_and_request_cleanup
+    oracle_changed: invalidate_comparisons_until_reapproved
+    baseline_drift: quarantine_block_and_rerun_reference
+reporting:
+    snapshots: [per_transition, daily, final]
+    include:
+        [
+            all_mutations,
+            negative_results,
+            raw_measurement_hashes,
+            lineage,
+            pareto_front,
+            unresolved_risks,
+        ]

@@ -1,0 +1,64 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6.1/v61-candidate-batch.schema.json",
+	"title": "v61-candidate-batch",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"batch_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"frozen_baseline_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"reference_protocol_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"source_repository": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"trial_candidates": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"pattern": "^[a-f0-9]{64}$"
+			},
+			"maxItems": 1000
+		},
+		"assignment_ids": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+			},
+			"maxItems": 1000
+		},
+		"generation_label": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 4096
+		},
+		"software_selected": {
+			"const": true
+		},
+		"created_at": {
+			"type": "string",
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"batch_id",
+		"frozen_baseline_digest",
+		"reference_protocol_digest",
+		"source_repository",
+		"trial_candidates",
+		"assignment_ids",
+		"generation_label",
+		"software_selected",
+		"created_at"
+	]
+}

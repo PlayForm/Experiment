@@ -1,0 +1,14 @@
+{
+	"attestation_id": "sample-id",
+	"kind": "build",
+	"issuer_id": "sample-id",
+	"subject_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"predicate_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"credential_serial": "sample-id",
+	"issued_utc": "2026-11-21T10:00:00Z",
+	"expires_utc": "2026-11-21T10:00:00Z",
+	"signature_algorithm": "Ed25519",
+	"signature_b64": "sample-id",
+	"scope_policy_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"event_id": "sample-id"
+}

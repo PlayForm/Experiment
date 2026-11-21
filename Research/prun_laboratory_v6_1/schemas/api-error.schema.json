@@ -1,0 +1,44 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/api-error.schema.json",
+	"title": "api-error",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"error_code": {
+			"type": "string",
+			"enum": [
+				"BAD_REQUEST",
+				"UNAUTHORIZED",
+				"FORBIDDEN",
+				"NOT_FOUND",
+				"CONFLICT",
+				"PRECONDITION_FAILED",
+				"REPLAY",
+				"EXPIRED_LEASE",
+				"FENCING_REJECTED",
+				"INVALID_EVIDENCE",
+				"RATE_LIMITED",
+				"UNAVAILABLE",
+				"INTERNAL"
+			]
+		},
+		"message": {
+			"type": "string",
+			"minLength": 1
+		},
+		"request_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"details": {
+			"type": "object",
+			"additionalProperties": {
+				"type": "string",
+				"minLength": 0
+			}
+		}
+	},
+	"required": ["error_code", "message", "request_id"]
+}

@@ -1,0 +1,16 @@
+{
+	"protocol_id": "sample-id",
+	"version": 1,
+	"hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"pairing": true,
+	"shuffle_seed": 1,
+	"warmups": 1,
+	"min_repetitions": 1,
+	"max_repetitions": 1,
+	"fixture_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"trace_mode": "off",
+	"cpu_set": "sample-id",
+	"host_policy_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"outlier_policy": "predeclared",
+	"stop_condition_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}

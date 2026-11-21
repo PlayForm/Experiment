@@ -1,0 +1,29 @@
+{
+	"version": 5,
+	"bid_id": "bid-1",
+	"case_id": "case-1",
+	"bidder_identity": "researcher-proponent-1",
+	"stance": "proponent",
+	"snapshot_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+	"proposal_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+	"requested": {
+		"input_tokens": 12000,
+		"output_tokens": 4000,
+		"cpu_core_seconds": 1000,
+		"benchmark_seconds": 0,
+		"gpu_seconds": 0,
+		"storage_byte_days": 50000,
+		"reference_requests": 10
+	},
+	"mechanism_key": "walkdir-parallel",
+	"prediction": {
+		"event": "candidate passes oracle",
+		"probability": 0.72,
+		"registered_before_outcome": true
+	},
+	"information_gain_basis": "Compare wide and deep trees against reference.",
+	"source_coverage_note": "Only source traversal module",
+	"model_cohort_id": "model-cohort-a",
+	"created_utc": "2026-11-21T00:01:00Z",
+	"signature_b64": "DEMO_UNVERIFIED_SIGNATURE"
+}

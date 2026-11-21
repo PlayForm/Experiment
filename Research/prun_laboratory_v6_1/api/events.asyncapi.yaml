@@ -1,0 +1,199 @@
+asyncapi: 3.1.0
+info:
+    title: Rust Lab Signed Event Bus
+    version: 6.1.0
+    description:
+        Trusted event subscribers only. Signed audit-event payload is metadata-only;
+        content stored in encrypted CAS and accessed by policy.
+defaultContentType: application/json
+channels:
+    labCampaign:
+        address: lab.v6.campaign
+        messages:
+            audit:
+                $ref: "#/components/messages/AuditEvent"
+        description: Read-only signed event stream, authorized subscriber only.
+    labSource:
+        address: lab.v6.source
+        messages:
+            audit:
+                $ref: "#/components/messages/AuditEvent"
+        description: Read-only signed event stream, authorized subscriber only.
+    labResearch:
+        address: lab.v6.research
+        messages:
+            audit:
+                $ref: "#/components/messages/AuditEvent"
+        description: Read-only signed event stream, authorized subscriber only.
+    labWorker:
+        address: lab.v6.worker
+        messages:
+            audit:
+                $ref: "#/components/messages/AuditEvent"
+        description: Read-only signed event stream, authorized subscriber only.
+    labMutation:
+        address: lab.v6.mutation
+        messages:
+            audit:
+                $ref: "#/components/messages/AuditEvent"
+        description: Read-only signed event stream, authorized subscriber only.
+    labBuild:
+        address: lab.v6.build
+        messages:
+            audit:
+                $ref: "#/components/messages/AuditEvent"
+        description: Read-only signed event stream, authorized subscriber only.
+    labOracle:
+        address: lab.v6.oracle
+        messages:
+            audit:
+                $ref: "#/components/messages/AuditEvent"
+        description: Read-only signed event stream, authorized subscriber only.
+    labBenchmark:
+        address: lab.v6.benchmark
+        messages:
+            audit:
+                $ref: "#/components/messages/AuditEvent"
+        description: Read-only signed event stream, authorized subscriber only.
+    labSecurity:
+        address: lab.v6.security
+        messages:
+            audit:
+                $ref: "#/components/messages/AuditEvent"
+        description: Read-only signed event stream, authorized subscriber only.
+    labOperations:
+        address: lab.v6.operations
+        messages:
+            audit:
+                $ref: "#/components/messages/AuditEvent"
+        description: Read-only signed event stream, authorized subscriber only.
+    labCustody:
+        address: lab.v6.1.custody
+        messages:
+            audit:
+                $ref: "#/components/messages/AuditEvent"
+        description: Trusted software subscribers only; restricted metadata.
+    labLicense:
+        address: lab.v6.1.license
+        messages:
+            audit:
+                $ref: "#/components/messages/AuditEvent"
+        description: Trusted software subscribers only; restricted metadata.
+    labFeedback:
+        address: lab.v6.1.feedback
+        messages:
+            audit:
+                $ref: "#/components/messages/AuditEvent"
+        description: Trusted software subscribers only; restricted metadata.
+    labKnowledge:
+        address: lab.v6.1.knowledge
+        messages:
+            audit:
+                $ref: "#/components/messages/AuditEvent"
+        description: Trusted software subscribers only; restricted metadata.
+    labCurriculum:
+        address: lab.v6.1.curriculum
+        messages:
+            audit:
+                $ref: "#/components/messages/AuditEvent"
+        description:
+            Trusted software research assignment and study result events; not
+            worker visible.
+operations:
+    subscribeCampaign:
+        action: receive
+        channel:
+            $ref: "#/channels/labCampaign"
+        messages:
+            - $ref: "#/channels/labCampaign/messages/audit"
+    subscribeSource:
+        action: receive
+        channel:
+            $ref: "#/channels/labSource"
+        messages:
+            - $ref: "#/channels/labSource/messages/audit"
+    subscribeResearch:
+        action: receive
+        channel:
+            $ref: "#/channels/labResearch"
+        messages:
+            - $ref: "#/channels/labResearch/messages/audit"
+    subscribeWorker:
+        action: receive
+        channel:
+            $ref: "#/channels/labWorker"
+        messages:
+            - $ref: "#/channels/labWorker/messages/audit"
+    subscribeMutation:
+        action: receive
+        channel:
+            $ref: "#/channels/labMutation"
+        messages:
+            - $ref: "#/channels/labMutation/messages/audit"
+    subscribeBuild:
+        action: receive
+        channel:
+            $ref: "#/channels/labBuild"
+        messages:
+            - $ref: "#/channels/labBuild/messages/audit"
+    subscribeOracle:
+        action: receive
+        channel:
+            $ref: "#/channels/labOracle"
+        messages:
+            - $ref: "#/channels/labOracle/messages/audit"
+    subscribeBenchmark:
+        action: receive
+        channel:
+            $ref: "#/channels/labBenchmark"
+        messages:
+            - $ref: "#/channels/labBenchmark/messages/audit"
+    subscribeSecurity:
+        action: receive
+        channel:
+            $ref: "#/channels/labSecurity"
+        messages:
+            - $ref: "#/channels/labSecurity/messages/audit"
+    subscribeOperations:
+        action: receive
+        channel:
+            $ref: "#/channels/labOperations"
+        messages:
+            - $ref: "#/channels/labOperations/messages/audit"
+    subscribeCustody:
+        action: receive
+        channel:
+            $ref: "#/channels/labCustody"
+        messages:
+            - $ref: "#/channels/labCustody/messages/audit"
+    subscribeLicense:
+        action: receive
+        channel:
+            $ref: "#/channels/labLicense"
+        messages:
+            - $ref: "#/channels/labLicense/messages/audit"
+    subscribeFeedback:
+        action: receive
+        channel:
+            $ref: "#/channels/labFeedback"
+        messages:
+            - $ref: "#/channels/labFeedback/messages/audit"
+    subscribeKnowledge:
+        action: receive
+        channel:
+            $ref: "#/channels/labKnowledge"
+        messages:
+            - $ref: "#/channels/labKnowledge/messages/audit"
+    subscribeCurriculum:
+        action: receive
+        channel:
+            $ref: "#/channels/labCurriculum"
+        messages:
+            - $ref: "#/channels/labCurriculum/messages/audit"
+components:
+    messages:
+        AuditEvent:
+            name: AuditEvent
+            contentType: application/json
+            payload:
+                $ref: ../schemas/audit-event.schema.json

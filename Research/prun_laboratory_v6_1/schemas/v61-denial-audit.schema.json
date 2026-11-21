@@ -1,0 +1,82 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6.1/v61-denial-audit.schema.json",
+	"title": "v61-denial-audit",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"audit_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"request_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"decision_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"actor_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"action": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 4096
+		},
+		"artifact_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"policy_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"reason_code": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 4096
+		},
+		"risk_class": {
+			"type": "string",
+			"enum": [
+				"informational",
+				"security",
+				"legal",
+				"privacy",
+				"integrity"
+			]
+		},
+		"worker_notified": {
+			"const": false
+		},
+		"operator_visibility": {
+			"const": "restricted"
+		},
+		"event_time": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"recorded_at": {
+			"type": "string",
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"audit_id",
+		"request_id",
+		"decision_id",
+		"actor_id",
+		"action",
+		"artifact_digest",
+		"policy_digest",
+		"reason_code",
+		"risk_class",
+		"worker_notified",
+		"operator_visibility",
+		"event_time",
+		"recorded_at"
+	]
+}

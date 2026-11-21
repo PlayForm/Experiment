@@ -1,0 +1,45 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/host-status.schema.json",
+	"title": "host-status",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"host_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"fingerprint": {
+			"$ref": "./hardware-fingerprint.schema.json"
+		},
+		"state": {
+			"type": "string",
+			"enum": ["eligible", "busy", "quarantined", "offline", "draining"]
+		},
+		"lease_id": {
+			"type": ["string", "null"]
+		},
+		"last_calibration_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		},
+		"temperature_celsius": {
+			"type": "number"
+		},
+		"load_state": {
+			"type": "string",
+			"enum": ["idle", "stable", "contaminated", "unknown"]
+		}
+	},
+	"required": [
+		"host_id",
+		"fingerprint",
+		"state",
+		"lease_id",
+		"last_calibration_utc",
+		"temperature_celsius",
+		"load_state"
+	]
+}

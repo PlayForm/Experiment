@@ -1,0 +1,19 @@
+{
+	"sample_id": "sample-id",
+	"benchmark_id": "sample-id",
+	"pair_id": "sample-id",
+	"candidate_label": "baseline",
+	"order": 1,
+	"elapsed_ns": 1,
+	"cpu_user_ns": 1,
+	"cpu_system_ns": 1,
+	"peak_rss_bytes": 1,
+	"minor_faults": 1,
+	"major_faults": 1,
+	"exit_code": 1,
+	"stdout_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"stderr_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"environment_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"valid": false,
+	"exclusion_reason": "sample-id"
+}

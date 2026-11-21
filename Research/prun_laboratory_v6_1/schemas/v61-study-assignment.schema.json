@@ -1,0 +1,82 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6.1/v61-study-assignment.schema.json",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"study_assignment_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"curriculum_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"research_track_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"view_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"challenge_family": {
+			"type": "string",
+			"enum": [
+				"exploration",
+				"implementation",
+				"skepticism",
+				"test-design",
+				"replication",
+				"hardware-specialization",
+				"cross-repository-transfer",
+				"publication"
+			]
+		},
+		"worker_visible_task_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"allowed_output_classes": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"enum": [
+					"patch",
+					"test-proposal",
+					"research-claim",
+					"draft-paper"
+				]
+			},
+			"maxItems": 1000
+		},
+		"assigned_by": {
+			"const": "trusted-curriculum-service"
+		},
+		"allocation_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"assignment_policy_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"created_at": {
+			"type": "string",
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"study_assignment_id",
+		"curriculum_id",
+		"research_track_id",
+		"view_id",
+		"challenge_family",
+		"worker_visible_task_digest",
+		"allowed_output_classes",
+		"assigned_by",
+		"allocation_id",
+		"assignment_policy_digest",
+		"created_at"
+	]
+}

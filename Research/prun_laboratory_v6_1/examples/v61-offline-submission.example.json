@@ -1,0 +1,8 @@
+{
+	"local_nonce": "task-local-123",
+	"patch_file": "/workspace/out/change.patch",
+	"claims_file": "/workspace/out/claims.json",
+	"test_proposals_dir": null,
+	"paper_draft_file": null,
+	"claim_of_success": "local-test-only"
+}

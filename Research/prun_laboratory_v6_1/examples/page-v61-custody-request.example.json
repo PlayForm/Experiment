@@ -1,0 +1,20 @@
+{
+	"items": [
+		{
+			"request_id": "xfer-1",
+			"idempotency_key": "idempo-1",
+			"artifact_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+			"artifact_policy_id": "policy-a",
+			"source_holder_id": "vault-1",
+			"target_holder_id": "worker-17",
+			"requested_purpose": "research",
+			"requested_bytes": 1234,
+			"lease_expires_at": "2026-11-21T01:00:00Z",
+			"repository_id": "repo-a",
+			"policy_revision": "0000000000000000000000000000000000000000000000000000000000000000",
+			"transfer_nonce": "nonce-a"
+		}
+	],
+	"next_cursor": null,
+	"has_more": false
+}

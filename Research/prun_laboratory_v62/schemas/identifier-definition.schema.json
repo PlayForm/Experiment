@@ -1,0 +1,65 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://contracts.example.invalid/v6.2/identifier-definition.schema.json",
+	"title": "Private canonical identifier factory input",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"semantic_kind": {
+			"type": "string",
+			"enum": [
+				"schema",
+				"event",
+				"artifact",
+				"policy",
+				"capability",
+				"correspondence"
+			]
+		},
+		"constraint": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"alphabet": {
+					"const": "ascii_restricted"
+				},
+				"first": {
+					"const": "ascii_alnum"
+				},
+				"continuation_extra": {
+					"const": "_.:/-"
+				},
+				"min_bytes": {
+					"type": "integer",
+					"minimum": 1,
+					"maximum": 128
+				},
+				"max_bytes": {
+					"type": "integer",
+					"minimum": 1,
+					"maximum": 128
+				},
+				"canonicalization": {
+					"const": "reject_noncanonical"
+				}
+			},
+			"required": [
+				"alphabet",
+				"first",
+				"continuation_extra",
+				"min_bytes",
+				"max_bytes",
+				"canonicalization"
+			]
+		},
+		"definition_hash": {
+			"type": "string",
+			"pattern": "^(?:[a-f0-9]{64})(?![\\s\\S])"
+		},
+		"revision": {
+			"type": "integer",
+			"minimum": 1
+		}
+	},
+	"required": ["semantic_kind", "constraint", "definition_hash", "revision"]
+}

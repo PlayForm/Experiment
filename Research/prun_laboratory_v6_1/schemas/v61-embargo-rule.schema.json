@@ -1,0 +1,73 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6.1/v61-embargo-rule.schema.json",
+	"title": "v61-embargo-rule",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"embargo_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"repository_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"subject_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"prohibited_recipients": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+			},
+			"maxItems": 1000
+		},
+		"prohibited_research_tracks": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+			},
+			"maxItems": 1000
+		},
+		"prohibited_purposes": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1,
+				"maxLength": 4096
+			},
+			"maxItems": 1000
+		},
+		"release_after": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"issuer_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"owner_approved": {
+			"type": "boolean"
+		},
+		"policy_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		}
+	},
+	"required": [
+		"embargo_id",
+		"repository_id",
+		"subject_digest",
+		"prohibited_recipients",
+		"prohibited_research_tracks",
+		"prohibited_purposes",
+		"release_after",
+		"issuer_id",
+		"owner_approved",
+		"policy_digest"
+	]
+}

@@ -1,0 +1,12 @@
+{
+	"decision_id": "decision-1",
+	"request_id": "xfer-1",
+	"verdict": "deny",
+	"internal_reason_code": "embargo",
+	"policy_revision": "0000000000000000000000000000000000000000000000000000000000000000",
+	"holder_attestation_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"issuer_id": "policy-service",
+	"decision_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"issued_at": "2026-11-21T01:00:00Z",
+	"valid_until": "2026-11-21T01:00:00Z"
+}

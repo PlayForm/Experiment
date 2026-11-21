@@ -1,0 +1,8 @@
+{
+	"host_id": "sample-id",
+	"experiment_id": "sample-id",
+	"cpu_set": "sample-id",
+	"resource_fingerprint_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"lease_duration_seconds": 1,
+	"request_id": "sample-id"
+}

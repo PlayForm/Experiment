@@ -1,0 +1,69 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6.1/v61-experiment-spec.schema.json",
+	"title": "v61-experiment-spec",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"experiment_spec_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"intent_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"reference_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"candidate_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"build_policy_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"oracle_policy_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"benchmark_protocol_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"hardware_cohort": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"release_criteria_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"schema_version": {
+			"const": "6.1"
+		},
+		"compiled_by": {
+			"const": "trusted-policy-engine"
+		},
+		"compiled_at": {
+			"type": "string",
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"experiment_spec_id",
+		"intent_id",
+		"reference_digest",
+		"candidate_digest",
+		"build_policy_digest",
+		"oracle_policy_digest",
+		"benchmark_protocol_digest",
+		"hardware_cohort",
+		"release_criteria_digest",
+		"schema_version",
+		"compiled_by",
+		"compiled_at"
+	]
+}

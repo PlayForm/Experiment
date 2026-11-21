@@ -1,0 +1,17 @@
+{
+	"benchmark_id": "sample-id",
+	"experiment_id": "sample-id",
+	"mutation_id": "sample-id",
+	"baseline_binary_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"candidate_binary_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"workload_manifest_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"host_cohort_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"protocol_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"repetitions": 1,
+	"warmups": 1,
+	"randomization_seed": 1,
+	"trace_mode": "off",
+	"lease_id": "sample-id",
+	"fencing_token": 1,
+	"idempotency_key": "sample-id"
+}

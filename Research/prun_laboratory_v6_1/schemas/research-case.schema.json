@@ -1,0 +1,65 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/research-case.schema.json",
+	"title": "research-case",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"case_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"campaign_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"mutation_id": {
+			"type": ["string", "null"]
+		},
+		"hypothesis_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"state": {
+			"type": "string",
+			"enum": [
+				"opened",
+				"blind_assigned",
+				"preregistered",
+				"investigating",
+				"patching",
+				"measured",
+				"reviewing",
+				"published",
+				"archived"
+			]
+		},
+		"blind_cohort_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"privacy_class": {
+			"type": "string",
+			"enum": ["private", "restricted", "sanitizable"]
+		},
+		"created_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"case_id",
+		"campaign_id",
+		"mutation_id",
+		"hypothesis_digest",
+		"state",
+		"blind_cohort_id",
+		"privacy_class",
+		"created_utc"
+	]
+}

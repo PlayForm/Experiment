@@ -1,0 +1,27 @@
+sequenceDiagram
+    autonumber
+    participant Owner as Human / GPUI (Plane 0)
+    participant Kernel as Rust Kernel (Plane 1)
+    participant Policy as Rights & Embargo Engine
+    participant CAS as Encrypted CAS / Custody Vault
+    participant Supervisor as Trusted Worker Supervisor
+    participant LLM as Offline LLM Container (Boundary X)
+    participant Runner as Trusted Oracle + Runner (Plane 2)
+    Owner->>Kernel: Signed campaign config
+    Kernel->>Policy: Authorize source and local context
+    Policy-->>Kernel: Permit/deny + policy digest
+    Kernel->>CAS: Reserve qualified destination storage
+    CAS-->>Kernel: Fresh capacity / fenced lease
+    Kernel->>Supervisor: Stage approved snapshot + task
+    Supervisor->>LLM: Read-only Rust source + offline tools
+    LLM-->>Supervisor: Patch + experiment proposal (untrusted)
+    Supervisor-->>LLM: Opaque submission_received
+    Supervisor->>Kernel: Signed ingestion receipt (no verdict)
+    Kernel->>Policy: Validate patch scope, rights, conflicts
+    Kernel->>Runner: Frozen build + oracle + exclusive benchmark
+    Runner-->>Kernel: Signed samples and verification verdict
+    Kernel->>CAS: Seal raw results, metadata and correspondence
+    Kernel->>Policy: Compile private feedback release view
+    Policy-->>Kernel: Approved projection digest
+    Kernel->>Supervisor: Optional next private feedback capsule
+    Note over Kernel,CAS: Privileged truth, audit and signatures never enter offline worker

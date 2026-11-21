@@ -1,0 +1,108 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6.1/v61-license-grant.schema.json",
+	"title": "v61-license-grant",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"grant_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"repository_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"source_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"spdx_expression": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 4096
+		},
+		"license_text_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"eula_artifact_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"license_status": {
+			"type": "string",
+			"enum": [
+				"unreviewed",
+				"compatible",
+				"restricted",
+				"requires-review",
+				"prohibited"
+			]
+		},
+		"allowed_uses": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"enum": [
+					"build",
+					"test",
+					"benchmark",
+					"research",
+					"publication",
+					"replication",
+					"transfer",
+					"archive"
+				]
+			},
+			"maxItems": 1000
+		},
+		"derivative_obligations": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1,
+				"maxLength": 4096
+			},
+			"maxItems": 1000
+		},
+		"redistribution_allowed": {
+			"type": "boolean"
+		},
+		"model_training_allowed": {
+			"type": "boolean"
+		},
+		"jurisdiction_review_required": {
+			"type": "boolean"
+		},
+		"review_authority": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"review_record_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"valid_from": {
+			"type": "string",
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"grant_id",
+		"repository_id",
+		"source_digest",
+		"spdx_expression",
+		"license_text_digest",
+		"eula_artifact_digest",
+		"license_status",
+		"allowed_uses",
+		"derivative_obligations",
+		"redistribution_allowed",
+		"model_training_allowed",
+		"jurisdiction_review_required",
+		"review_authority",
+		"review_record_digest",
+		"valid_from"
+	]
+}

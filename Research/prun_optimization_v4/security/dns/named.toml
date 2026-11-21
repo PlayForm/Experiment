@@ -1,0 +1,11 @@
+# Hickory DNS 0.26.x — isolated authoritative zone; not a trust anchor.
+listen_addrs_ipv4 = ["0.0.0.0"]
+listen_addrs_ipv6 = []
+listen_port = 53
+directory = "/etc/hickory/zones"
+
+[[zones]]
+zone = "lab.internal"
+zone_type = "Primary"
+file = "lab.internal.zone"
+axfr_policy = "Deny"

@@ -1,0 +1,83 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6.1/v61-research-view.schema.json",
+	"title": "v61-research-view",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"view_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"worker_assignment_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"source_snapshot_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"allowed_paths": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1,
+				"maxLength": 4096
+			},
+			"maxItems": 1000
+		},
+		"reference_artifact_digests": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"pattern": "^[a-f0-9]{64}$"
+			},
+			"maxItems": 1000
+		},
+		"feedback_artifact_digests": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"pattern": "^[a-f0-9]{64}$"
+			},
+			"maxItems": 1000
+		},
+		"excluded_track_ids": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+			},
+			"maxItems": 1000
+		},
+		"repository_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"view_policy_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"manifest_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"created_at": {
+			"type": "string",
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"view_id",
+		"worker_assignment_id",
+		"source_snapshot_digest",
+		"allowed_paths",
+		"reference_artifact_digests",
+		"feedback_artifact_digests",
+		"excluded_track_ids",
+		"repository_id",
+		"view_policy_digest",
+		"manifest_digest",
+		"created_at"
+	]
+}

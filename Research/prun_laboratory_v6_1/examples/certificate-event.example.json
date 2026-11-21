@@ -1,0 +1,13 @@
+{
+	"cert_event_id": "sample-id",
+	"credential_serial": "sample-id",
+	"subject_id": "sample-id",
+	"issuer_id": "sample-id",
+	"kind": "x509-tls",
+	"action": "requested",
+	"scope_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"public_key_fingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"reason_code": "sample-id",
+	"occurred_utc": "2026-11-21T10:00:00Z",
+	"event_id": "sample-id"
+}

@@ -1,0 +1,11 @@
+{
+	"command_id": "sample-id",
+	"command_kind": "activate-campaign",
+	"target_id": "sample-id",
+	"desired_revision": 1,
+	"idempotency_key": "sample-id",
+	"policy_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"reason": "sample-id",
+	"submitted_utc": "2026-11-21T10:00:00Z",
+	"operator_id": "sample-id"
+}

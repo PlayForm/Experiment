@@ -1,0 +1,22 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6.1/page-v61-trade-restriction.schema.json",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"items": {
+			"type": "array",
+			"items": {
+				"$ref": "./v61-trade-restriction.schema.json"
+			},
+			"maxItems": 500
+		},
+		"next_cursor": {
+			"type": ["string", "null"]
+		},
+		"has_more": {
+			"type": "boolean"
+		}
+	},
+	"required": ["items", "next_cursor", "has_more"]
+}

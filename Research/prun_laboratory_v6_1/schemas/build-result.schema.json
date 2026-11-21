@@ -1,0 +1,75 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/build-result.schema.json",
+	"title": "build-result",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"build_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"state": {
+			"type": "string",
+			"enum": ["succeeded", "failed", "infrastructure_error"]
+		},
+		"binary": {
+			"anyOf": [
+				{
+					"$ref": "./artifact-ref.schema.json"
+				},
+				{
+					"type": "null"
+				}
+			]
+		},
+		"stdout": {
+			"$ref": "./artifact-ref.schema.json"
+		},
+		"stderr": {
+			"$ref": "./artifact-ref.schema.json"
+		},
+		"builder_image_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"build_started_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		},
+		"build_completed_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		},
+		"exit_code": {
+			"type": "integer"
+		},
+		"evidence_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"trusted_signer_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		}
+	},
+	"required": [
+		"build_id",
+		"state",
+		"binary",
+		"stdout",
+		"stderr",
+		"builder_image_digest",
+		"build_started_utc",
+		"build_completed_utc",
+		"exit_code",
+		"evidence_digest",
+		"trusted_signer_id"
+	]
+}

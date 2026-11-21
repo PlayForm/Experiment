@@ -1,0 +1,12 @@
+{
+	"lease_id": "sample-id",
+	"resource_type": "worker",
+	"resource_id": "sample-id",
+	"owner_job_id": "sample-id",
+	"fencing_token": 1,
+	"state": "held",
+	"acquired_utc": "2026-11-21T10:00:00Z",
+	"expires_utc": "2026-11-21T10:00:00Z",
+	"cpuset": "sample-id",
+	"exclusive": false
+}

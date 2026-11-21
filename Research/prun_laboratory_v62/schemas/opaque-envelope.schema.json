@@ -1,0 +1,33 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://contracts.example.invalid/v6.2/opaque-envelope.schema.json",
+	"title": "Boundary envelope; semantic content fully encrypted",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"v": {
+			"const": "6.2"
+		},
+		"rt": {
+			"type": "string",
+			"pattern": "^(?:[A-Za-z0-9_-]{43})(?![\\s\\S])"
+		},
+		"e": {
+			"type": "integer",
+			"minimum": 1
+		},
+		"enc": {
+			"type": "string",
+			"pattern": "^(?:[A-Za-z0-9_-]{16,4096})(?![\\s\\S])"
+		},
+		"ct": {
+			"type": "string",
+			"pattern": "^(?:[A-Za-z0-9_-]{16,4096})(?![\\s\\S])"
+		},
+		"s": {
+			"type": "string",
+			"pattern": "^(?:[A-Za-z0-9_-]{16,4096})(?![\\s\\S])"
+		}
+	},
+	"required": ["v", "rt", "e", "enc", "ct", "s"]
+}

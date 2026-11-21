@@ -1,0 +1,22 @@
+{
+	"schema_version": 3,
+	"conversation_id": "conversation-001",
+	"session_id": "agent-session-001",
+	"turn_id": "turn-0007",
+	"seq": 7,
+	"kind": "feedback",
+	"role_policy_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"context_snapshot_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+	"content_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+	"redaction_policy_id": "scoped-feedback-v1",
+	"created_utc": "2026-11-21T01:05:00Z",
+	"model_id": null,
+	"prompt_template_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+	"prior_turns": ["turn-0006"],
+	"tools_used": [],
+	"ttft_ms": null,
+	"ttfb_ms": null,
+	"tokens_in": null,
+	"tokens_out": null,
+	"finish_reason": null
+}

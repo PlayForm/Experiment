@@ -1,0 +1,45 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/benchmark-lease-request.schema.json",
+	"title": "benchmark-lease-request",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"host_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"experiment_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"cpu_set": {
+			"type": "string",
+			"minLength": 1
+		},
+		"resource_fingerprint_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"lease_duration_seconds": {
+			"type": "integer",
+			"minimum": 1
+		},
+		"request_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		}
+	},
+	"required": [
+		"host_id",
+		"experiment_id",
+		"cpu_set",
+		"resource_fingerprint_digest",
+		"lease_duration_seconds",
+		"request_id"
+	]
+}

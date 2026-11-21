@@ -1,0 +1,80 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6.1/v61-release-compatibility.schema.json",
+	"title": "v61-release-compatibility",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"compatibility_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"origin_repository": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"target_repository": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"claim_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"source_license_grants": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+			},
+			"maxItems": 1000
+		},
+		"target_license_grants": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+			},
+			"maxItems": 1000
+		},
+		"license_result": {
+			"type": "string",
+			"enum": ["allow", "deny", "needs-human-review"]
+		},
+		"semantic_transfer_status": {
+			"type": "string",
+			"enum": ["unverified", "verified", "failed"]
+		},
+		"independent_experiment_id": {
+			"anyOf": [
+				{
+					"type": "string",
+					"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+				},
+				{
+					"type": "null"
+				}
+			]
+		},
+		"evaluated_by": {
+			"const": "trusted-policy-engine"
+		},
+		"evaluated_at": {
+			"type": "string",
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"compatibility_id",
+		"origin_repository",
+		"target_repository",
+		"claim_digest",
+		"source_license_grants",
+		"target_license_grants",
+		"license_result",
+		"semantic_transfer_status",
+		"independent_experiment_id",
+		"evaluated_by",
+		"evaluated_at"
+	]
+}

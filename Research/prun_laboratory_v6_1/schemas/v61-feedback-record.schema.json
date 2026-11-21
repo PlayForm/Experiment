@@ -1,0 +1,69 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6.1/v61-feedback-record.schema.json",
+	"title": "v61-feedback-record",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"feedback_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"source_experiment_spec": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"authoritative_result_digests": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"pattern": "^[a-f0-9]{64}$"
+			},
+			"maxItems": 1000
+		},
+		"target_track_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"allowed_fields": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1,
+				"maxLength": 4096
+			},
+			"maxItems": 1000
+		},
+		"projection_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"redaction_policy_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"release_class": {
+			"type": "string",
+			"enum": ["private-track", "sanitized-citation", "cross-repository"]
+		},
+		"created_by": {
+			"const": "trusted-feedback-projector"
+		},
+		"created_at": {
+			"type": "string",
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"feedback_id",
+		"source_experiment_spec",
+		"authoritative_result_digests",
+		"target_track_id",
+		"allowed_fields",
+		"projection_digest",
+		"redaction_policy_digest",
+		"release_class",
+		"created_by",
+		"created_at"
+	]
+}

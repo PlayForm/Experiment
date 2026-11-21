@@ -1,0 +1,72 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/lease.schema.json",
+	"title": "lease",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"lease_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"resource_type": {
+			"type": "string",
+			"enum": [
+				"worker",
+				"cpu-set",
+				"builder",
+				"benchmark-host",
+				"holdout-access",
+				"publication-review"
+			]
+		},
+		"resource_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"owner_job_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"fencing_token": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"state": {
+			"type": "string",
+			"enum": ["held", "released", "expired", "revoked"]
+		},
+		"acquired_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		},
+		"expires_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		},
+		"cpuset": {
+			"type": "string",
+			"minLength": 0
+		},
+		"exclusive": {
+			"type": "boolean"
+		}
+	},
+	"required": [
+		"lease_id",
+		"resource_type",
+		"resource_id",
+		"owner_job_id",
+		"fencing_token",
+		"state",
+		"acquired_utc",
+		"expires_utc",
+		"cpuset",
+		"exclusive"
+	]
+}

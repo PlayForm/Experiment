@@ -1,0 +1,230 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://example.invalid/prun-bench.schema.json",
+	"title": "PlayForm/Run Docker Benchmark Matrix v1",
+	"description": "Experiment invariants and the Cartesian product of source refs, build configs and Cargo feature sets.",
+	"type": "object",
+	"additionalProperties": false,
+	"required": [
+		"schema_version",
+		"invariants",
+		"refs",
+		"builds",
+		"feature_sets",
+		"fixtures",
+		"workloads"
+	],
+	"properties": {
+		"schema_version": {
+			"const": 1
+		},
+		"invariants": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": [
+				"builder_base",
+				"runner_base",
+				"hyperfine_version",
+				"cpuset",
+				"memory",
+				"warmups",
+				"runs",
+				"environment"
+			],
+			"properties": {
+				"builder_base": {
+					"type": "string",
+					"minLength": 1
+				},
+				"runner_base": {
+					"type": "string",
+					"minLength": 1
+				},
+				"hyperfine_version": {
+					"type": "string",
+					"minLength": 1
+				},
+				"cpuset": {
+					"type": "string",
+					"description": "e.g. 2-5, or empty to leave unpinned"
+				},
+				"memory": {
+					"type": "string",
+					"pattern": "^[1-9][0-9]*[kmgKMG]?$"
+				},
+				"warmups": {
+					"type": "integer",
+					"minimum": 0
+				},
+				"runs": {
+					"type": "integer",
+					"minimum": 2
+				},
+				"environment": {
+					"type": "object",
+					"additionalProperties": {
+						"type": "string"
+					}
+				},
+				"metrics": {
+					"type": "string",
+					"minLength": 1,
+					"description": "Hyperfine 2 metrics selection"
+				},
+				"runner_cpusets": {
+					"type": "object",
+					"additionalProperties": false,
+					"properties": {
+						"release": {
+							"type": "string"
+						},
+						"diagnostic": {
+							"type": "string"
+						}
+					}
+				}
+			}
+		},
+		"refs": {
+			"type": "array",
+			"minItems": 1,
+			"items": {
+				"type": "object",
+				"additionalProperties": false,
+				"required": ["id", "git_ref"],
+				"properties": {
+					"id": {
+						"$ref": "#/$defs/id"
+					},
+					"git_ref": {
+						"type": "string",
+						"minLength": 1
+					}
+				}
+			}
+		},
+		"builds": {
+			"type": "array",
+			"minItems": 1,
+			"items": {
+				"type": "object",
+				"additionalProperties": false,
+				"required": ["id", "profile"],
+				"properties": {
+					"id": {
+						"$ref": "#/$defs/id"
+					},
+					"profile": {
+						"enum": ["release", "dev"]
+					},
+					"rustflags": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"profile_env": {
+						"type": "object",
+						"propertyNames": {
+							"pattern": "^CARGO_PROFILE_(RELEASE|DEV)_[A-Z0-9_]+$"
+						},
+						"additionalProperties": {
+							"type": "string"
+						}
+					}
+				}
+			}
+		},
+		"feature_sets": {
+			"type": "array",
+			"minItems": 1,
+			"items": {
+				"type": "object",
+				"additionalProperties": false,
+				"required": ["id"],
+				"properties": {
+					"id": {
+						"$ref": "#/$defs/id"
+					},
+					"features": {
+						"type": "array",
+						"items": {
+							"type": "string",
+							"minLength": 1
+						}
+					},
+					"no_default_features": {
+						"type": "boolean"
+					}
+				}
+			}
+		},
+		"fixtures": {
+			"type": "array",
+			"minItems": 1,
+			"items": {
+				"type": "object",
+				"additionalProperties": false,
+				"required": ["id", "directories", "depth", "noise_files"],
+				"properties": {
+					"id": {
+						"$ref": "#/$defs/id"
+					},
+					"directories": {
+						"type": "integer",
+						"minimum": 1
+					},
+					"depth": {
+						"type": "integer",
+						"minimum": 1
+					},
+					"noise_files": {
+						"type": "integer",
+						"minimum": 0
+					}
+				}
+			}
+		},
+		"workloads": {
+			"type": "array",
+			"minItems": 1,
+			"items": {
+				"type": "object",
+				"additionalProperties": false,
+				"required": ["id", "fixture", "pattern", "parallel", "command"],
+				"properties": {
+					"id": {
+						"$ref": "#/$defs/id"
+					},
+					"fixture": {
+						"$ref": "#/$defs/id"
+					},
+					"pattern": {
+						"type": "string",
+						"minLength": 1
+					},
+					"parallel": {
+						"type": "boolean"
+					},
+					"command": {
+						"type": "string",
+						"minLength": 1
+					}
+				}
+			}
+		},
+		"exclude": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			},
+			"uniqueItems": true
+		}
+	},
+	"$defs": {
+		"id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"
+		}
+	}
+}

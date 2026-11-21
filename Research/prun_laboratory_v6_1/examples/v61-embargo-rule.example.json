@@ -1,0 +1,12 @@
+{
+	"embargo_id": "embargo-a",
+	"repository_id": "repo-a",
+	"subject_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"prohibited_recipients": ["sibling-2"],
+	"prohibited_research_tracks": [],
+	"prohibited_purposes": ["publication"],
+	"release_after": "2026-11-21T01:00:00Z",
+	"issuer_id": "repository-owner",
+	"owner_approved": true,
+	"policy_digest": "0000000000000000000000000000000000000000000000000000000000000000"
+}

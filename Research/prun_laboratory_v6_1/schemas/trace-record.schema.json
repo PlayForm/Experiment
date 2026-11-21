@@ -1,0 +1,98 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/trace-record.schema.json",
+	"title": "trace-record",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"trace_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[0-9a-f]{32}$"
+		},
+		"span_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[0-9a-f]{16}$"
+		},
+		"parent_span_id": {
+			"type": ["string", "null"]
+		},
+		"plane": {
+			"type": "string",
+			"enum": ["control", "product"]
+		},
+		"span_name": {
+			"type": "string",
+			"minLength": 1
+		},
+		"start_unix_ns": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"end_unix_ns": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"resource_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"campaign_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"experiment_id": {
+			"type": ["string", "null"]
+		},
+		"mutation_id": {
+			"type": ["string", "null"]
+		},
+		"status_code": {
+			"type": "string",
+			"enum": ["OK", "ERROR", "UNSET"]
+		},
+		"attributes": {
+			"type": "object",
+			"additionalProperties": {
+				"type": "string",
+				"minLength": 0
+			}
+		},
+		"links": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			}
+		},
+		"capture_mode": {
+			"type": "string",
+			"enum": [
+				"control-full",
+				"product-off",
+				"product-lite",
+				"product-diagnostic"
+			]
+		}
+	},
+	"required": [
+		"trace_id",
+		"span_id",
+		"parent_span_id",
+		"plane",
+		"span_name",
+		"start_unix_ns",
+		"end_unix_ns",
+		"resource_id",
+		"campaign_id",
+		"experiment_id",
+		"mutation_id",
+		"status_code",
+		"attributes",
+		"links",
+		"capture_mode"
+	]
+}

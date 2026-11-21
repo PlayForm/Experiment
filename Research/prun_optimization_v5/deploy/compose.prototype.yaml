@@ -1,0 +1,14 @@
+# Runs ONE offline allocation demonstration, NOT the whole multi-container platform.
+services:
+    market-reference:
+        build:
+            context: ..
+            dockerfile: deploy/Dockerfile.market-prototype
+        volumes:
+            - ../examples/market-scenario.v5.json:/input/scenario.json:ro
+        command: ["/input/scenario.json"]
+        read_only: true
+        network_mode: "none"
+        user: "65532:65532"
+        security_opt: ["no-new-privileges:true"]
+        cap_drop: ["ALL"]

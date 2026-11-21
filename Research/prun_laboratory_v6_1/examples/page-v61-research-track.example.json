@@ -1,0 +1,19 @@
+{
+	"items": [
+		{
+			"track_id": "track-a",
+			"repository_id": "repo-a",
+			"parent_track_id": null,
+			"role": "proponent",
+			"model_lineage_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+			"view_id": "view-a",
+			"opinion_privacy": "private",
+			"peer_visibility": "none",
+			"trade_group": "group-a",
+			"assignment_policy_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+			"created_at": "2026-11-21T01:00:00Z"
+		}
+	],
+	"next_cursor": null,
+	"has_more": false
+}

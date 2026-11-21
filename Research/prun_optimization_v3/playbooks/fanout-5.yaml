@@ -1,0 +1,104 @@
+playbook_version: 3
+id: fanout-five-closed-loop
+status: illustrative_not_executable
+input:
+    frozen_baseline_build_id: B0
+    source_ref: Current
+    workload_protocol_id: dev-paired-v1
+    holdout_view: withheld_from_mutators
+    agent_image: lab-agent-worker@sha256:PIN_ON_DEPLOYMENT
+phases:
+    - id: freeze
+      executor: coordinator
+      action: freeze_generation
+      produce:
+          [
+              generation_id,
+              source_snapshot,
+              baseline_digest,
+              oracle_digest,
+              protocol_digest,
+          ]
+    - id: split
+      executor: deterministic_diversifier
+      action: allocate_scoped_strategies
+      variants:
+          - { slot: 1, mechanism_family: allocation, scope: matcher }
+          - { slot: 2, mechanism_family: scheduling, scope: scheduler }
+          - { slot: 3, mechanism_family: filesystem, scope: walker }
+          - {
+                slot: 4,
+                mechanism_family: syscall_overhead,
+                scope: process_executor,
+            }
+          - { slot: 5, mechanism_family: heuristic_policy, scope: planner }
+    - id: mutate
+      executor: agent_worker
+      fanout: 5
+      require: [one_concept_patch, committed_source, typed_proposal]
+      permissions: [own_worktree_rw, scoped_source_read, submit_proposal]
+      deny:
+          [
+              docker_socket,
+              peer_worktrees,
+              holdout_samples,
+              raw_campaign_database,
+              benchmark_runner,
+          ]
+    - id: gate
+      executor: deterministic_novelty_gate
+      checks:
+          [
+              scope,
+              ancestor,
+              exact_identity,
+              canonical_overlap,
+              feature_compatibility,
+              evidence_reuse,
+          ]
+      on_exact_hit: emit_reuse_event
+      on_uncertain: classifier_advisory_then_policy
+    - id: build
+      executor: pinned_builder
+      concurrency: 3
+      requires: [novelty_checked, scope_checked]
+    - id: oracle
+      executor: trusted_oracle
+      requires: [immutable_binary]
+      on_failure: reject_with_scoped_failure_capsule
+    - id: queue
+      executor: benchmark_scheduler
+      max_parallel_per_host: 1
+      lease: exclusive
+      requires: [oracle_passed]
+    - id: benchmark
+      executor: persistent_release_runner
+      mode: trace-off
+      paired_baseline: frozen_B0
+      verify_environment: true
+      sample_policy: protocol_locked
+    - id: analysis
+      executor: deterministic_statistical_evaluator
+      requires: [raw_sample_hash, valid_lease, full_trial_manifest]
+      classify: [win, loss, tie, inconclusive, invalid]
+    - id: feedback
+      executor: coordinator_redaction_gateway
+      destination: original_logical_patcher_conversation
+      include:
+          [
+              own_candidate,
+              aggregate_development_results,
+              evidence_refs,
+              oracle_category,
+              next_scope,
+          ]
+      exclude: [sealed_holdout, raw_peer_patches, peer_conversations]
+    - id: next_generation
+      executor: coordinator
+      conditions: [within_budget, no_human_stop, no_host_health_alarm]
+      actions:
+          [
+              revise_as_new_mutation,
+              retire_lane,
+              request_integration_or_confirmation,
+          ]

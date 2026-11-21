@@ -1,0 +1,818 @@
+{
+	"version": "6.1",
+	"events": [
+		{
+			"event_kind": "CampaignCreated",
+			"family": "campaign",
+			"payload_schema": "../schemas/campaign.schema.json",
+			"producer": "coordinator",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "CampaignValidated",
+			"family": "campaign",
+			"payload_schema": "../schemas/campaign.schema.json",
+			"producer": "policy-service",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "CampaignActivated",
+			"family": "campaign",
+			"payload_schema": "../schemas/campaign.schema.json",
+			"producer": "coordinator",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "CampaignPaused",
+			"family": "campaign",
+			"payload_schema": "../schemas/campaign.schema.json",
+			"producer": "coordinator",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "CampaignDrained",
+			"family": "campaign",
+			"payload_schema": "../schemas/campaign.schema.json",
+			"producer": "coordinator",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "CampaignCompleted",
+			"family": "campaign",
+			"payload_schema": "../schemas/campaign.schema.json",
+			"producer": "coordinator",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "CampaignFailed",
+			"family": "campaign",
+			"payload_schema": "../schemas/campaign.schema.json",
+			"producer": "coordinator",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "SourceSnapshotCaptured",
+			"family": "source",
+			"payload_schema": "../schemas/source-snapshot.schema.json",
+			"producer": "source-adapter",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "SourceScopeValidated",
+			"family": "source",
+			"payload_schema": "../schemas/source-snapshot.schema.json",
+			"producer": "scope-validator",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "DependencyClosurePinned",
+			"family": "source",
+			"payload_schema": "../schemas/artifact-manifest.schema.json",
+			"producer": "source-adapter",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "ResearchCaseOpened",
+			"family": "research",
+			"payload_schema": "../schemas/research-case.schema.json",
+			"producer": "coordinator",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "BlindAssignmentCreated",
+			"family": "research",
+			"payload_schema": "../schemas/task-assignment.schema.json",
+			"producer": "coordinator",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "ResearchClaimSubmitted",
+			"family": "research",
+			"payload_schema": "../schemas/research-claim.schema.json",
+			"producer": "supervisor",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "ResearchClaimRecorded",
+			"family": "research",
+			"payload_schema": "../schemas/research-claim.schema.json",
+			"producer": "knowledge-registry",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "ResearchDisagreementRecorded",
+			"family": "research",
+			"payload_schema": "../schemas/research-claim.schema.json",
+			"producer": "knowledge-registry",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "PaperStaged",
+			"family": "research",
+			"payload_schema": "../schemas/research-paper.schema.json",
+			"producer": "publication-service",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "PaperSanitized",
+			"family": "research",
+			"payload_schema": "../schemas/research-paper.schema.json",
+			"producer": "sanitizer",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "PaperReleased",
+			"family": "research",
+			"payload_schema": "../schemas/research-paper.schema.json",
+			"producer": "publication-authority",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "PaperRetracted",
+			"family": "research",
+			"payload_schema": "../schemas/research-paper.schema.json",
+			"producer": "publication-authority",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "TransferHypothesisOpened",
+			"family": "research",
+			"payload_schema": "../schemas/research-case.schema.json",
+			"producer": "coordinator",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "TaskStaged",
+			"family": "worker",
+			"payload_schema": "../schemas/task-bundle.schema.json",
+			"producer": "coordinator",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "WorkerLeaseGranted",
+			"family": "worker",
+			"payload_schema": "../schemas/lease.schema.json",
+			"producer": "scheduler",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "WorkerStarted",
+			"family": "worker",
+			"payload_schema": "../schemas/worker-status.schema.json",
+			"producer": "supervisor",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "ModelTurnSealed",
+			"family": "worker",
+			"payload_schema": "../schemas/agent-turn.schema.json",
+			"producer": "supervisor",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "LocalToolCallSealed",
+			"family": "worker",
+			"payload_schema": "../schemas/tool-call.schema.json",
+			"producer": "supervisor",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "WorkerOutputStaged",
+			"family": "worker",
+			"payload_schema": "../schemas/task-receipt.schema.json",
+			"producer": "supervisor",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "WorkerTimedOut",
+			"family": "worker",
+			"payload_schema": "../schemas/worker-status.schema.json",
+			"producer": "supervisor",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "WorkerQuarantined",
+			"family": "worker",
+			"payload_schema": "../schemas/worker-status.schema.json",
+			"producer": "supervisor",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "FeedbackCapsulePrepared",
+			"family": "worker",
+			"payload_schema": "../schemas/feedback-capsule.schema.json",
+			"producer": "feedback-authority",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "PatchSubmitted",
+			"family": "mutation",
+			"payload_schema": "../schemas/patch-proposal.schema.json",
+			"producer": "supervisor",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "PatchRejectedAsDuplicate",
+			"family": "mutation",
+			"payload_schema": "../schemas/patch-proposal.schema.json",
+			"producer": "novelty-gate",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "PatchScopeRejected",
+			"family": "mutation",
+			"payload_schema": "../schemas/patch-proposal.schema.json",
+			"producer": "scope-validator",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "MutationAdmitted",
+			"family": "mutation",
+			"payload_schema": "../schemas/mutation.schema.json",
+			"producer": "coordinator",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "MutationRejected",
+			"family": "mutation",
+			"payload_schema": "../schemas/mutation.schema.json",
+			"producer": "coordinator",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "MutationPromoted",
+			"family": "mutation",
+			"payload_schema": "../schemas/mutation.schema.json",
+			"producer": "release-gate",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "BuildRequested",
+			"family": "build",
+			"payload_schema": "../schemas/build-request.schema.json",
+			"producer": "coordinator",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "BuildCompleted",
+			"family": "build",
+			"payload_schema": "../schemas/build-result.schema.json",
+			"producer": "builder",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "BuildFailed",
+			"family": "build",
+			"payload_schema": "../schemas/build-result.schema.json",
+			"producer": "builder",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "OracleRequested",
+			"family": "oracle",
+			"payload_schema": "../schemas/oracle-request.schema.json",
+			"producer": "coordinator",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "OraclePassed",
+			"family": "oracle",
+			"payload_schema": "../schemas/oracle-result.schema.json",
+			"producer": "oracle",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "OracleFailed",
+			"family": "oracle",
+			"payload_schema": "../schemas/oracle-result.schema.json",
+			"producer": "oracle",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "OracleInconclusive",
+			"family": "oracle",
+			"payload_schema": "../schemas/oracle-result.schema.json",
+			"producer": "oracle",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "BenchmarkLeaseGranted",
+			"family": "benchmark",
+			"payload_schema": "../schemas/lease.schema.json",
+			"producer": "scheduler",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "BenchmarkRequested",
+			"family": "benchmark",
+			"payload_schema": "../schemas/benchmark-request.schema.json",
+			"producer": "coordinator",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "BenchmarkCompleted",
+			"family": "benchmark",
+			"payload_schema": "../schemas/benchmark-result.schema.json",
+			"producer": "runner",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "BenchmarkContaminated",
+			"family": "benchmark",
+			"payload_schema": "../schemas/benchmark-result.schema.json",
+			"producer": "runner",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "BenchmarkLeaseExpired",
+			"family": "benchmark",
+			"payload_schema": "../schemas/lease.schema.json",
+			"producer": "scheduler",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "EvaluationCompleted",
+			"family": "benchmark",
+			"payload_schema": "../schemas/evaluation-result.schema.json",
+			"producer": "evaluator",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "CredentialIssued",
+			"family": "security",
+			"payload_schema": "../schemas/certificate-event.schema.json",
+			"producer": "pki",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "CredentialRevoked",
+			"family": "security",
+			"payload_schema": "../schemas/certificate-event.schema.json",
+			"producer": "pki",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "AttestationRecorded",
+			"family": "security",
+			"payload_schema": "../schemas/attestation.schema.json",
+			"producer": "attestation-service",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "PolicyValidated",
+			"family": "security",
+			"payload_schema": "../schemas/source-policy.schema.json",
+			"producer": "policy-service",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "PolicyRejected",
+			"family": "security",
+			"payload_schema": "../schemas/source-policy.schema.json",
+			"producer": "policy-service",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "HostQuarantined",
+			"family": "operations",
+			"payload_schema": "../schemas/host-status.schema.json",
+			"producer": "host-verifier",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "ArtifactCommitted",
+			"family": "operations",
+			"payload_schema": "../schemas/artifact-ref.schema.json",
+			"producer": "cas",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "TelemetryPipelineDegraded",
+			"family": "operations",
+			"payload_schema": "../schemas/notification.schema.json",
+			"producer": "telemetry-gateway",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "EventReplayCompleted",
+			"family": "operations",
+			"payload_schema": "../schemas/audit-event.schema.json",
+			"producer": "coordinator",
+			"consumer": "ledger",
+			"privacy": "metadata-only",
+			"authoritative": true
+		},
+		{
+			"event_kind": "RepositoryAdmitted",
+			"family": "source",
+			"payload_schema": "../schemas/v61-repository-admission.schema.json",
+			"producer": "source-adapter",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		},
+		{
+			"event_kind": "ArtifactPolicyBound",
+			"family": "custody",
+			"payload_schema": "../schemas/v61-artifact-policy.schema.json",
+			"producer": "custody-policy",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		},
+		{
+			"event_kind": "HolderQualified",
+			"family": "custody",
+			"payload_schema": "../schemas/v61-holder-capability.schema.json",
+			"producer": "holder-supervisor",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		},
+		{
+			"event_kind": "CustodyRequested",
+			"family": "custody",
+			"payload_schema": "../schemas/v61-custody-request.schema.json",
+			"producer": "custody-broker",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		},
+		{
+			"event_kind": "CustodyAuthorized",
+			"family": "custody",
+			"payload_schema": "../schemas/v61-custody-decision.schema.json",
+			"producer": "policy-service",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		},
+		{
+			"event_kind": "CustodyDenied",
+			"family": "custody",
+			"payload_schema": "../schemas/v61-custody-decision.schema.json",
+			"producer": "policy-service",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		},
+		{
+			"event_kind": "CustodyStorageReserved",
+			"family": "custody",
+			"payload_schema": "../schemas/v61-storage-lease.schema.json",
+			"producer": "storage-broker",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		},
+		{
+			"event_kind": "CustodyCommitted",
+			"family": "custody",
+			"payload_schema": "../schemas/v61-custody-receipt.schema.json",
+			"producer": "custody-broker",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		},
+		{
+			"event_kind": "CustodyQuarantined",
+			"family": "custody",
+			"payload_schema": "../schemas/v61-custody-receipt.schema.json",
+			"producer": "custody-broker",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		},
+		{
+			"event_kind": "EmbargoRegistered",
+			"family": "license",
+			"payload_schema": "../schemas/v61-embargo-rule.schema.json",
+			"producer": "policy-service",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		},
+		{
+			"event_kind": "LicenseGrantReviewed",
+			"family": "license",
+			"payload_schema": "../schemas/v61-license-grant.schema.json",
+			"producer": "license-registry",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		},
+		{
+			"event_kind": "TradeEdgeRestricted",
+			"family": "license",
+			"payload_schema": "../schemas/v61-trade-restriction.schema.json",
+			"producer": "policy-service",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		},
+		{
+			"event_kind": "ResearchTrackAssigned",
+			"family": "research",
+			"payload_schema": "../schemas/v61-research-track.schema.json",
+			"producer": "coordinator",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		},
+		{
+			"event_kind": "ResearchViewCompiled",
+			"family": "research",
+			"payload_schema": "../schemas/v61-research-view.schema.json",
+			"producer": "context-projector",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		},
+		{
+			"event_kind": "WorkerContextStaged",
+			"family": "worker",
+			"payload_schema": "../schemas/v61-task-context-plan.schema.json",
+			"producer": "supervisor",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		},
+		{
+			"event_kind": "ExperimentIntentIngested",
+			"family": "research",
+			"payload_schema": "../schemas/v61-experiment-intent.schema.json",
+			"producer": "supervisor",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		},
+		{
+			"event_kind": "ExperimentSpecCompiled",
+			"family": "research",
+			"payload_schema": "../schemas/v61-experiment-spec.schema.json",
+			"producer": "experiment-compiler",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		},
+		{
+			"event_kind": "CandidateBatchRegistered",
+			"family": "research",
+			"payload_schema": "../schemas/v61-candidate-batch.schema.json",
+			"producer": "coordinator",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		},
+		{
+			"event_kind": "PrivateFeedbackProjected",
+			"family": "feedback",
+			"payload_schema": "../schemas/v61-feedback-record.schema.json",
+			"producer": "feedback-projector",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		},
+		{
+			"event_kind": "KnowledgeReleaseRequested",
+			"family": "knowledge",
+			"payload_schema": "../schemas/v61-knowledge-release.schema.json",
+			"producer": "publication-bridge",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		},
+		{
+			"event_kind": "KnowledgeReleaseAuthorized",
+			"family": "knowledge",
+			"payload_schema": "../schemas/v61-knowledge-release.schema.json",
+			"producer": "publication-bridge",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		},
+		{
+			"event_kind": "KnowledgeCompatibilityRecorded",
+			"family": "knowledge",
+			"payload_schema": "../schemas/v61-release-compatibility.schema.json",
+			"producer": "policy-service",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		},
+		{
+			"event_kind": "PolicyDenialRecorded",
+			"family": "security",
+			"payload_schema": "../schemas/v61-denial-audit.schema.json",
+			"producer": "audit-service",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		},
+		{
+			"event_kind": "BitemporalFactAppended",
+			"family": "audit",
+			"payload_schema": "../schemas/v61-temporal-fact.schema.json",
+			"producer": "ledger",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		},
+		{
+			"event_kind": "WorkerNeutralReceiptIssued",
+			"family": "worker",
+			"payload_schema": "../schemas/v61-worker-neutral-receipt.schema.json",
+			"producer": "supervisor",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		},
+		{
+			"event_kind": "WorkerBoundaryObserved",
+			"family": "security",
+			"payload_schema": "../schemas/v61-boundary-observation.schema.json",
+			"producer": "supervisor",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		},
+		{
+			"event_kind": "ResearchCurriculumRegistered",
+			"family": "curriculum",
+			"payload_schema": "../schemas/v61-curriculum.schema.json",
+			"producer": "curriculum-service",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		},
+		{
+			"event_kind": "StudyAssignmentCreated",
+			"family": "curriculum",
+			"payload_schema": "../schemas/v61-study-assignment.schema.json",
+			"producer": "curriculum-service",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		},
+		{
+			"event_kind": "StudyOutcomeRecorded",
+			"family": "curriculum",
+			"payload_schema": "../schemas/v61-study-outcome.schema.json",
+			"producer": "study-evaluator",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		},
+		{
+			"event_kind": "PhysicalAllocationGranted",
+			"family": "curriculum",
+			"payload_schema": "../schemas/v61-physical-allocation.schema.json",
+			"producer": "resource-scheduler",
+			"consumer": "ledger",
+			"privacy": "restricted-metadata",
+			"authoritative": true,
+			"worker_visible": false
+		}
+	]
+}

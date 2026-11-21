@@ -1,0 +1,72 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6.1/v61-custody-decision.schema.json",
+	"title": "v61-custody-decision",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"decision_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"request_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"verdict": {
+			"type": "string",
+			"enum": ["allow", "deny", "defer", "quarantine"]
+		},
+		"internal_reason_code": {
+			"type": "string",
+			"enum": [
+				"permitted",
+				"embargo",
+				"license",
+				"trade-edge",
+				"untrusted-holder",
+				"insufficient-storage",
+				"scope",
+				"expired",
+				"unknown-policy",
+				"policy-unavailable"
+			]
+		},
+		"policy_revision": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"holder_attestation_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"issuer_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"decision_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"issued_at": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"valid_until": {
+			"type": "string",
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"decision_id",
+		"request_id",
+		"verdict",
+		"internal_reason_code",
+		"policy_revision",
+		"holder_attestation_digest",
+		"issuer_id",
+		"decision_digest",
+		"issued_at",
+		"valid_until"
+	]
+}

@@ -1,0 +1,88 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://contracts.example.invalid/v6.2/proof-bound-grant.schema.json",
+	"title": "Capability bound to an authenticated workload key and current policy",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"grant_id": {
+			"type": "string",
+			"pattern": "^(?:[A-Za-z0-9_-]{43})(?![\\s\\S])"
+		},
+		"issuer": {
+			"type": "string",
+			"pattern": "^(?:[A-Za-z0-9_-]{43})(?![\\s\\S])"
+		},
+		"subject": {
+			"type": "string",
+			"pattern": "^(?:[A-Za-z0-9_-]{43})(?![\\s\\S])"
+		},
+		"resource": {
+			"type": "string",
+			"pattern": "^(?:[A-Za-z0-9_-]{43})(?![\\s\\S])"
+		},
+		"action": {
+			"type": "string",
+			"enum": [
+				"resolve",
+				"read",
+				"hold",
+				"stage",
+				"decrypt",
+				"append",
+				"audit",
+				"activate"
+			]
+		},
+		"purpose": {
+			"type": "string",
+			"enum": [
+				"build",
+				"test",
+				"measure",
+				"research",
+				"audit",
+				"operator",
+				"custody"
+			]
+		},
+		"proof_key_digest": {
+			"type": "string",
+			"pattern": "^(?:[a-f0-9]{64})(?![\\s\\S])"
+		},
+		"policy_digest": {
+			"type": "string",
+			"pattern": "^(?:[a-f0-9]{64})(?![\\s\\S])"
+		},
+		"epoch": {
+			"type": "integer",
+			"minimum": 1
+		},
+		"not_before": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"expires": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"signature": {
+			"type": "string",
+			"pattern": "^(?:[A-Za-z0-9_-]{16,4096})(?![\\s\\S])"
+		}
+	},
+	"required": [
+		"grant_id",
+		"issuer",
+		"subject",
+		"resource",
+		"action",
+		"purpose",
+		"proof_key_digest",
+		"policy_digest",
+		"epoch",
+		"not_before",
+		"expires",
+		"signature"
+	]
+}

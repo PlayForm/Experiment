@@ -1,0 +1,26 @@
+{
+	"version": 5,
+	"case_id": "case-1",
+	"repo_id": "playform-run",
+	"campaign_id": "campaign-1",
+	"parent_mutation_id": "mutation-0",
+	"source_commit": "abc1234",
+	"source_scope_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"workload_id": "wide-traversal",
+	"state": "opened",
+	"question": "Does an alternate directory walker improve traversal without changing results?",
+	"hypothesis_family": "directory-walking",
+	"roles": ["proponent", "skeptic", "alternative", "replicator"],
+	"privacy": "private",
+	"holdout_policy": "sealed",
+	"budget_ceiling": {
+		"input_tokens": 120000,
+		"output_tokens": 40000,
+		"cpu_core_seconds": 12000,
+		"benchmark_seconds": 3000,
+		"gpu_seconds": 0,
+		"storage_byte_days": 1000000,
+		"reference_requests": 200
+	},
+	"created_utc": "2026-11-21T00:00:00Z"
+}

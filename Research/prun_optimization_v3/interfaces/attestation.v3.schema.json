@@ -1,0 +1,88 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://prun.local/schemas/attestation.v3.json",
+	"title": "PlayForm/Run attestation v3",
+	"type": "object",
+	"additionalProperties": false,
+	"required": [
+		"schema_version",
+		"attestation_id",
+		"stamp_kind",
+		"subject_kind",
+		"subject_id",
+		"evidence_sha256",
+		"policy_sha256",
+		"issuer",
+		"valid_cohort",
+		"issued_utc",
+		"signature"
+	],
+	"properties": {
+		"schema_version": {
+			"const": 3
+		},
+		"attestation_id": {
+			"type": "string",
+			"minLength": 1
+		},
+		"stamp_kind": {
+			"enum": [
+				"scope_checked",
+				"novelty_checked",
+				"oracle_passed",
+				"bench_integrity_passed",
+				"analysis_confirmed",
+				"integration_eligible",
+				"release_approved"
+			]
+		},
+		"subject_kind": {
+			"type": "string",
+			"minLength": 1
+		},
+		"subject_id": {
+			"type": "string",
+			"minLength": 1
+		},
+		"evidence_sha256": {
+			"type": "string",
+			"pattern": "^[0-9a-f]{64}$"
+		},
+		"policy_sha256": {
+			"type": "string",
+			"pattern": "^[0-9a-f]{64}$"
+		},
+		"issuer": {
+			"type": "string",
+			"minLength": 1
+		},
+		"valid_cohort": {
+			"type": "string",
+			"minLength": 1
+		},
+		"issued_utc": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"signature": {
+			"type": "string",
+			"minLength": 1
+		},
+		"signing_key_id": {
+			"type": "string",
+			"minLength": 1
+		},
+		"expires_utc": {
+			"type": ["string", "null"],
+			"format": "date-time"
+		},
+		"prerequisite_attestations": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			},
+			"uniqueItems": true
+		}
+	}
+}

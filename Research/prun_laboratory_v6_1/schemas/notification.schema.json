@@ -1,0 +1,61 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/notification.schema.json",
+	"title": "notification",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"notification_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"kind": {
+			"type": "string",
+			"enum": [
+				"campaign-state",
+				"experiment-state",
+				"worker-state",
+				"certificate-state",
+				"publication-state",
+				"policy-alert"
+			]
+		},
+		"severity": {
+			"type": "string",
+			"enum": ["info", "warning", "critical"]
+		},
+		"resource_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"message_code": {
+			"type": "string",
+			"minLength": 1
+		},
+		"occurred_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		},
+		"event_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"acknowledged": {
+			"type": "boolean"
+		}
+	},
+	"required": [
+		"notification_id",
+		"kind",
+		"severity",
+		"resource_id",
+		"message_code",
+		"occurred_utc",
+		"event_id",
+		"acknowledged"
+	]
+}

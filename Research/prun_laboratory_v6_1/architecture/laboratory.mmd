@@ -1,0 +1,18 @@
+flowchart LR
+    Human[GPUI / CLI / owner] <-->|mTLS read models + approved commands| API[Public API]
+    API <--> Core[Deterministic Rust kernel]
+    Core --> Event[Signed append-only ledger]
+    Core --> Supervisor[Offline worker supervisor]
+    Supervisor -->|scoped input mount| Model[LLM worker / NO NETWORK]
+    Model -->|local staged artifacts| Supervisor
+    Supervisor --> CAS[Encrypted CAS]
+    Core --> Builder[Isolated builder]
+    Builder --> Oracle[Trusted test mesh]
+    Oracle --> Runner[Exclusive trace-off runner]
+    Runner --> Evaluator[Deterministic evaluator]
+    Evaluator --> Event
+    Core --> CtrlOtel[CONTROL OTLP]
+    Runner -.diagnostic build only.-> SUTOtel[PRODUCT OTLP]
+    CtrlOtel --> API
+    SUTOtel --> API
+    Event --> API

@@ -1,0 +1,86 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/certificate-event.schema.json",
+	"title": "certificate-event",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"cert_event_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"credential_serial": {
+			"type": "string",
+			"minLength": 1
+		},
+		"subject_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"issuer_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"kind": {
+			"type": "string",
+			"enum": [
+				"x509-tls",
+				"ssh-user",
+				"ssh-host",
+				"message-signing",
+				"recipient-encryption"
+			]
+		},
+		"action": {
+			"type": "string",
+			"enum": [
+				"requested",
+				"issued",
+				"renewed",
+				"revoked",
+				"expired",
+				"denied"
+			]
+		},
+		"scope_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"public_key_fingerprint": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"reason_code": {
+			"type": "string",
+			"minLength": 0
+		},
+		"occurred_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		},
+		"event_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		}
+	},
+	"required": [
+		"cert_event_id",
+		"credential_serial",
+		"subject_id",
+		"issuer_id",
+		"kind",
+		"action",
+		"scope_digest",
+		"public_key_fingerprint",
+		"reason_code",
+		"occurred_utc",
+		"event_id"
+	]
+}

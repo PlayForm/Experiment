@@ -1,0 +1,77 @@
+version: 5
+campaign:
+    id: lab-week-1
+    duration_hours: 168
+    repo_adapter: examples/repository-adapter.v5.json
+    freeze_on_start:
+        [
+            source_commit,
+            oracle,
+            workload_splits,
+            resource_policy,
+            release_policy,
+        ]
+    untrusted_sources: true
+    benchmark_runners_per_host: 1
+    telemetry:
+        control: on
+        research: on
+        product_release: off
+roles:
+    worker_image: lab-rust-research-worker:proposed
+    blinded_stage:
+        - role: proponent
+          agents: 1
+          initial_token_limit: 12000
+        - role: skeptic
+          agents: 1
+          initial_token_limit: 12000
+        - role: alternative
+          agents: 1
+          initial_token_limit: 12000
+        - role: replicator
+          agents: 1
+          initial_token_limit: 8000
+    post_experiment:
+        - methodology_critic
+        - source_librarian
+        - scientific_editor
+        - publication_sanitizer
+        - independent_integration_researcher
+funding:
+    unit: native_resource_caps
+    campaign_caps:
+        input_tokens: 1200000
+        output_tokens: 400000
+        cpu_core_seconds: 200000
+        benchmark_seconds: 14400
+        gpu_seconds: 0
+        storage_byte_days: 500000000
+        reference_requests: 2000
+    dissent_reserve_fraction: 0.15
+    replication_reserve_fraction: 0.20
+    maximum_bid_fraction: 0.10
+    max_active_agent_assignments: 20
+    no_unbudgeted_self_spawn: true
+publication:
+    default_visibility: private
+    public_requires_signed_declassification: true
+    signed_evidence_and_license_check: true
+    publish_null_results: true
+    allow_unverified_hypothesis_notes: true
+    prohibit_fake_peer_review_labels: true
+security:
+    identity: v4-trust-prototype
+    transport: mtls
+    message_signatures: ed25519
+    message_encryption: hpke
+    private_conversations: true
+    independent_publisher_key: true
+    agent_docker_socket: false
+    outbound_network: reference-broker-only
+stopping:
+    on_budget_exhaustion: true
+    on_oracle_unavailable: true
+    on_trust_compromise: true
+    on_owner_stop: true
+    on_repeated_contamination: true

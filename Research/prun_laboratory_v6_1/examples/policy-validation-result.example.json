@@ -1,0 +1,7 @@
+{
+	"policy_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"valid": false,
+	"violations": [],
+	"validated_utc": "2026-11-21T10:00:00Z",
+	"validator_version": "sample-id"
+}

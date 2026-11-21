@@ -1,0 +1,18 @@
+{
+	"tool_call_id": "sample-id",
+	"turn_id": "sample-id",
+	"tool_name": "read-scoped-file",
+	"arguments_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"result_artifact": {
+		"digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+		"media_type": "sample-id",
+		"size_bytes": 1,
+		"storage_class": "private",
+		"encryption": "none",
+		"created_utc": "2026-11-21T10:00:00Z"
+	},
+	"exit_code": 1,
+	"started_utc": "2026-11-21T10:00:00Z",
+	"completed_utc": "2026-11-21T10:00:00Z",
+	"policy_check_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}

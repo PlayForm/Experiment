@@ -1,0 +1,17 @@
+{
+	"grant_id": "license-a",
+	"repository_id": "repo-a",
+	"source_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"spdx_expression": "Apache-2.0",
+	"license_text_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"eula_artifact_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"license_status": "compatible",
+	"allowed_uses": ["build", "test", "research"],
+	"derivative_obligations": ["retain notices"],
+	"redistribution_allowed": true,
+	"model_training_allowed": false,
+	"jurisdiction_review_required": false,
+	"review_authority": "owner",
+	"review_record_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"valid_from": "2026-11-21T01:00:00Z"
+}

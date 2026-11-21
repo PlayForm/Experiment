@@ -1,0 +1,83 @@
+{
+	"version": "6.1",
+	"policy_default": "deny",
+	"model_trust_domain": {
+		"network_routes": [],
+		"service_credentials": [],
+		"public_api": false,
+		"internal_api": false,
+		"otel": false,
+		"artifact_registry_api": false,
+		"authorized_transitions": []
+	},
+	"services": {
+		"audit-service": ["/internal/v1/audit/denial"],
+		"context-projector": ["/internal/v1/research/view/compile"],
+		"coordinator": [
+			"/internal/v1/research/candidates/register",
+			"/internal/v1/research/track"
+		],
+		"custody-broker": [
+			"/internal/v1/custody/commit",
+			"/internal/v1/custody/preflight"
+		],
+		"custody-policy": ["/internal/v1/artifacts/policy/bind"],
+		"experiment-compiler": ["/internal/v1/experiments/spec/compile"],
+		"feedback-projector": ["/internal/v1/feedback/project"],
+		"holder-supervisor": ["/internal/v1/holders/attest"],
+		"ledger": ["/internal/v1/facts/append"],
+		"license-registry": ["/internal/v1/licenses/register"],
+		"policy-service": [
+			"/internal/v1/custody/decide",
+			"/internal/v1/embargoes/register",
+			"/internal/v1/knowledge/compatibility",
+			"/internal/v1/trade/restrict"
+		],
+		"publication-bridge": ["/internal/v1/knowledge/release"],
+		"source-adapter": ["/internal/v1/repos/admit"],
+		"storage-broker": ["/internal/v1/custody/reserve"],
+		"supervisor": [
+			"/internal/v1/research/boundary/record",
+			"/internal/v1/research/intent/ingest",
+			"/internal/v1/research/task-context",
+			"/internal/v1/workers/neutral-receipt"
+		],
+		"curriculum-service": [
+			"/internal/v1/curriculum/register",
+			"/internal/v1/curriculum/study/assign"
+		],
+		"study-evaluator": ["/internal/v1/curriculum/study/outcome"],
+		"resource-scheduler": ["/internal/v1/resources/allocate"]
+	},
+	"rules": {
+		"untrusted_model_output": [
+			"patch",
+			"hypothesis",
+			"test-proposal",
+			"draft-paper"
+		],
+		"trusted_authority_only": [
+			"experiment-spec",
+			"custody-decision",
+			"custody-receipt",
+			"oracle-result",
+			"benchmark-result",
+			"evaluation-result",
+			"knowledge-release"
+		],
+		"policy_priority": "explicit-deny > explicit-permit > default-deny",
+		"unknown_terms": "deny_and_request_review",
+		"reader_class": "operator/observer only"
+	},
+	"telemetry_exclude": [
+		"prompt_text",
+		"source_content",
+		"private_correspondence",
+		"embargo_targets",
+		"trade_edges",
+		"secret_paths",
+		"private_key",
+		"model_private_thought",
+		"raw_license_text"
+	]
+}

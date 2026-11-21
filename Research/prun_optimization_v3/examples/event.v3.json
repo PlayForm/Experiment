@@ -1,0 +1,21 @@
+{
+	"schema_version": 3,
+	"event_id": "ev-001",
+	"event_kind": "PATCH_SUBMITTED",
+	"aggregate_id": "mutation-0001",
+	"aggregate_seq": 1,
+	"occurred_utc": "2026-11-21T01:00:00Z",
+	"actor": {
+		"id": "agent-001",
+		"role": "patcher"
+	},
+	"idempotency_key": "task-001-submit-1",
+	"payload_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"correlation_id": "generation-001",
+	"causation_event_id": null,
+	"trace_context": null,
+	"source_artifacts": [
+		"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+	],
+	"view_policy_id": "worker-scoped-v1"
+}

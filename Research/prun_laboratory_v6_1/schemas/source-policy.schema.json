@@ -1,0 +1,77 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/source-policy.schema.json",
+	"title": "source-policy",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"policy_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"version": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"policy_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"owner_actor_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"allowed_repositories": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1,
+				"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+			}
+		},
+		"allowed_outbound_network": {
+			"const": false
+		},
+		"llm_service_access": {
+			"const": false
+		},
+		"runner_exclusive": {
+			"const": true
+		},
+		"trusted_tests_immutable": {
+			"const": true
+		},
+		"holdout_sealed": {
+			"const": true
+		},
+		"authorized_roles": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			}
+		},
+		"created_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"policy_id",
+		"version",
+		"policy_digest",
+		"owner_actor_id",
+		"allowed_repositories",
+		"allowed_outbound_network",
+		"llm_service_access",
+		"runner_exclusive",
+		"trusted_tests_immutable",
+		"holdout_sealed",
+		"authorized_roles",
+		"created_utc"
+	]
+}

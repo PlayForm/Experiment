@@ -1,0 +1,2132 @@
+openapi: 3.1.1
+info:
+    title: Rust Laboratory External API
+    version: 6.1.0
+    description:
+        "Observer and authenticated-operator interface. No LLM or model-runtime
+        container is permitted to connect. v6.1: artifact sovereignty, non-disclosing
+        worker boundary, emergent research and bitemporal transfer."
+servers:
+    - url: https://lab-ui.lab.internal:9443
+      description:
+          Human client endpoint; loopback or UDS transport is an allowed local
+          alternative.
+tags:
+    - name: health
+    - name: monitor
+    - name: campaigns
+    - name: experiments
+    - name: mutations
+    - name: research
+    - name: evidence
+    - name: workers
+    - name: pki
+    - name: telemetry
+    - name: operator
+security:
+    - mutualTLS: []
+components:
+    securitySchemes:
+        mutualTLS:
+            type: mutualTLS
+paths:
+    /health/live:
+        get:
+            operationId: getLiveness
+            summary: Is API process alive
+            tags:
+                - health
+            parameters: []
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/status.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /health/ready:
+        get:
+            operationId: getReadiness
+            summary: Ready to serve consistent projections
+            tags:
+                - health
+            parameters: []
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/status.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/status:
+        get:
+            operationId: getStatus
+            summary: Current laboratory status
+            tags:
+                - monitor
+            parameters: []
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/status.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/campaigns:
+        get:
+            operationId: listCampaigns
+            summary: List campaigns
+            tags:
+                - campaigns
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                      minLength: 0
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-campaign.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/campaigns/{id}:
+        get:
+            operationId: getCampaignsById
+            summary: Read one campaign
+            tags:
+                - campaigns
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/campaign.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/experiments:
+        get:
+            operationId: listExperiments
+            summary: List experiments
+            tags:
+                - experiments
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                      minLength: 0
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-experiment.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/experiments/{id}:
+        get:
+            operationId: getExperimentsById
+            summary: Read one experiment
+            tags:
+                - experiments
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/experiment.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/mutations:
+        get:
+            operationId: listMutations
+            summary: List mutations
+            tags:
+                - mutations
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                      minLength: 0
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-mutation.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/mutations/{id}:
+        get:
+            operationId: getMutationsById
+            summary: Read one mutation
+            tags:
+                - mutations
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/mutation.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/research/cases:
+        get:
+            operationId: listResearchCases
+            summary: List research/cases
+            tags:
+                - research
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                      minLength: 0
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-research-case.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/research/cases/{id}:
+        get:
+            operationId: getResearchCasesById
+            summary: Read one research-case
+            tags:
+                - research
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/research-case.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/research/papers:
+        get:
+            operationId: listResearchPapers
+            summary: List research/papers
+            tags:
+                - research
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                      minLength: 0
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-research-paper.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/research/papers/{id}:
+        get:
+            operationId: getResearchPapersById
+            summary: Read one research-paper
+            tags:
+                - research
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/research-paper.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/workers:
+        get:
+            operationId: listWorkers
+            summary: List workers
+            tags:
+                - workers
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                      minLength: 0
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-worker-status.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/workers/{id}:
+        get:
+            operationId: getWorkersById
+            summary: Read one worker-status
+            tags:
+                - workers
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/worker-status.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/hosts:
+        get:
+            operationId: listHosts
+            summary: List hosts
+            tags:
+                - workers
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                      minLength: 0
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-host-status.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/hosts/{id}:
+        get:
+            operationId: getHostsById
+            summary: Read one host-status
+            tags:
+                - workers
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/host-status.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/certificates:
+        get:
+            operationId: listCertificates
+            summary: List certificates
+            tags:
+                - pki
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                      minLength: 0
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-certificate-event.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/certificates/{id}:
+        get:
+            operationId: getCertificatesById
+            summary: Read one certificate-event
+            tags:
+                - pki
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/certificate-event.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/attestations:
+        get:
+            operationId: listAttestations
+            summary: List attestations
+            tags:
+                - evidence
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                      minLength: 0
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-attestation.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/attestations/{id}:
+        get:
+            operationId: getAttestationsById
+            summary: Read one attestation
+            tags:
+                - evidence
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/attestation.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/notifications:
+        get:
+            operationId: listNotifications
+            summary: List notifications
+            tags:
+                - monitor
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                      minLength: 0
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-notification.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/notifications/{id}:
+        get:
+            operationId: getNotification
+            summary: Read notification
+            tags:
+                - monitor
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/notification.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/audit/events:
+        get:
+            operationId: listAuditEvents
+            summary: List audit/events
+            tags:
+                - evidence
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                      minLength: 0
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-audit-event.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/audit/events/{id}:
+        get:
+            operationId: getAuditEventsById
+            summary: Read one audit-event
+            tags:
+                - evidence
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/audit-event.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/benchmarks:
+        get:
+            operationId: listBenchmarks
+            summary: List benchmarks
+            tags:
+                - experiments
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                      minLength: 0
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-benchmark-result.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/benchmarks/{id}:
+        get:
+            operationId: getBenchmarksById
+            summary: Read one benchmark-result
+            tags:
+                - experiments
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/benchmark-result.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/lineage/{id}:
+        get:
+            operationId: getLineage
+            summary: Immutable ancestry and evidence graph
+            tags:
+                - evidence
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/lineage.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/experiments/{id}/samples:
+        get:
+            operationId: getExperimentSamples
+            summary: Raw measurement sample metadata
+            tags:
+                - experiments
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-sample.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/agents/conversations:
+        get:
+            operationId: listConversationMetadata
+            summary: Only conversation metadata, never private plaintext
+            tags:
+                - research
+            parameters: []
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-agent-turn.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/agents/conversations/{id}:
+        get:
+            operationId: getConversationMetadata
+            summary: Conversation header and authorized artifact references
+            tags:
+                - research
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/artifact-manifest.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/agents/tool-calls:
+        get:
+            operationId: listToolCallMetadata
+            summary: Authorized local tool invocation records
+            tags:
+                - research
+            parameters: []
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-tool-call.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/agents/tool-calls/{id}:
+        get:
+            operationId: getToolCall
+            summary: Read signed local tool metadata
+            tags:
+                - research
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/tool-call.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/artifacts/{digest}/metadata:
+        get:
+            operationId: getArtifactMetadata
+            summary: Read artifact metadata, not artifact content
+            tags:
+                - evidence
+            parameters:
+                - name: digest
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/artifact-ref.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/telemetry/control/traces:
+        get:
+            operationId: listControlTraces
+            summary: Query control-plane span metadata
+            tags:
+                - telemetry
+            parameters: []
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-trace-record.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/telemetry/product/traces:
+        get:
+            operationId: listProductTraces
+            summary: Query separated diagnostic span metadata
+            tags:
+                - telemetry
+            parameters: []
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-trace-record.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/telemetry/control/metrics:
+        get:
+            operationId: listControlMetrics
+            summary: Query control metrics
+            tags:
+                - telemetry
+            parameters: []
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-metric-record.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/telemetry/product/metrics:
+        get:
+            operationId: listProductMetrics
+            summary: Query product diagnostic metrics
+            tags:
+                - telemetry
+            parameters: []
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-metric-record.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/events:
+        get:
+            operationId: getEventHistory
+            summary: Page through authoritative ledger projections
+            tags:
+                - monitor
+            parameters:
+                - name: after_seq
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 0
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-audit-event.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/policies/{id}:
+        get:
+            operationId: getPolicy
+            summary: Read effective policy summary
+            tags:
+                - monitor
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            responses:
+                "200":
+                    description: Read-only projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/source-policy.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/operator/commands:
+        post:
+            operationId: submitOwnerCommand
+            summary: Submit a validated operator command
+            tags:
+                - operator
+            parameters: []
+            responses:
+                "202":
+                    description: Accepted asynchronously
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - owner
+                - operator
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/command.schema.json
+    /v1/operator/policies/validate:
+        post:
+            operationId: validatePolicyCandidate
+            summary: Validate policy artifact without activating it
+            tags:
+                - operator
+            parameters: []
+            responses:
+                "202":
+                    description: Accepted asynchronously
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - owner
+                - operator
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/source-policy.schema.json
+    /v1/events/stream:
+        get:
+            operationId: streamEvents
+            summary: SSE over approved metadata-only ledger events
+            tags:
+                - monitor
+            parameters:
+                - name: after_seq
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 0
+            responses:
+                "200":
+                    description: SSE stream of opaque metadata-only events
+                    content:
+                        text/event-stream:
+                            schema:
+                                type: string
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+    /v1/custody/requests:
+        get:
+            operationId: v61ListCustodyRequest
+            summary: List custody transfer requests
+            tags:
+                - v61-custody
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Authorization-filtered projection; not raw payload
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-v61-custody-request.schema.json
+                default:
+                    description: Authorized human API error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - operator
+            security:
+                - mutualTLS: []
+    /v1/custody/receipts:
+        get:
+            operationId: v61ListCustodyReceipt
+            summary: List artifact custody receipts
+            tags:
+                - v61-custody
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Authorization-filtered projection; not raw payload
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-v61-custody-receipt.schema.json
+                default:
+                    description: Authorized human API error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - operator
+            security:
+                - mutualTLS: []
+    /v1/custody/holders:
+        get:
+            operationId: v61ListHolderCapability
+            summary: Holder capabilities and active attestations
+            tags:
+                - v61-custody
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Authorization-filtered projection; not raw payload
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-v61-holder-capability.schema.json
+                default:
+                    description: Authorized human API error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - operator
+            security:
+                - mutualTLS: []
+    /v1/policies/embargoes:
+        get:
+            operationId: v61ListEmbargoRule
+            summary: Repository and research embargo rules
+            tags:
+                - v61-policies
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Authorization-filtered projection; not raw payload
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-v61-embargo-rule.schema.json
+                default:
+                    description: Authorized human API error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - operator
+            security:
+                - mutualTLS: []
+    /v1/policies/licenses:
+        get:
+            operationId: v61ListLicenseGrant
+            summary: License and EULA rights records
+            tags:
+                - v61-policies
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Authorization-filtered projection; not raw payload
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-v61-license-grant.schema.json
+                default:
+                    description: Authorized human API error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - operator
+            security:
+                - mutualTLS: []
+    /v1/policies/trade-graph:
+        get:
+            operationId: v61ListTradeRestriction
+            summary: Non-trading researcher/tenant groups
+            tags:
+                - v61-policies
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Authorization-filtered projection; not raw payload
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-v61-trade-restriction.schema.json
+                default:
+                    description: Authorized human API error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - operator
+            security:
+                - mutualTLS: []
+    /v1/research/tracks:
+        get:
+            operationId: v61ListResearchTrack
+            summary: Independent private research tracks
+            tags:
+                - v61-research
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Authorization-filtered projection; not raw payload
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-v61-research-track.schema.json
+                default:
+                    description: Authorized human API error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - operator
+            security:
+                - mutualTLS: []
+    /v1/research/views:
+        get:
+            operationId: v61ListResearchView
+            summary: Approved local context manifest projections
+            tags:
+                - v61-research
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Authorization-filtered projection; not raw payload
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-v61-research-view.schema.json
+                default:
+                    description: Authorized human API error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - operator
+            security:
+                - mutualTLS: []
+    /v1/research/feedback:
+        get:
+            operationId: v61ListFeedbackRecord
+            summary: Scoped feedback release records
+            tags:
+                - v61-research
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Authorization-filtered projection; not raw payload
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-v61-feedback-record.schema.json
+                default:
+                    description: Authorized human API error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - operator
+            security:
+                - mutualTLS: []
+    /v1/research/knowledge-releases:
+        get:
+            operationId: v61ListKnowledgeRelease
+            summary: Cross-track knowledge releases
+            tags:
+                - v61-research
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Authorization-filtered projection; not raw payload
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-v61-knowledge-release.schema.json
+                default:
+                    description: Authorized human API error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - operator
+            security:
+                - mutualTLS: []
+    /v1/repositories/admissions:
+        get:
+            operationId: v61ListRepositoryAdmission
+            summary: Source repository admission decisions
+            tags:
+                - v61-repositories
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Authorization-filtered projection; not raw payload
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-v61-repository-admission.schema.json
+                default:
+                    description: Authorized human API error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - operator
+            security:
+                - mutualTLS: []
+    /v1/audit/denials:
+        get:
+            operationId: v61ListDenialAudit
+            summary: Restricted policy-denial audit events
+            tags:
+                - v61-audit
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Authorization-filtered projection; not raw payload
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-v61-denial-audit.schema.json
+                default:
+                    description: Authorized human API error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - operator
+            security:
+                - mutualTLS: []
+    /v1/experiments/specifications:
+        get:
+            operationId: v61ListExperimentSpec
+            summary: Trusted compiled experiment specifications
+            tags:
+                - v61-experiments
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Authorization-filtered projection; not raw payload
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-v61-experiment-spec.schema.json
+                default:
+                    description: Authorized human API error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+            security:
+                - mutualTLS: []
+    /v1/storage/leases:
+        get:
+            operationId: v61ListStorageLease
+            summary: Storage inventory and lease records
+            tags:
+                - v61-storage
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Authorization-filtered projection; not raw payload
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-v61-storage-lease.schema.json
+                default:
+                    description: Authorized human API error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - operator
+            security:
+                - mutualTLS: []
+    /v1/facts/timeline:
+        get:
+            operationId: v61ListTemporalFact
+            summary: Bitemporal fact and event history
+            tags:
+                - v61-facts
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Authorization-filtered projection; not raw payload
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-v61-temporal-fact.schema.json
+                default:
+                    description: Authorized human API error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - operator
+            security:
+                - mutualTLS: []
+    /v1/research/candidate-batches:
+        get:
+            operationId: v61ListCandidateBatch
+            summary: Frozen reference and candidate groups
+            tags:
+                - v61-research
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Authorization-filtered projection; not raw payload
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-v61-candidate-batch.schema.json
+                default:
+                    description: Authorized human API error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - observer
+            security:
+                - mutualTLS: []
+    /v1/research/intentions:
+        get:
+            operationId: v61ListExperimentIntent
+            summary: Observed untrusted experiment proposals
+            tags:
+                - v61-research
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Authorization-filtered projection; not raw payload
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-v61-experiment-intent.schema.json
+                default:
+                    description: Authorized human API error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - operator
+            security:
+                - mutualTLS: []
+    /v1/research/transfer-compatibility:
+        get:
+            operationId: v61ListReleaseCompatibility
+            summary: Cross repository compatibility checks
+            tags:
+                - v61-research
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Authorization-filtered projection; not raw payload
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-v61-release-compatibility.schema.json
+                default:
+                    description: Authorized human API error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - operator
+            security:
+                - mutualTLS: []
+    /v1/artifacts/policies:
+        get:
+            operationId: v61ListArtifactPolicy
+            summary: Artifact custody and disclosure policies
+            tags:
+                - v61-artifacts
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Authorization-filtered projection; not raw payload
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-v61-artifact-policy.schema.json
+                default:
+                    description: Authorized human API error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - operator
+            security:
+                - mutualTLS: []
+    /v1/security/boundary-observations:
+        get:
+            operationId: v61ListBoundaryObservation
+            summary: Trusted record of isolated worker operations
+            tags:
+                - v61-security
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Authorization-filtered projection; not raw payload
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-v61-boundary-observation.schema.json
+                default:
+                    description: Authorized human API error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - operator
+            security:
+                - mutualTLS: []
+    /v1/research/curricula:
+        get:
+            operationId: v61ListCurriculumRecords
+            summary: Read authorized curriculum records
+            tags:
+                - v61-research
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Filtered trusted projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-v61-curriculum.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - operator
+            security:
+                - mutualTLS: []
+    /v1/research/studies/assignments:
+        get:
+            operationId: v61ListStudyAssignmentRecords
+            summary: Read authorized study-assignment records
+            tags:
+                - v61-research
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Filtered trusted projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-v61-study-assignment.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - operator
+            security:
+                - mutualTLS: []
+    /v1/research/studies/outcomes:
+        get:
+            operationId: v61ListStudyOutcomeRecords
+            summary: Read authorized study-outcome records
+            tags:
+                - v61-research
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Filtered trusted projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-v61-study-outcome.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - operator
+            security:
+                - mutualTLS: []
+    /v1/research/resources/allocations:
+        get:
+            operationId: v61ListPhysicalAllocationRecords
+            summary: Read authorized physical-allocation records
+            tags:
+                - v61-research
+            parameters:
+                - name: cursor
+                  in: query
+                  required: false
+                  schema:
+                      type: string
+                - name: limit
+                  in: query
+                  required: false
+                  schema:
+                      type: integer
+                      minimum: 1
+                      maximum: 500
+            responses:
+                "200":
+                    description: Filtered trusted projection
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/page-v61-physical-allocation.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - operator
+            security:
+                - mutualTLS: []

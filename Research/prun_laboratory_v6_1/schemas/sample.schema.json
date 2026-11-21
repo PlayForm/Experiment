@@ -1,0 +1,100 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/sample.schema.json",
+	"title": "sample",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"sample_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"benchmark_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"pair_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"candidate_label": {
+			"type": "string",
+			"enum": ["baseline", "candidate"]
+		},
+		"order": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"elapsed_ns": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"cpu_user_ns": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"cpu_system_ns": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"peak_rss_bytes": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"minor_faults": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"major_faults": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"exit_code": {
+			"type": "integer"
+		},
+		"stdout_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"stderr_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"environment_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"valid": {
+			"type": "boolean"
+		},
+		"exclusion_reason": {
+			"type": "string",
+			"minLength": 0
+		}
+	},
+	"required": [
+		"sample_id",
+		"benchmark_id",
+		"pair_id",
+		"candidate_label",
+		"order",
+		"elapsed_ns",
+		"cpu_user_ns",
+		"cpu_system_ns",
+		"peak_rss_bytes",
+		"minor_faults",
+		"major_faults",
+		"exit_code",
+		"stdout_digest",
+		"stderr_digest",
+		"environment_digest",
+		"valid",
+		"exclusion_reason"
+	]
+}

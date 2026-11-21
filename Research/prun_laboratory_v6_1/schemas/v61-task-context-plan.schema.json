@@ -1,0 +1,87 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6.1/v61-task-context-plan.schema.json",
+	"title": "v61-task-context-plan",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"plan_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"view_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"offline": {
+			"const": true
+		},
+		"task_mount_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"source_mount_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"allowed_local_tools": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"enum": [
+					"rustc",
+					"cargo-check",
+					"cargo-test-local",
+					"ripgrep",
+					"read-file",
+					"git-diff",
+					"format"
+				]
+			},
+			"maxItems": 1000
+		},
+		"scratch_bytes_limit": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"process_limit": {
+			"type": "integer",
+			"minimum": 1
+		},
+		"network_mode": {
+			"const": "none"
+		},
+		"output_manifest_schema": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 4096
+		},
+		"prohibited_context_classes": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1,
+				"maxLength": 4096
+			},
+			"maxItems": 1000
+		},
+		"supervisor_attestation": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		}
+	},
+	"required": [
+		"plan_id",
+		"view_id",
+		"offline",
+		"task_mount_digest",
+		"source_mount_digest",
+		"allowed_local_tools",
+		"scratch_bytes_limit",
+		"process_limit",
+		"network_mode",
+		"output_manifest_schema",
+		"prohibited_context_classes",
+		"supervisor_attestation"
+	]
+}

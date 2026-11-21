@@ -1,0 +1,12 @@
+{
+	"intent_id": "intent-a",
+	"worker_assignment_id": "task-a",
+	"proposal_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"source_snapshot_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"hypothesis": "remove redundant allocation",
+	"claimed_changed_symbols": ["walker::visit"],
+	"predicted_effect": "lower-memory",
+	"worker_claimed_tests": ["cargo test"],
+	"submitted_at": "2026-11-21T01:00:00Z",
+	"worker_visible_reference": "opaque-a"
+}

@@ -1,0 +1,13 @@
+{
+	"batch_id": "batch-1",
+	"frozen_baseline_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"reference_protocol_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"source_repository": "repo-a",
+	"trial_candidates": [
+		"0000000000000000000000000000000000000000000000000000000000000000"
+	],
+	"assignment_ids": ["task-a"],
+	"generation_label": "wave-1",
+	"software_selected": true,
+	"created_at": "2026-11-21T01:00:00Z"
+}

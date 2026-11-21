@@ -1,0 +1,87 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/patch-proposal.schema.json",
+	"title": "patch-proposal",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"proposal_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"task_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"case_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"base_snapshot_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"patch": {
+			"$ref": "./artifact-ref.schema.json"
+		},
+		"proposed_tests": {
+			"type": "array",
+			"items": {
+				"$ref": "./artifact-ref.schema.json"
+			}
+		},
+		"changed_symbols": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			}
+		},
+		"hypothesis_claim_ids": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1,
+				"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+			}
+		},
+		"scope_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"source_tree_after_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"submitted_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		},
+		"author_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		}
+	},
+	"required": [
+		"proposal_id",
+		"task_id",
+		"case_id",
+		"base_snapshot_id",
+		"patch",
+		"proposed_tests",
+		"changed_symbols",
+		"hypothesis_claim_ids",
+		"scope_digest",
+		"source_tree_after_digest",
+		"submitted_utc",
+		"author_id"
+	]
+}

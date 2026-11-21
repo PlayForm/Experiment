@@ -1,0 +1,13 @@
+{
+	"compatibility_id": "compat-1",
+	"origin_repository": "repo-a",
+	"target_repository": "repo-b",
+	"claim_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"source_license_grants": ["license-a"],
+	"target_license_grants": [],
+	"license_result": "needs-human-review",
+	"semantic_transfer_status": "unverified",
+	"independent_experiment_id": null,
+	"evaluated_by": "trusted-policy-engine",
+	"evaluated_at": "2026-11-21T01:00:00Z"
+}

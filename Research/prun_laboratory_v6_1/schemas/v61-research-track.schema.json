@@ -1,0 +1,80 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6.1/v61-research-track.schema.json",
+	"title": "v61-research-track",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"track_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"repository_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"parent_track_id": {
+			"anyOf": [
+				{
+					"type": "string",
+					"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+				},
+				{
+					"type": "null"
+				}
+			]
+		},
+		"role": {
+			"type": "string",
+			"enum": [
+				"proponent",
+				"skeptic",
+				"alternate",
+				"replicator",
+				"test-designer",
+				"integrator"
+			]
+		},
+		"model_lineage_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"view_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"opinion_privacy": {
+			"type": "string",
+			"enum": ["private", "restricted", "publishable"]
+		},
+		"peer_visibility": {
+			"type": "string",
+			"enum": ["none", "aggregate-only", "approved-releases"]
+		},
+		"trade_group": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"assignment_policy_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"created_at": {
+			"type": "string",
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"track_id",
+		"repository_id",
+		"parent_track_id",
+		"role",
+		"model_lineage_digest",
+		"view_id",
+		"opinion_privacy",
+		"peer_visibility",
+		"trade_group",
+		"assignment_policy_digest",
+		"created_at"
+	]
+}

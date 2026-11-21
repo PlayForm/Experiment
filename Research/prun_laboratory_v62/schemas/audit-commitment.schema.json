@@ -1,0 +1,51 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://contracts.example.invalid/v6.2/audit-commitment.schema.json",
+	"title": "Signed append-only record commitment with lineage binding",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"sequence": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"previous": {
+			"type": "string",
+			"pattern": "^(?:[a-f0-9]{64})(?![\\s\\S])"
+		},
+		"event_ciphertext_digest": {
+			"type": "string",
+			"pattern": "^(?:[a-f0-9]{64})(?![\\s\\S])"
+		},
+		"producer": {
+			"type": "string",
+			"pattern": "^(?:[A-Za-z0-9_-]{43})(?![\\s\\S])"
+		},
+		"epoch": {
+			"type": "integer",
+			"minimum": 1
+		},
+		"policy_digest": {
+			"type": "string",
+			"pattern": "^(?:[a-f0-9]{64})(?![\\s\\S])"
+		},
+		"timestamp": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"signature": {
+			"type": "string",
+			"pattern": "^(?:[A-Za-z0-9_-]{16,4096})(?![\\s\\S])"
+		}
+	},
+	"required": [
+		"sequence",
+		"previous",
+		"event_ciphertext_digest",
+		"producer",
+		"epoch",
+		"policy_digest",
+		"timestamp",
+		"signature"
+	]
+}

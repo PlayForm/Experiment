@@ -1,0 +1,84 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/benchmark-protocol.schema.json",
+	"title": "benchmark-protocol",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"protocol_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"version": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"hash": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"pairing": {
+			"const": true
+		},
+		"shuffle_seed": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"warmups": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"min_repetitions": {
+			"type": "integer",
+			"minimum": 1
+		},
+		"max_repetitions": {
+			"type": "integer",
+			"minimum": 1
+		},
+		"fixture_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"trace_mode": {
+			"const": "off"
+		},
+		"cpu_set": {
+			"type": "string",
+			"minLength": 1
+		},
+		"host_policy_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"outlier_policy": {
+			"type": "string",
+			"enum": ["predeclared", "none"]
+		},
+		"stop_condition_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		}
+	},
+	"required": [
+		"protocol_id",
+		"version",
+		"hash",
+		"pairing",
+		"shuffle_seed",
+		"warmups",
+		"min_repetitions",
+		"max_repetitions",
+		"fixture_digest",
+		"trace_mode",
+		"cpu_set",
+		"host_policy_digest",
+		"outlier_policy",
+		"stop_condition_digest"
+	]
+}

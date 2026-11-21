@@ -1,0 +1,7 @@
+{
+	"lease_id": "sample-id",
+	"fencing_token": 1,
+	"worker_id": "sample-id",
+	"observed_state": "assigned",
+	"request_id": "sample-id"
+}

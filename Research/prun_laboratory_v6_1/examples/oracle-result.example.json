@@ -1,0 +1,10 @@
+{
+	"oracle_run_id": "sample-id",
+	"state": "passed",
+	"tests": [],
+	"trusted_manifest_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"runner_image_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"result_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"signed_attestation_id": "sample-id",
+	"completed_utc": "2026-11-21T10:00:00Z"
+}

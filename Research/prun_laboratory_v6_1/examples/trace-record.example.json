@@ -1,0 +1,17 @@
+{
+	"trace_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"span_id": "bbbbbbbbbbbbbbbb",
+	"parent_span_id": "sample-id",
+	"plane": "control",
+	"span_name": "sample-id",
+	"start_unix_ns": 1,
+	"end_unix_ns": 1,
+	"resource_id": "sample-id",
+	"campaign_id": "sample-id",
+	"experiment_id": "sample-id",
+	"mutation_id": "sample-id",
+	"status_code": "OK",
+	"attributes": {},
+	"links": [],
+	"capture_mode": "control-full"
+}

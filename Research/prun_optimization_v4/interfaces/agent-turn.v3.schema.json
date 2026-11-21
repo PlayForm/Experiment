@@ -1,0 +1,120 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://prun.local/schemas/agent-turn.v3.json",
+	"title": "PlayForm/Run agent-turn v3",
+	"type": "object",
+	"additionalProperties": false,
+	"required": [
+		"schema_version",
+		"conversation_id",
+		"session_id",
+		"turn_id",
+		"seq",
+		"kind",
+		"role_policy_sha256",
+		"context_snapshot_sha256",
+		"content_sha256",
+		"redaction_policy_id",
+		"created_utc"
+	],
+	"properties": {
+		"schema_version": {
+			"const": 3
+		},
+		"conversation_id": {
+			"type": "string",
+			"minLength": 1
+		},
+		"session_id": {
+			"type": "string",
+			"minLength": 1
+		},
+		"turn_id": {
+			"type": "string",
+			"minLength": 1
+		},
+		"seq": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"kind": {
+			"enum": [
+				"system",
+				"developer",
+				"user",
+				"assistant",
+				"tool_call",
+				"tool_result",
+				"feedback",
+				"compaction"
+			]
+		},
+		"role_policy_sha256": {
+			"type": "string",
+			"pattern": "^[0-9a-f]{64}$"
+		},
+		"context_snapshot_sha256": {
+			"type": "string",
+			"pattern": "^[0-9a-f]{64}$"
+		},
+		"content_sha256": {
+			"type": "string",
+			"pattern": "^[0-9a-f]{64}$"
+		},
+		"redaction_policy_id": {
+			"type": "string",
+			"minLength": 1
+		},
+		"created_utc": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"model_id": {
+			"type": ["string", "null"]
+		},
+		"prompt_template_sha256": {
+			"oneOf": [
+				{
+					"type": "string",
+					"pattern": "^[0-9a-f]{64}$"
+				},
+				{
+					"type": "null"
+				}
+			]
+		},
+		"prior_turns": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			}
+		},
+		"tools_used": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			}
+		},
+		"ttft_ms": {
+			"type": ["number", "null"],
+			"minimum": 0
+		},
+		"ttfb_ms": {
+			"type": ["number", "null"],
+			"minimum": 0
+		},
+		"tokens_in": {
+			"type": ["integer", "null"],
+			"minimum": 0
+		},
+		"tokens_out": {
+			"type": ["integer", "null"],
+			"minimum": 0
+		},
+		"finish_reason": {
+			"type": ["string", "null"]
+		}
+	}
+}

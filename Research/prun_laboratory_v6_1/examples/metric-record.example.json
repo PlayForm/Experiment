@@ -1,0 +1,12 @@
+{
+	"metric_id": "sample-id",
+	"plane": "control",
+	"name": "sample-id",
+	"unit": "sample-id",
+	"kind": "counter",
+	"value": 0.0,
+	"observed_utc": "2026-11-21T10:00:00Z",
+	"resource_id": "sample-id",
+	"attributes": {},
+	"sample_authority": "telemetry"
+}

@@ -1,0 +1,89 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/campaign.schema.json",
+	"title": "campaign",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"campaign_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"repository_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"revision": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"state": {
+			"type": "string",
+			"enum": [
+				"draft",
+				"validated",
+				"active",
+				"paused",
+				"draining",
+				"completed",
+				"cancelled",
+				"failed"
+			]
+		},
+		"policy_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"adapter_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"workload_set_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"created_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		},
+		"updated_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		},
+		"owner_actor_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"goal": {
+			"type": "string",
+			"minLength": 1
+		},
+		"holdout_policy_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		}
+	},
+	"required": [
+		"campaign_id",
+		"repository_id",
+		"revision",
+		"state",
+		"policy_digest",
+		"adapter_digest",
+		"workload_set_digest",
+		"created_utc",
+		"updated_utc",
+		"owner_actor_id",
+		"goal",
+		"holdout_policy_id"
+	]
+}

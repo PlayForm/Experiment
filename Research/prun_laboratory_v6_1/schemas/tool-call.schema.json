@@ -1,0 +1,67 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/tool-call.schema.json",
+	"title": "tool-call",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"tool_call_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"turn_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"tool_name": {
+			"type": "string",
+			"enum": [
+				"read-scoped-file",
+				"search-scoped-text",
+				"apply-local-patch",
+				"local-test",
+				"local-compile",
+				"list-scoped-files"
+			]
+		},
+		"arguments_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"result_artifact": {
+			"$ref": "./artifact-ref.schema.json"
+		},
+		"exit_code": {
+			"type": "integer"
+		},
+		"started_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		},
+		"completed_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		},
+		"policy_check_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		}
+	},
+	"required": [
+		"tool_call_id",
+		"turn_id",
+		"tool_name",
+		"arguments_digest",
+		"result_artifact",
+		"exit_code",
+		"started_utc",
+		"completed_utc",
+		"policy_check_digest"
+	]
+}

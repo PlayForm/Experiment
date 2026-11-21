@@ -1,0 +1,27 @@
+flowchart TD
+  A[Owner + Constitution] --> C[Treasury + Policy]
+  A --> T[CA + Identity + Encryption]
+  C --> E[Research Exchange]
+  T --> E
+  E --> R1[Proponent - private]
+  E --> R2[Skeptic - private]
+  E --> R3[Independent rival - private]
+  E --> R4[Replication designer - private]
+  R1 --> H[Signed hypothesis / claims]
+  R2 --> H
+  R3 --> H
+  R4 --> H
+  H --> P[Scoped Patcher]
+  P --> V[Independent verifier and oracle]
+  V --> B[Builders and isolated benchmarks]
+  B --> S[Statistical evaluator and evidence ledger]
+  S --> H
+  H --> U[Authorized declassification + publication]
+  S --> U
+  U --> K[Signed paper/knowledge corpus]
+  K --> I[Independent transfer researcher]
+  I --> E
+  C --> O[OTel control and research planes]
+  B --> O2[OTel measurement plane]
+  O --> G[Rust GPUI Observatory]
+  O2 --> G

@@ -1,0 +1,11 @@
+{
+	"test_id": "sample-id",
+	"test_family": "reference",
+	"state": "passed",
+	"fixture_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"stdout_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"stderr_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"counterexample_digest": "sample-id",
+	"duration_ns": 1,
+	"notes_code": "sample-id"
+}

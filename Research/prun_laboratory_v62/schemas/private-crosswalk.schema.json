@@ -1,0 +1,57 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://contracts.example.invalid/v6.2/private-crosswalk.schema.json",
+	"title": "Synthetic plaintext example; deployed record MUST be encrypted",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"scope": {
+			"type": "string",
+			"pattern": "^(?:[A-Za-z0-9_-]{43})(?![\\s\\S])"
+		},
+		"opaque_handle": {
+			"type": "string",
+			"pattern": "^(?:[A-Za-z0-9_-]{43})(?![\\s\\S])"
+		},
+		"canonical_digest": {
+			"type": "string",
+			"pattern": "^(?:[a-f0-9]{64})(?![\\s\\S])"
+		},
+		"audience": {
+			"type": "string",
+			"pattern": "^(?:[A-Za-z0-9_-]{43})(?![\\s\\S])"
+		},
+		"epoch": {
+			"type": "integer",
+			"minimum": 1
+		},
+		"purpose": {
+			"type": "string",
+			"enum": [
+				"measurement",
+				"orchestration",
+				"custody",
+				"audit",
+				"operator"
+			]
+		},
+		"mapping_cipher_digest": {
+			"type": "string",
+			"pattern": "^(?:[a-f0-9]{64})(?![\\s\\S])"
+		},
+		"expiry": {
+			"type": "string",
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"scope",
+		"opaque_handle",
+		"canonical_digest",
+		"audience",
+		"epoch",
+		"purpose",
+		"mapping_cipher_digest",
+		"expiry"
+	]
+}

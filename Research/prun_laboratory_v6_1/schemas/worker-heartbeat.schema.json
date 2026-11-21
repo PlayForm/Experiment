@@ -1,0 +1,39 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/worker-heartbeat.schema.json",
+	"title": "worker-heartbeat",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"lease_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"fencing_token": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"worker_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"observed_state": {
+			"type": "string",
+			"enum": ["assigned", "running", "staging"]
+		},
+		"request_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		}
+	},
+	"required": [
+		"lease_id",
+		"fencing_token",
+		"worker_id",
+		"observed_state",
+		"request_id"
+	]
+}

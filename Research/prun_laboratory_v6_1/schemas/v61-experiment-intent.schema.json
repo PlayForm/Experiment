@@ -1,0 +1,78 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6.1/v61-experiment-intent.schema.json",
+	"title": "v61-experiment-intent",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"intent_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"worker_assignment_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"proposal_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"source_snapshot_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"hypothesis": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 4096
+		},
+		"claimed_changed_symbols": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1,
+				"maxLength": 4096
+			},
+			"maxItems": 1000
+		},
+		"predicted_effect": {
+			"type": "string",
+			"enum": [
+				"faster",
+				"lower-memory",
+				"lower-cpu",
+				"behavioral-fix",
+				"unknown"
+			]
+		},
+		"worker_claimed_tests": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1,
+				"maxLength": 4096
+			},
+			"maxItems": 1000
+		},
+		"submitted_at": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"worker_visible_reference": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		}
+	},
+	"required": [
+		"intent_id",
+		"worker_assignment_id",
+		"proposal_digest",
+		"source_snapshot_digest",
+		"hypothesis",
+		"claimed_changed_symbols",
+		"predicted_effect",
+		"worker_claimed_tests",
+		"submitted_at",
+		"worker_visible_reference"
+	]
+}

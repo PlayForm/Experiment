@@ -1,0 +1,143 @@
+version: 6
+machines:
+    campaign:
+        initial: draft
+        transitions:
+            - - draft
+              - validated
+              - policy-service
+            - - validated
+              - active
+              - coordinator-on-owner-command
+            - - active
+              - paused
+              - coordinator-on-owner-command
+            - - paused
+              - active
+              - coordinator-on-owner-command
+            - - active
+              - draining
+              - coordinator-on-owner-command
+            - - draining
+              - completed
+              - coordinator-on-all-jobs-terminal
+            - - active
+              - failed
+              - coordinator-on-critical-fault
+            - - paused
+              - cancelled
+              - coordinator-on-owner-command
+            - - active
+              - cancelled
+              - coordinator-on-owner-command
+    mutation:
+        initial: proposed
+        transitions:
+            - - proposed
+              - admitted
+              - scope-validator
+            - - proposed
+              - rejected
+              - scope-validator
+            - - admitted
+              - built
+              - builder-attested
+            - - built
+              - oracle_failed
+              - oracle-attested
+            - - built
+              - oracle_passed
+              - oracle-attested
+            - - oracle_passed
+              - measured
+              - runner-attested
+            - - measured
+              - evaluated
+              - evaluator-attested
+            - - evaluated
+              - eligible
+              - policy-engine
+            - - evaluated
+              - rejected
+              - policy-engine
+            - - eligible
+              - promoted
+              - release-gate
+            - - oracle_failed
+              - archived
+              - coordinator
+            - - rejected
+              - archived
+              - coordinator
+    worker:
+        initial: idle
+        transitions:
+            - - idle
+              - assigned
+              - scheduler-lease
+            - - assigned
+              - running
+              - supervisor
+            - - running
+              - staging
+              - supervisor
+            - - staging
+              - idle
+              - supervisor-on-artifact-seal
+            - - running
+              - failed
+              - supervisor
+            - - assigned
+              - failed
+              - supervisor
+            - - failed
+              - quarantined
+              - host-verifier
+            - - quarantined
+              - terminated
+              - operator
+    benchmark:
+        initial: queued
+        transitions:
+            - - queued
+              - leased
+              - scheduler-exclusive
+            - - leased
+              - running
+              - runner-start
+            - - running
+              - sealed
+              - runner-evidence
+            - - running
+              - contaminated
+              - runner-integrity
+            - - sealed
+              - evaluated
+              - evaluator-attestation
+            - - contaminated
+              - queued
+              - coordinator-retry-new-attempt
+    publication:
+        initial: draft
+        transitions:
+            - - draft
+              - private-reviewed
+              - review-authority
+            - - private-reviewed
+              - sanitization-pending
+              - publisher
+            - - sanitization-pending
+              - sanitized
+              - sanitizer
+            - - sanitized
+              - internal-released
+              - publication-authority
+            - - internal-released
+              - public-released
+              - publication-authority-on-owner-policy
+            - - draft
+              - rejected
+              - publication-authority
+            - - sanitization-pending
+              - rejected
+              - sanitizer

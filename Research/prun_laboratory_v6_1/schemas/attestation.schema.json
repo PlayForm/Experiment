@@ -1,0 +1,88 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/attestation.schema.json",
+	"title": "attestation",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"attestation_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"kind": {
+			"type": "string",
+			"enum": [
+				"build",
+				"oracle",
+				"benchmark",
+				"evaluation",
+				"publication",
+				"identity",
+				"release",
+				"sanitization"
+			]
+		},
+		"issuer_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"subject_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"predicate_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"credential_serial": {
+			"type": "string",
+			"minLength": 1
+		},
+		"issued_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		},
+		"expires_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		},
+		"signature_algorithm": {
+			"type": "string",
+			"enum": ["Ed25519", "ECDSA-P256-SHA256"]
+		},
+		"signature_b64": {
+			"type": "string",
+			"minLength": 1
+		},
+		"scope_policy_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"event_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		}
+	},
+	"required": [
+		"attestation_id",
+		"kind",
+		"issuer_id",
+		"subject_digest",
+		"predicate_digest",
+		"credential_serial",
+		"issued_utc",
+		"expires_utc",
+		"signature_algorithm",
+		"signature_b64",
+		"scope_policy_digest",
+		"event_id"
+	]
+}

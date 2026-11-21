@@ -1,0 +1,48 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/telemetry-batch.schema.json",
+	"title": "telemetry-batch",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"plane": {
+			"type": "string",
+			"enum": ["control", "product"]
+		},
+		"batch_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"traces": {
+			"type": "array",
+			"items": {
+				"$ref": "./trace-record.schema.json"
+			}
+		},
+		"metrics": {
+			"type": "array",
+			"items": {
+				"$ref": "./metric-record.schema.json"
+			}
+		},
+		"source_credential_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"collected_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"plane",
+		"batch_id",
+		"traces",
+		"metrics",
+		"source_credential_id",
+		"collected_utc"
+	]
+}

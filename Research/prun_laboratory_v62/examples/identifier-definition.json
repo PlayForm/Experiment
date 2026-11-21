@@ -1,0 +1,13 @@
+{
+	"semantic_kind": "artifact",
+	"constraint": {
+		"alphabet": "ascii_restricted",
+		"first": "ascii_alnum",
+		"continuation_extra": "_.:/-",
+		"min_bytes": 1,
+		"max_bytes": 128,
+		"canonicalization": "reject_noncanonical"
+	},
+	"definition_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"revision": 1
+}

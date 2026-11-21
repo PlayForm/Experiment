@@ -1,0 +1,24 @@
+{
+	"host_id": "sample-id",
+	"fingerprint": {
+		"host_id": "sample-id",
+		"cpu_vendor": "sample-id",
+		"cpu_model": "sample-id",
+		"isa": [],
+		"logical_cpus": 1,
+		"physical_cores": 1,
+		"numa_nodes": 1,
+		"ram_bytes": 1,
+		"kernel_release": "sample-id",
+		"container_runtime": "sample-id",
+		"filesystem_type": "sample-id",
+		"governor": "sample-id",
+		"thermal_policy": "sample-id",
+		"fingerprint_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+	},
+	"state": "eligible",
+	"lease_id": "sample-id",
+	"last_calibration_utc": "2026-11-21T10:00:00Z",
+	"temperature_celsius": 0.0,
+	"load_state": "idle"
+}

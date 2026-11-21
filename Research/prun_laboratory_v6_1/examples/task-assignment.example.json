@@ -1,0 +1,12 @@
+{
+	"assignment_id": "sample-id",
+	"task_id": "sample-id",
+	"supervisor_id": "sample-id",
+	"worker_slot_id": "sample-id",
+	"lease_id": "sample-id",
+	"fencing_token": 1,
+	"expires_utc": "2026-11-21T10:00:00Z",
+	"bundle_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"input_mount_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"output_mount_id": "sample-id"
+}

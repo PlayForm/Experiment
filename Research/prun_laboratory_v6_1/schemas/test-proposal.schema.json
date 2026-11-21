@@ -1,0 +1,57 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/test-proposal.schema.json",
+	"title": "test-proposal",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"proposal_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"task_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"base_snapshot_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"suggested_tests": {
+			"type": "array",
+			"items": {
+				"$ref": "./artifact-ref.schema.json"
+			},
+			"minItems": 1
+		},
+		"claimed_invariants": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			}
+		},
+		"author_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"submitted_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"proposal_id",
+		"task_id",
+		"base_snapshot_id",
+		"suggested_tests",
+		"claimed_invariants",
+		"author_id",
+		"submitted_utc"
+	]
+}

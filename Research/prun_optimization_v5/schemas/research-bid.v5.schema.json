@@ -1,0 +1,149 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://example.invalid/prun-lab/research-bid.v5.schema.json",
+	"title": "Prun Research Economy research-bid v5",
+	"type": "object",
+	"required": [
+		"version",
+		"bid_id",
+		"case_id",
+		"bidder_identity",
+		"stance",
+		"snapshot_hash",
+		"proposal_hash",
+		"requested",
+		"mechanism_key",
+		"prediction",
+		"information_gain_basis",
+		"source_coverage_note",
+		"model_cohort_id",
+		"created_utc",
+		"signature_b64"
+	],
+	"properties": {
+		"version": {
+			"const": 5
+		},
+		"bid_id": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 128
+		},
+		"case_id": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 128
+		},
+		"bidder_identity": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 128
+		},
+		"stance": {
+			"enum": [
+				"proponent",
+				"skeptic",
+				"alternative",
+				"replicator",
+				"methodologist",
+				"librarian"
+			]
+		},
+		"snapshot_hash": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"proposal_hash": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"requested": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": [
+				"input_tokens",
+				"output_tokens",
+				"cpu_core_seconds",
+				"benchmark_seconds",
+				"gpu_seconds",
+				"storage_byte_days",
+				"reference_requests"
+			],
+			"properties": {
+				"input_tokens": {
+					"type": "integer",
+					"minimum": 0
+				},
+				"output_tokens": {
+					"type": "integer",
+					"minimum": 0
+				},
+				"cpu_core_seconds": {
+					"type": "integer",
+					"minimum": 0
+				},
+				"benchmark_seconds": {
+					"type": "integer",
+					"minimum": 0
+				},
+				"gpu_seconds": {
+					"type": "integer",
+					"minimum": 0
+				},
+				"storage_byte_days": {
+					"type": "integer",
+					"minimum": 0
+				},
+				"reference_requests": {
+					"type": "integer",
+					"minimum": 0
+				}
+			}
+		},
+		"mechanism_key": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 128
+		},
+		"prediction": {
+			"type": "object",
+			"required": ["event", "probability", "registered_before_outcome"],
+			"properties": {
+				"event": {
+					"type": "string",
+					"minLength": 8
+				},
+				"probability": {
+					"type": "number",
+					"minimum": 0,
+					"maximum": 1
+				},
+				"registered_before_outcome": {
+					"const": true
+				}
+			},
+			"additionalProperties": false
+		},
+		"information_gain_basis": {
+			"type": "string",
+			"minLength": 8
+		},
+		"source_coverage_note": {
+			"type": "string"
+		},
+		"model_cohort_id": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 128
+		},
+		"created_utc": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"signature_b64": {
+			"type": "string",
+			"minLength": 16
+		}
+	},
+	"additionalProperties": false
+}

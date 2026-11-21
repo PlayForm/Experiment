@@ -1,0 +1,34 @@
+{
+	"build_id": "sample-id",
+	"state": "succeeded",
+	"binary": {
+		"digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+		"media_type": "sample-id",
+		"size_bytes": 1,
+		"storage_class": "private",
+		"encryption": "none",
+		"created_utc": "2026-11-21T10:00:00Z"
+	},
+	"stdout": {
+		"digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+		"media_type": "sample-id",
+		"size_bytes": 1,
+		"storage_class": "private",
+		"encryption": "none",
+		"created_utc": "2026-11-21T10:00:00Z"
+	},
+	"stderr": {
+		"digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+		"media_type": "sample-id",
+		"size_bytes": 1,
+		"storage_class": "private",
+		"encryption": "none",
+		"created_utc": "2026-11-21T10:00:00Z"
+	},
+	"builder_image_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"build_started_utc": "2026-11-21T10:00:00Z",
+	"build_completed_utc": "2026-11-21T10:00:00Z",
+	"exit_code": 1,
+	"evidence_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"trusted_signer_id": "sample-id"
+}

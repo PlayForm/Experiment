@@ -1,0 +1,15 @@
+{
+	"experiment_id": "sample-id",
+	"campaign_id": "sample-id",
+	"mutation_id": "sample-id",
+	"baseline_mutation_id": "sample-id",
+	"source_snapshot_id": "sample-id",
+	"workload_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"hardware_cohort_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"build_recipe_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"protocol_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"state": "planned",
+	"benchmark_id": "sample-id",
+	"created_utc": "2026-11-21T10:00:00Z",
+	"updated_utc": "2026-11-21T10:00:00Z"
+}

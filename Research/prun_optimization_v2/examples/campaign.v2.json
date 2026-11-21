@@ -1,0 +1,242 @@
+{
+	"schema_version": 2,
+	"project": {
+		"name": "PlayForm/Run",
+		"repository": "https://github.com/PlayForm/Run",
+		"source_ref": "Current",
+		"target_binary": "Run",
+		"compatibility": "exact"
+	},
+	"campaign": {
+		"id": "local-adaptive-scheduler-v1",
+		"description": "Characterize reference, explore bounded scheduler and static planner, then independently confirm",
+		"mode": "human_reviewed_autonomous",
+		"duration_hours": 168,
+		"workload_split_seed": 21941,
+		"objectives": {
+			"primary": "paired_wall_time",
+			"weights": { "tiny": 0.25, "medium": 0.35, "large": 0.4 },
+			"secondary": ["cpu_time", "max_rss", "binary_size"],
+			"min_practical_speedup_fraction": 0.02,
+			"maximum_critical_regression_fraction": 0.05,
+			"confidence_level": 0.95
+		},
+		"budgets": {
+			"max_mutations": 160,
+			"max_builds": 500,
+			"max_trial_blocks": 1200,
+			"max_concurrent_coding_agents": 3,
+			"max_concurrent_builds": 2,
+			"max_concurrent_benchmarks_per_host": 1,
+			"max_disk_gb": 200,
+			"min_free_disk_gb": 25,
+			"max_agent_attempts_per_mutation": 3,
+			"max_trial_runtime_seconds": 600
+		},
+		"safety": {
+			"require_human_release_approval": true,
+			"allow_agent_oracle_edits": false,
+			"allow_network_in_bench_runner": false,
+			"allow_privileged_benchmark_runner": false,
+			"allow_agent_docker_socket": false,
+			"allow_unapproved_external_commands": false,
+			"stop_on_host_health_alarm": true
+		}
+	},
+	"containers": {
+		"builder": "rust:slim-bookworm",
+		"runner_release": "debian:bookworm-slim",
+		"runner_diagnostic": "debian:bookworm-slim",
+		"training_runner": "debian:bookworm-slim",
+		"pin_image_digests_for_campaign": true,
+		"binary_mount_mode": "read_only",
+		"fixture_mount_mode": "read_only_by_default"
+	},
+	"hardware": {
+		"host_id": "local-linux-01",
+		"class_id": "linux-dedicated-cpu",
+		"cpu_set": "2-5",
+		"smt_policy": "isolate_siblings",
+		"numa_policy": "local",
+		"measurement_exclusive": true,
+		"physical_isolation_required_for_promotion": true,
+		"effective_cpu_quota": "unlimited",
+		"storage_cohort": "local_fs",
+		"hardware_profile_artifact": null
+	},
+	"builds": [
+		{
+			"id": "reference",
+			"cargo_profile": "release",
+			"target_cpu": "baseline",
+			"features": [],
+			"runtime_strategy": "reference",
+			"rustflags": []
+		},
+		{
+			"id": "static-planner",
+			"cargo_profile": "release",
+			"target_cpu": "baseline",
+			"features": ["heuristic-static"],
+			"runtime_strategy": "static-v1",
+			"rustflags": []
+		},
+		{
+			"id": "bounded-pool",
+			"cargo_profile": "release",
+			"target_cpu": "baseline",
+			"features": ["scheduler-bounded"],
+			"runtime_strategy": "bounded-v1",
+			"rustflags": []
+		},
+		{
+			"id": "shadow-planner",
+			"cargo_profile": "release",
+			"target_cpu": "baseline",
+			"features": ["heuristic-static", "heuristic-shadow"],
+			"runtime_strategy": "shadow-v1",
+			"rustflags": []
+		}
+	],
+	"feature_groups": [
+		{
+			"id": "planner",
+			"kind": "runtime_strategy",
+			"members": ["reference", "static-v1", "shadow-v1"],
+			"exclusive_active_selection": true
+		},
+		{
+			"id": "scheduler",
+			"kind": "runtime_strategy",
+			"members": ["reference", "bounded-v1"],
+			"exclusive_active_selection": true
+		},
+		{
+			"id": "experimental_capabilities",
+			"kind": "cargo_capability",
+			"members": [
+				"heuristic-static",
+				"heuristic-shadow",
+				"scheduler-bounded"
+			],
+			"exclusive_active_selection": false
+		}
+	],
+	"heuristics": {
+		"feature_family": "heuristic-v1",
+		"modes": ["off", "static", "shadow"],
+		"default_mode": "off",
+		"analyzer_time_budget_us": 200,
+		"filesystem_sampling_enabled": false,
+		"allow_active_command_probing": false,
+		"confidence_threshold": 0.8,
+		"fallback_strategy": "reference",
+		"persist_raw_commands": false,
+		"policy_artifact": null,
+		"explain_plan_opt_in": true
+	},
+	"fixtures": [
+		{
+			"id": "tiny-tree",
+			"generator": "synthetic_tree_v1",
+			"seed": 1001,
+			"directories": 12,
+			"depth": 2,
+			"files_per_dir": 2,
+			"match_density": 0.25,
+			"writable": false
+		},
+		{
+			"id": "medium-tree",
+			"generator": "synthetic_tree_v1",
+			"seed": 1002,
+			"directories": 256,
+			"depth": 4,
+			"files_per_dir": 4,
+			"match_density": 0.5,
+			"writable": false
+		},
+		{
+			"id": "large-tree",
+			"generator": "synthetic_tree_v1",
+			"seed": 1003,
+			"directories": 4096,
+			"depth": 6,
+			"files_per_dir": 5,
+			"match_density": 0.15,
+			"writable": false
+		}
+	],
+	"workloads": [
+		{
+			"id": "tiny",
+			"fixture": "tiny-tree",
+			"command": ["/usr/bin/true"],
+			"pattern": "bench.marker",
+			"parallel": false,
+			"split": "development",
+			"oracle": "exact_exec_v1"
+		},
+		{
+			"id": "medium",
+			"fixture": "medium-tree",
+			"command": ["/usr/bin/true"],
+			"pattern": "bench.marker",
+			"parallel": true,
+			"split": "development",
+			"oracle": "exact_exec_v1"
+		},
+		{
+			"id": "large",
+			"fixture": "large-tree",
+			"command": ["/usr/bin/true"],
+			"pattern": "bench.marker",
+			"parallel": true,
+			"split": "holdout",
+			"oracle": "exact_exec_v1"
+		}
+	],
+	"benchmark": {
+		"engine": "hyperfine",
+		"engine_version": "2.0.0",
+		"warmups_per_candidate": 3,
+		"samples_per_block": 15,
+		"minimum_blocks": 4,
+		"paired_comparison": true,
+		"block_order": "abba_with_seeded_reversal",
+		"periodic_reference_blocks": 2,
+		"profile_during_primary_timing": false,
+		"keep_raw_samples": true,
+		"holdout_visible_to_mutator": false,
+		"invalid_environment_policy": "quarantine_and_reschedule"
+	},
+	"agents": {
+		"provider": "local_command_adapter",
+		"roles": [
+			"scout",
+			"mutator",
+			"oracle",
+			"builder",
+			"runner",
+			"analyst",
+			"integrator",
+			"curator"
+		],
+		"worktree_root": ".prun-lab/worktrees",
+		"playbook": "playbooks/autonomous-week.yaml",
+		"require_hypothesis_card": true,
+		"require_single_concept_patch": true,
+		"require_committed_snapshot": true,
+		"auto_merge": false
+	},
+	"storage": {
+		"database": ".prun-lab/evidence.sqlite3",
+		"artifact_root": ".prun-lab/objects/sha256",
+		"journal": ".prun-lab/events.ndjson",
+		"append_only_evidence": true,
+		"store_agent_prompts": true,
+		"prompt_redaction": "secrets_and_private_paths",
+		"artifact_integrity": "sha256",
+		"schema_migration_mode": "explicit"
+	}
+}

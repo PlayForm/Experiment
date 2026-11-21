@@ -1,0 +1,32 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/paper-stage-request.schema.json",
+	"title": "paper-stage-request",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"paper": {
+			"$ref": "./research-paper.schema.json"
+		},
+		"requested_visibility": {
+			"type": "string",
+			"enum": ["private", "internal", "public"]
+		},
+		"sanitization_policy_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"request_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		}
+	},
+	"required": [
+		"paper",
+		"requested_visibility",
+		"sanitization_policy_digest",
+		"request_id"
+	]
+}

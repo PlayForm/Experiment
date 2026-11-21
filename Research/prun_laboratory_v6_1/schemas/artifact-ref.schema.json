@@ -1,0 +1,43 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/artifact-ref.schema.json",
+	"title": "artifact-ref",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"media_type": {
+			"type": "string",
+			"minLength": 1
+		},
+		"size_bytes": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"storage_class": {
+			"type": "string",
+			"enum": ["private", "sealed", "internal", "public"]
+		},
+		"encryption": {
+			"type": "string",
+			"enum": ["none", "recipient-envelope", "at-rest"]
+		},
+		"created_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"digest",
+		"media_type",
+		"size_bytes",
+		"storage_class",
+		"encryption",
+		"created_utc"
+	]
+}

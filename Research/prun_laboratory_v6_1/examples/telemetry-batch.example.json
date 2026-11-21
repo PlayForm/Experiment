@@ -1,0 +1,8 @@
+{
+	"plane": "control",
+	"batch_id": "sample-id",
+	"traces": [],
+	"metrics": [],
+	"source_credential_id": "sample-id",
+	"collected_utc": "2026-11-21T10:00:00Z"
+}

@@ -1,0 +1,30 @@
+{
+	"version": 5,
+	"adapter_id": "rust-cli-v1",
+	"repo_id": "playform-run",
+	"origin": "https://github.com/PlayForm/Run",
+	"base_ref": "main",
+	"authorized_owner": "local-owner",
+	"visibility": "public",
+	"license_policy": "review_required",
+	"toolchain": {
+		"name": "cargo",
+		"version": "pinned-via-lockfile",
+		"builder_image_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+	},
+	"source_scope": ["Source/**"],
+	"commands": {
+		"build": ["cargo", "build", "--release"],
+		"oracle": ["cargo", "test"],
+		"benchmark": ["Run", "--help"]
+	},
+	"outputs": {
+		"artifact_path": "Target/release/Run",
+		"metrics": ["elapsed_seconds"]
+	},
+	"oracle_id": "reference-behavior-v1",
+	"workloads": ["wide-traversal"],
+	"default_network": "off",
+	"publication_policy": "manual_review",
+	"adapter_artifact_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+}

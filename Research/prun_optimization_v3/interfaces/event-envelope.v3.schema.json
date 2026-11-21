@@ -1,0 +1,91 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://prun.local/schemas/event-envelope.v3.json",
+	"title": "PlayForm/Run event-envelope v3",
+	"type": "object",
+	"additionalProperties": false,
+	"required": [
+		"schema_version",
+		"event_id",
+		"event_kind",
+		"aggregate_id",
+		"aggregate_seq",
+		"occurred_utc",
+		"actor",
+		"idempotency_key",
+		"payload_sha256",
+		"correlation_id"
+	],
+	"properties": {
+		"schema_version": {
+			"const": 3
+		},
+		"event_id": {
+			"type": "string",
+			"minLength": 1
+		},
+		"event_kind": {
+			"type": "string",
+			"minLength": 1
+		},
+		"campaign_id": {
+			"type": "string",
+			"minLength": 1
+		},
+		"aggregate_id": {
+			"type": "string",
+			"minLength": 1
+		},
+		"aggregate_seq": {
+			"type": "integer",
+			"minimum": 1
+		},
+		"occurred_utc": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"actor": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": ["id", "role"],
+			"properties": {
+				"id": {
+					"type": "string",
+					"minLength": 1
+				},
+				"role": {
+					"type": "string",
+					"minLength": 1
+				}
+			}
+		},
+		"idempotency_key": {
+			"type": "string",
+			"minLength": 1
+		},
+		"payload_sha256": {
+			"type": "string",
+			"pattern": "^[0-9a-f]{64}$"
+		},
+		"correlation_id": {
+			"type": "string",
+			"minLength": 1
+		},
+		"causation_event_id": {
+			"type": ["string", "null"]
+		},
+		"trace_context": {
+			"type": ["string", "null"]
+		},
+		"source_artifacts": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"pattern": "^[0-9a-f]{64}$"
+			}
+		},
+		"view_policy_id": {
+			"type": ["string", "null"]
+		}
+	}
+}

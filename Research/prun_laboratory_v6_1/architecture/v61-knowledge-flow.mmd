@@ -1,0 +1,13 @@
+flowchart LR
+    A[Independent research proposal] --> B[Trusted immutable ingestion]
+    B --> C[Deterministic oracle and benchmark]
+    C --> D[Authoritative evidence store]
+    D --> E[Fast private feedback projector]
+    E --> A
+    D --> F[Slow paper and knowledge custodian]
+    F --> G{Rights, license, embargo and trade clearance?}
+    G -->|No| H[Restricted audit; no model disclosure]
+    G -->|Yes| I[Sanitized signed knowledge card]
+    I --> J[Different repository source adapter]
+    J --> K[Fresh target repository experiment]
+    K --> C

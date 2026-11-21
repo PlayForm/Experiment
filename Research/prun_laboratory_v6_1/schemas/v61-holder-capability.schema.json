@@ -1,0 +1,121 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6.1/v61-holder-capability.schema.json",
+	"title": "v61-holder-capability",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"holder_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"holder_role": {
+			"type": "string",
+			"enum": [
+				"offline-agent",
+				"supervisor",
+				"builder",
+				"oracle",
+				"runner",
+				"publisher",
+				"integrator",
+				"vault",
+				"operator"
+			]
+		},
+		"environment_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"trust_domain": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"tenant_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"media_types": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1,
+				"maxLength": 4096
+			},
+			"maxItems": 1000
+		},
+		"accepted_classes": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"enum": ["public", "internal", "restricted", "sealed"]
+			},
+			"maxItems": 1000
+		},
+		"supported_purposes": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"enum": [
+					"build",
+					"test",
+					"benchmark",
+					"research",
+					"publication",
+					"replication",
+					"transfer",
+					"archive"
+				]
+			},
+			"maxItems": 1000
+		},
+		"max_bytes": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"free_bytes": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"encryption_at_rest": {
+			"type": "boolean"
+		},
+		"ephemeral_storage": {
+			"type": "boolean"
+		},
+		"network_mode": {
+			"type": "string",
+			"enum": ["none", "internal-mtls", "operator"]
+		},
+		"credential_fingerprint": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"attestation_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"expires_at": {
+			"type": "string",
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"holder_id",
+		"holder_role",
+		"environment_digest",
+		"trust_domain",
+		"tenant_id",
+		"media_types",
+		"accepted_classes",
+		"supported_purposes",
+		"max_bytes",
+		"free_bytes",
+		"encryption_at_rest",
+		"ephemeral_storage",
+		"network_mode",
+		"credential_fingerprint",
+		"attestation_digest",
+		"expires_at"
+	]
+}

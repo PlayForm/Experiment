@@ -1,0 +1,68 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6.1/v61-trade-restriction.schema.json",
+	"title": "v61-trade-restriction",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"restriction_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"source_group_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"target_group_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"direction": {
+			"type": "string",
+			"enum": ["a-to-b", "b-to-a", "both"]
+		},
+		"restriction_kind": {
+			"type": "string",
+			"enum": [
+				"embargo",
+				"conflict-of-interest",
+				"anti-collusion",
+				"license",
+				"cross-tenant",
+				"holdout"
+			]
+		},
+		"allowed_metadata": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1,
+				"maxLength": 4096
+			},
+			"maxItems": 1000
+		},
+		"policy_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"effective_at": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"expires_at": {
+			"type": "string",
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"restriction_id",
+		"source_group_id",
+		"target_group_id",
+		"direction",
+		"restriction_kind",
+		"allowed_metadata",
+		"policy_digest",
+		"effective_at",
+		"expires_at"
+	]
+}

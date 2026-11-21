@@ -1,0 +1,22 @@
+{
+	"items": [
+		{
+			"release_id": "release-a",
+			"origin_repository": "repo-a",
+			"target_repository": "repo-b",
+			"source_evidence_digests": [
+				"0000000000000000000000000000000000000000000000000000000000000000"
+			],
+			"derived_document_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+			"sanitization_policy_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+			"license_grant_ids": ["license-a"],
+			"embargo_checked": true,
+			"review_status": "pending",
+			"release_scope": "repo-private",
+			"exporter_id": "knowledge-bridge",
+			"recorded_at": "2026-11-21T01:00:00Z"
+		}
+	],
+	"next_cursor": null,
+	"has_more": false
+}

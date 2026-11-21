@@ -1,0 +1,23 @@
+{
+	"turn_id": "sample-id",
+	"conversation_id": "sample-id",
+	"task_id": "sample-id",
+	"segment_id": "sample-id",
+	"role": "system",
+	"sequence": 1,
+	"visible_content_artifact": {
+		"digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+		"media_type": "sample-id",
+		"size_bytes": 1,
+		"storage_class": "private",
+		"encryption": "none",
+		"created_utc": "2026-11-21T10:00:00Z"
+	},
+	"model_fingerprint": "sample-id",
+	"prompt_template_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"context_snapshot_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"tool_call_ids": [],
+	"started_utc": "2026-11-21T10:00:00Z",
+	"completed_utc": "2026-11-21T10:00:00Z",
+	"privacy_class": "private-worker"
+}

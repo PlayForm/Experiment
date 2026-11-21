@@ -1,0 +1,10 @@
+{
+	"notification_id": "sample-id",
+	"kind": "campaign-state",
+	"severity": "info",
+	"resource_id": "sample-id",
+	"message_code": "sample-id",
+	"occurred_utc": "2026-11-21T10:00:00Z",
+	"event_id": "sample-id",
+	"acknowledged": false
+}

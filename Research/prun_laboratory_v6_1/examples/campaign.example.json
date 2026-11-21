@@ -1,0 +1,14 @@
+{
+	"campaign_id": "sample-id",
+	"repository_id": "sample-id",
+	"revision": 1,
+	"state": "draft",
+	"policy_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"adapter_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"workload_set_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"created_utc": "2026-11-21T10:00:00Z",
+	"updated_utc": "2026-11-21T10:00:00Z",
+	"owner_actor_id": "sample-id",
+	"goal": "sample-id",
+	"holdout_policy_id": "sample-id"
+}

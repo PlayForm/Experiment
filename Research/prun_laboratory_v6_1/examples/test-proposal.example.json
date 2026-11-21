@@ -1,0 +1,18 @@
+{
+	"proposal_id": "sample-id",
+	"task_id": "sample-id",
+	"base_snapshot_id": "sample-id",
+	"suggested_tests": [
+		{
+			"digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+			"media_type": "sample-id",
+			"size_bytes": 1,
+			"storage_class": "private",
+			"encryption": "none",
+			"created_utc": "2026-11-21T10:00:00Z"
+		}
+	],
+	"claimed_invariants": [],
+	"author_id": "sample-id",
+	"submitted_utc": "2026-11-21T10:00:00Z"
+}

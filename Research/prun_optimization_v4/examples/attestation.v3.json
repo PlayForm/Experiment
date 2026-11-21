@@ -1,0 +1,16 @@
+{
+	"schema_version": 3,
+	"attestation_id": "att-001",
+	"stamp_kind": "oracle_passed",
+	"subject_kind": "build",
+	"subject_id": "build-001",
+	"evidence_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"policy_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+	"issuer": "oracle-service-v1",
+	"valid_cohort": "linux-amd64-runner-cohort-A",
+	"issued_utc": "2026-11-21T01:03:00Z",
+	"signature": "DEMO_NOT_A_REAL_SIGNATURE",
+	"signing_key_id": "local-test-key",
+	"expires_utc": null,
+	"prerequisite_attestations": []
+}

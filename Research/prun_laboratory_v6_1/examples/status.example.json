@@ -1,0 +1,13 @@
+{
+	"api_version": "v6",
+	"lab_state": "idle",
+	"active_campaigns": 1,
+	"queued_jobs": 1,
+	"running_jobs": 1,
+	"benchmark_host_leases": 1,
+	"control_telemetry": "ok",
+	"product_telemetry": "ok",
+	"event_ledger_sequence": 1,
+	"last_checkpoint_utc": "2026-11-21T10:00:00Z",
+	"as_of_utc": "2026-11-21T10:00:00Z"
+}

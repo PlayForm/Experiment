@@ -1,0 +1,21 @@
+{
+	"schema_version": 3,
+	"capsule_id": "feedback-001",
+	"recipient_work_order_id": "task-001",
+	"proposal_id": "proposal-001",
+	"evaluation_status": "benchmark_loss",
+	"dataset_visibility": "own_development_only",
+	"baseline_binary_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"candidate_binary_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+	"evidence_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+	"policy_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+	"issued_utc": "2026-11-21T01:05:00Z",
+	"speedup_ratio": 0.97,
+	"ci_low": 0.95,
+	"ci_high": 0.99,
+	"failure_categories": [],
+	"aggregate_hints": ["Scheduling overhead increased on small jobs"],
+	"next_action": "revise_as_new_mutation",
+	"sealed_holdout_included": false,
+	"related_analysis_id": "analysis-001"
+}

@@ -1,0 +1,40 @@
+# OPTIONAL external OpenTelemetry Collector reference (Go distribution, not pure Rust).
+# For an entirely Rust-authored service, replace with axum/tonic OTLP receiver.
+# Check against the exact pinned Collector version before production deployment.
+receivers:
+    otlp/control:
+        protocols:
+            grpc:
+                endpoint: 0.0.0.0:4317
+            http:
+                endpoint: 0.0.0.0:4318
+    otlp/product:
+        protocols:
+            grpc:
+                endpoint: 0.0.0.0:14317
+            http:
+                endpoint: 0.0.0.0:14318
+processors:
+    memory_limiter:
+        check_interval: 1s
+        limit_mib: 512
+        spike_limit_mib: 128
+    batch/control:
+        timeout: 2s
+    batch/product:
+        timeout: 5s
+exporters:
+    debug/control:
+        verbosity: basic
+    debug/product:
+        verbosity: basic
+service:
+    pipelines:
+        traces/control:
+            receivers: [otlp/control]
+            processors: [memory_limiter, batch/control]
+            exporters: [debug/control]
+        traces/product:
+            receivers: [otlp/product]
+            processors: [memory_limiter, batch/product]
+            exporters: [debug/product]

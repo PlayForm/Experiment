@@ -1,0 +1,28 @@
+{
+	"bundle": {
+		"task_id": "sample-id",
+		"campaign_id": "sample-id",
+		"case_id": "sample-id",
+		"role": "researcher",
+		"source_snapshot": {
+			"snapshot_id": "sample-id",
+			"repository_id": "sample-id",
+			"git_commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+			"tree_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+			"scope_manifest_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+			"base_snapshot_id": "sample-id",
+			"license_manifest_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+			"created_utc": "2026-11-21T10:00:00Z"
+		},
+		"input_artifacts": [],
+		"policy_capsule_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+		"scope_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+		"deadline_utc": "2026-11-21T10:00:00Z",
+		"output_contract": "patch",
+		"generation": 1,
+		"task_nonce": "sample-id"
+	},
+	"trusted_supervisor_id": "sample-id",
+	"input_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"request_id": "sample-id"
+}

@@ -1,0 +1,65 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/lineage.schema.json",
+	"title": "lineage",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"subject_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"subject_kind": {
+			"type": "string",
+			"enum": ["mutation", "build", "experiment", "paper", "release"]
+		},
+		"parents": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1,
+				"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+			}
+		},
+		"children": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1,
+				"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+			}
+		},
+		"evidence_attestation_ids": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1,
+				"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+			}
+		},
+		"current_state": {
+			"type": "string",
+			"minLength": 1
+		},
+		"lineage_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"as_of_seq": {
+			"type": "integer",
+			"minimum": 0
+		}
+	},
+	"required": [
+		"subject_id",
+		"subject_kind",
+		"parents",
+		"children",
+		"evidence_attestation_ids",
+		"current_state",
+		"lineage_digest",
+		"as_of_seq"
+	]
+}

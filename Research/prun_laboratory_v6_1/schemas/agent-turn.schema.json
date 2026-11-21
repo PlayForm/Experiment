@@ -1,0 +1,98 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/agent-turn.schema.json",
+	"title": "agent-turn",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"turn_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"conversation_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"task_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"segment_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"role": {
+			"type": "string",
+			"enum": [
+				"system",
+				"task",
+				"model",
+				"local-tool",
+				"supervisor-feedback"
+			]
+		},
+		"sequence": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"visible_content_artifact": {
+			"$ref": "./artifact-ref.schema.json"
+		},
+		"model_fingerprint": {
+			"type": "string",
+			"minLength": 0
+		},
+		"prompt_template_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"context_snapshot_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"tool_call_ids": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1,
+				"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+			}
+		},
+		"started_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		},
+		"completed_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		},
+		"privacy_class": {
+			"type": "string",
+			"enum": ["private-worker", "sealed-research", "approved-for-review"]
+		}
+	},
+	"required": [
+		"turn_id",
+		"conversation_id",
+		"task_id",
+		"segment_id",
+		"role",
+		"sequence",
+		"visible_content_artifact",
+		"model_fingerprint",
+		"prompt_template_digest",
+		"context_snapshot_digest",
+		"tool_call_ids",
+		"started_utc",
+		"completed_utc",
+		"privacy_class"
+	]
+}

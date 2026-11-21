@@ -1,0 +1,100 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/envelope.schema.json",
+	"title": "envelope",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"envelope_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"protocol_version": {
+			"const": 6
+		},
+		"message_type": {
+			"type": "string",
+			"minLength": 1
+		},
+		"sender_credential_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"recipient_service_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"correlation_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"idempotency_key": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"created_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		},
+		"expires_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		},
+		"nonce": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"ciphertext": {
+			"$ref": "./artifact-ref.schema.json"
+		},
+		"ciphertext_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"sender_signature_b64": {
+			"type": "string",
+			"minLength": 1
+		},
+		"signature_scope_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"visibility": {
+			"type": "string",
+			"enum": ["metadata-only", "sealed"]
+		},
+		"tracing_correlation_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		}
+	},
+	"required": [
+		"envelope_id",
+		"protocol_version",
+		"message_type",
+		"sender_credential_id",
+		"recipient_service_id",
+		"correlation_id",
+		"idempotency_key",
+		"created_utc",
+		"expires_utc",
+		"nonce",
+		"ciphertext",
+		"ciphertext_digest",
+		"sender_signature_b64",
+		"signature_scope_digest",
+		"visibility",
+		"tracing_correlation_digest"
+	]
+}

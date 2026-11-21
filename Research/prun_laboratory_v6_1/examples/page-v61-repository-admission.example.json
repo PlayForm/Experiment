@@ -1,0 +1,22 @@
+{
+	"items": [
+		{
+			"admission_id": "admission-a",
+			"repository_id": "repo-a",
+			"source_uri": "https://example.invalid/repo",
+			"commit_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+			"tenant_id": "tenant-1",
+			"repository_visibility": "private",
+			"license_grant_ids": ["license-a"],
+			"approved_toolchain_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+			"offline_dependency_lock_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+			"read_path_allowlist": ["src/"],
+			"prohibited_path_patterns": ["**/.env", "**/secrets/**"],
+			"ingress_validation_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+			"policy_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+			"admission_status": "pending"
+		}
+	],
+	"next_cursor": null,
+	"has_more": false
+}

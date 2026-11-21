@@ -1,0 +1,96 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6.1/v61-repository-admission.schema.json",
+	"title": "v61-repository-admission",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"admission_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"repository_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"source_uri": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 4096
+		},
+		"commit_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"tenant_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"repository_visibility": {
+			"type": "string",
+			"enum": ["public", "private", "restricted"]
+		},
+		"license_grant_ids": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+			},
+			"maxItems": 1000
+		},
+		"approved_toolchain_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"offline_dependency_lock_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"read_path_allowlist": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1,
+				"maxLength": 4096
+			},
+			"maxItems": 1000
+		},
+		"prohibited_path_patterns": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1,
+				"maxLength": 4096
+			},
+			"maxItems": 1000
+		},
+		"ingress_validation_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"policy_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"admission_status": {
+			"type": "string",
+			"enum": ["pending", "admitted", "quarantined", "rejected"]
+		}
+	},
+	"required": [
+		"admission_id",
+		"repository_id",
+		"source_uri",
+		"commit_digest",
+		"tenant_id",
+		"repository_visibility",
+		"license_grant_ids",
+		"approved_toolchain_digest",
+		"offline_dependency_lock_digest",
+		"read_path_allowlist",
+		"prohibited_path_patterns",
+		"ingress_validation_digest",
+		"policy_digest",
+		"admission_status"
+	]
+}

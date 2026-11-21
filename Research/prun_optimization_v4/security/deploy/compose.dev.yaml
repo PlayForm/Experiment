@@ -1,0 +1,36 @@
+# DEMONSTRATION ONLY. Stage a relay-only bundle using `prun-lab-trust stage`.
+# Offline CA root keys MUST NOT be mounted to this relay container.
+services:
+    discovery:
+        build:
+            context: ../
+            dockerfile: deploy/Dockerfile.dns
+        networks:
+            trust-lan:
+                ipv4_address: 172.30.30.53
+        read_only: true
+        cap_drop: [ALL]
+        security_opt: ["no-new-privileges:true"]
+    relay:
+        build:
+            context: ../
+            dockerfile: deploy/Dockerfile.trust
+        command: ["relay", "/state", "relay", "0.0.0.0:8443"]
+        volumes:
+            - ../relay-runtime:/state
+        networks:
+            trust-lan:
+                ipv4_address: 172.30.30.10
+        dns: [172.30.30.53]
+        ports: ["127.0.0.1:8443:8443"]
+        read_only: true
+        user: "${LAB_UID:-1000}:${LAB_GID:-1000}"
+        tmpfs: ["/tmp"]
+        cap_drop: [ALL]
+        security_opt: ["no-new-privileges:true"]
+networks:
+    trust-lan:
+        internal: true
+        ipam:
+            config:
+                - subnet: 172.30.30.0/24

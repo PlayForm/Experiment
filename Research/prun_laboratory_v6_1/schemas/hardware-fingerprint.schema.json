@@ -1,0 +1,86 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/hardware-fingerprint.schema.json",
+	"title": "hardware-fingerprint",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"host_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"cpu_vendor": {
+			"type": "string",
+			"minLength": 1
+		},
+		"cpu_model": {
+			"type": "string",
+			"minLength": 1
+		},
+		"isa": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			}
+		},
+		"logical_cpus": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"physical_cores": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"numa_nodes": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"ram_bytes": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"kernel_release": {
+			"type": "string",
+			"minLength": 1
+		},
+		"container_runtime": {
+			"type": "string",
+			"minLength": 1
+		},
+		"filesystem_type": {
+			"type": "string",
+			"minLength": 1
+		},
+		"governor": {
+			"type": "string",
+			"minLength": 1
+		},
+		"thermal_policy": {
+			"type": "string",
+			"minLength": 1
+		},
+		"fingerprint_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		}
+	},
+	"required": [
+		"host_id",
+		"cpu_vendor",
+		"cpu_model",
+		"isa",
+		"logical_cpus",
+		"physical_cores",
+		"numa_nodes",
+		"ram_bytes",
+		"kernel_release",
+		"container_runtime",
+		"filesystem_type",
+		"governor",
+		"thermal_policy",
+		"fingerprint_digest"
+	]
+}

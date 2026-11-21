@@ -1,0 +1,82 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/feedback-capsule.schema.json",
+	"title": "feedback-capsule",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"feedback_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"task_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"mutation_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"iteration": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"oracle_state": {
+			"type": "string",
+			"enum": ["passed", "failed", "inconclusive", "not_run"]
+		},
+		"evaluation_state": {
+			"type": "string",
+			"enum": [
+				"eligible",
+				"rejected",
+				"specialize",
+				"more_samples",
+				"inconclusive",
+				"not_run"
+			]
+		},
+		"permitted_failure_codes": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			}
+		},
+		"allowed_result_refs": {
+			"type": "array",
+			"items": {
+				"$ref": "./artifact-ref.schema.json"
+			}
+		},
+		"next_scope_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"excludes_holdout_details": {
+			"const": true
+		},
+		"prepared_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"feedback_id",
+		"task_id",
+		"mutation_id",
+		"iteration",
+		"oracle_state",
+		"evaluation_state",
+		"permitted_failure_codes",
+		"allowed_result_refs",
+		"next_scope_digest",
+		"excludes_holdout_details",
+		"prepared_utc"
+	]
+}

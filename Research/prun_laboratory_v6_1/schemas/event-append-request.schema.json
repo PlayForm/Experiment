@@ -1,0 +1,32 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/event-append-request.schema.json",
+	"title": "event-append-request",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"event": {
+			"$ref": "./audit-event.schema.json"
+		},
+		"expected_aggregate_seq": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"expected_last_hash": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"request_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		}
+	},
+	"required": [
+		"event",
+		"expected_aggregate_seq",
+		"expected_last_hash",
+		"request_id"
+	]
+}

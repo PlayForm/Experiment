@@ -1,0 +1,208 @@
+{
+	"version": 6,
+	"transfers": [
+		{
+			"sender": "Owner",
+			"recipient": "Public API",
+			"transport": "mTLS HTTP",
+			"record": "command",
+			"meaning": "Operator-authenticated command document; only declarative allowed operations"
+		},
+		{
+			"sender": "Public API",
+			"recipient": "Coordinator",
+			"transport": "mTLS HTTP",
+			"record": "command",
+			"meaning": "Validated owner command; no arbitrary shell"
+		},
+		{
+			"sender": "Coordinator",
+			"recipient": "Event ledger",
+			"transport": "transactional append",
+			"record": "audit-event",
+			"meaning": "Signed state transition and hash chain"
+		},
+		{
+			"sender": "Ledger",
+			"recipient": "Projection service",
+			"transport": "authenticated outbox",
+			"record": "audit-event",
+			"meaning": "At-least-once delivery; idempotent projection"
+		},
+		{
+			"sender": "Projection service",
+			"recipient": "GPUI",
+			"transport": "mTLS HTTP/SSE",
+			"record": "page/status/audit-event",
+			"meaning": "Metadata-only public authorized view"
+		},
+		{
+			"sender": "Coordinator",
+			"recipient": "Supervisor",
+			"transport": "mTLS claim",
+			"record": "task-bundle",
+			"meaning": "Scoped work order; model is never API recipient"
+		},
+		{
+			"sender": "Supervisor",
+			"recipient": "LLM worker",
+			"transport": "read-only file mailbox",
+			"record": "task-bundle (filtered)",
+			"meaning": "Only source/task/content; no topology, IDs can be opaque"
+		},
+		{
+			"sender": "LLM worker",
+			"recipient": "Supervisor",
+			"transport": "scratch output directory",
+			"record": "patch/research-claim/test-proposal",
+			"meaning": "Untrusted data only; cannot run trusted control calls"
+		},
+		{
+			"sender": "Supervisor",
+			"recipient": "Conversation CAS",
+			"transport": "encrypted artifact commit",
+			"record": "agent-turn/tool-call",
+			"meaning": "Visible turn transcript, local tool args/results stored encrypted"
+		},
+		{
+			"sender": "Supervisor",
+			"recipient": "Ingestion gateway",
+			"transport": "mTLS HTTP",
+			"record": "task-receipt/patch-proposal",
+			"meaning": "Hash checks, scope checks, size checks"
+		},
+		{
+			"sender": "Ingestion gateway",
+			"recipient": "Novelty gate",
+			"transport": "trusted internal dispatch",
+			"record": "patch-proposal",
+			"meaning": "Exact identity, structural similarity, feature conflicts"
+		},
+		{
+			"sender": "Coordinator",
+			"recipient": "Builder",
+			"transport": "mTLS HTTP",
+			"record": "build-request",
+			"meaning": "Immutable source/toolchain/dependency closure"
+		},
+		{
+			"sender": "Builder",
+			"recipient": "Artifact CAS",
+			"transport": "mTLS HTTP",
+			"record": "build-result",
+			"meaning": "Executable digest and build log artifacts"
+		},
+		{
+			"sender": "Coordinator",
+			"recipient": "Oracle",
+			"transport": "mTLS HTTP",
+			"record": "oracle-request",
+			"meaning": "Independent frozen test suite"
+		},
+		{
+			"sender": "Oracle",
+			"recipient": "Event ledger",
+			"transport": "mTLS HTTP",
+			"record": "oracle-result",
+			"meaning": "Tests/counterexamples attested by oracle"
+		},
+		{
+			"sender": "Coordinator",
+			"recipient": "Benchmark scheduler",
+			"transport": "trusted dispatch",
+			"record": "benchmark-request",
+			"meaning": "Frozen comparative protocol"
+		},
+		{
+			"sender": "Scheduler",
+			"recipient": "Benchmark host",
+			"transport": "fenced lease",
+			"record": "lease",
+			"meaning": "Exclusive CPU and host resource reservation"
+		},
+		{
+			"sender": "Benchmark runner",
+			"recipient": "Event ledger",
+			"transport": "mTLS HTTP",
+			"record": "benchmark-result",
+			"meaning": "Raw paired samples and environment attestations"
+		},
+		{
+			"sender": "Evaluator",
+			"recipient": "Event ledger",
+			"transport": "mTLS HTTP",
+			"record": "evaluation-result",
+			"meaning": "Predeclared statistics; no model verdict authority"
+		},
+		{
+			"sender": "Feedback authority",
+			"recipient": "Supervisor",
+			"transport": "mTLS HTTP/CAS",
+			"record": "feedback-capsule",
+			"meaning": "Scoped results, not holdout internals"
+		},
+		{
+			"sender": "Supervisor",
+			"recipient": "LLM worker",
+			"transport": "read-only file mailbox",
+			"record": "feedback-capsule (filtered)",
+			"meaning": "Next iteration context supplied offline"
+		},
+		{
+			"sender": "Research workers",
+			"recipient": "Supervisor",
+			"transport": "scratch output directory",
+			"record": "research-claim",
+			"meaning": "Private authored opinion; no result authority"
+		},
+		{
+			"sender": "Publisher",
+			"recipient": "Publication authority",
+			"transport": "mTLS HTTP",
+			"record": "research-paper",
+			"meaning": "Sanitized derivative, evidence map and release policy"
+		},
+		{
+			"sender": "Publication authority",
+			"recipient": "Evidence ledger",
+			"transport": "mTLS HTTP",
+			"record": "attestation",
+			"meaning": "Release decision and signature"
+		},
+		{
+			"sender": "Integrator",
+			"recipient": "Supervisor",
+			"transport": "file mailbox",
+			"record": "research-case",
+			"meaning": "Transfer hypothesis only, not automatic promotion"
+		},
+		{
+			"sender": "PKI issuer",
+			"recipient": "Evidence ledger",
+			"transport": "mTLS HTTP",
+			"record": "certificate-event",
+			"meaning": "Issuance/renewal/revocation counts and reasons"
+		},
+		{
+			"sender": "Trusted services",
+			"recipient": "Control OTLP",
+			"transport": "OTLP/gRPC mTLS",
+			"record": "trace-record/metric-record",
+			"meaning": "Metadata, no content"
+		},
+		{
+			"sender": "SUT diagnostic binary",
+			"recipient": "Product OTLP",
+			"transport": "OTLP/gRPC mTLS",
+			"record": "trace-record/metric-record",
+			"meaning": "Diagnostic mode only"
+		},
+		{
+			"sender": "Control/Product telemetry stores",
+			"recipient": "Projection service",
+			"transport": "trusted read",
+			"record": "trace/metric projections",
+			"meaning": "Correlated by IDs only, no storage authority"
+		}
+	]
+}

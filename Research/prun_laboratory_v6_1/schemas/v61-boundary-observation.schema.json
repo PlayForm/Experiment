@@ -1,0 +1,60 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6.1/v61-boundary-observation.schema.json",
+	"title": "v61-boundary-observation",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"observation_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"worker_assignment_id": {
+			"type": "string",
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"local_action": {
+			"type": "string",
+			"enum": [
+				"read-file",
+				"write-file",
+				"compile",
+				"execute-local-test",
+				"file-unavailable",
+				"artifact-submit",
+				"invalid-request"
+			]
+		},
+		"outcome": {
+			"type": "string",
+			"enum": ["observed", "blocked", "not-supported", "inconclusive"]
+		},
+		"trusted_internal_cause": {
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 4096
+		},
+		"worker_feedback_class": {
+			"type": "string",
+			"enum": ["none", "generic-io", "generic-submission"]
+		},
+		"tool_receipt_digest": {
+			"type": "string",
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"logged_at": {
+			"type": "string",
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"observation_id",
+		"worker_assignment_id",
+		"local_action",
+		"outcome",
+		"trusted_internal_cause",
+		"worker_feedback_class",
+		"tool_receipt_digest",
+		"logged_at"
+	]
+}

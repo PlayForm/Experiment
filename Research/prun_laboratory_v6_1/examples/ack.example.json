@@ -1,0 +1,8 @@
+{
+	"request_id": "sample-id",
+	"accepted": false,
+	"record_id": "sample-id",
+	"event_id": "sample-id",
+	"state": "sample-id",
+	"receipt_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}

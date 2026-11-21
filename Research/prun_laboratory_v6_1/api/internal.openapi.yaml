@@ -1,0 +1,1931 @@
+openapi: 3.1.1
+info:
+    title: Rust Laboratory Trusted Internal API
+    version: 6.1.0
+    description:
+        "mTLS service-to-service only. Model containers have no route, credentials,
+        DNS context or API spec. v6.1: artifact sovereignty, non-disclosing worker boundary,
+        emergent research and bitemporal transfer."
+servers:
+    - url: https://lab-core.lab.internal:9444
+security:
+    - serviceMutualTLS: []
+components:
+    securitySchemes:
+        serviceMutualTLS:
+            type: mutualTLS
+paths:
+    /internal/v1/worker/claim:
+        post:
+            operationId: claimWorkerTask
+            summary: Trusted supervisor claims a scoped work order
+            tags:
+                - trusted-service
+            parameters: []
+            responses:
+                "202":
+                    description: Accepted asynchronously
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - supervisor
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/worker-claim-request.schema.json
+    /internal/v1/worker/heartbeat:
+        post:
+            operationId: heartbeatWorkerLease
+            summary: Heartbeat with fencing token
+            tags:
+                - trusted-service
+            parameters: []
+            responses:
+                "202":
+                    description: Accepted asynchronously
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - supervisor
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/worker-heartbeat.schema.json
+    /internal/v1/worker/complete:
+        post:
+            operationId: completeWorkerTask
+            summary: Submit supervisor-sealed task result
+            tags:
+                - trusted-service
+            parameters: []
+            responses:
+                "202":
+                    description: Accepted asynchronously
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - supervisor
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/worker-complete-request.schema.json
+    /internal/v1/source/snapshot:
+        post:
+            operationId: recordSourceSnapshot
+            summary: Register trusted source snapshot
+            tags:
+                - trusted-service
+            parameters: []
+            responses:
+                "202":
+                    description: Accepted asynchronously
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - source-adapter
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/source-snapshot.schema.json
+    /internal/v1/task/stage:
+        post:
+            operationId: stageScopedTask
+            summary: Stage one scoped task capsule
+            tags:
+                - trusted-service
+            parameters: []
+            responses:
+                "202":
+                    description: Accepted asynchronously
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - coordinator
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/task-staging-request.schema.json
+    /internal/v1/artifacts/commit:
+        post:
+            operationId: commitArtifact
+            summary: Commit verified content-addressed object metadata
+            tags:
+                - trusted-service
+            parameters: []
+            responses:
+                "202":
+                    description: Accepted asynchronously
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - supervisor
+                - builder
+                - oracle
+                - runner
+                - publisher
+                - coordinator
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/artifact-commit-request.schema.json
+    /internal/v1/proposals/patch:
+        post:
+            operationId: ingestPatch
+            summary: Admit untrusted patch artifact for deterministic checks
+            tags:
+                - trusted-service
+            parameters: []
+            responses:
+                "202":
+                    description: Accepted asynchronously
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - supervisor
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/patch-proposal.schema.json
+    /internal/v1/proposals/claim:
+        post:
+            operationId: ingestResearchClaim
+            summary: Admit research opinion without promoting evidence
+            tags:
+                - trusted-service
+            parameters: []
+            responses:
+                "202":
+                    description: Accepted asynchronously
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - supervisor
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/research-claim.schema.json
+    /internal/v1/proposals/test:
+        post:
+            operationId: ingestTestProposal
+            summary: Record untrusted proposed changeset tests
+            tags:
+                - trusted-service
+            parameters: []
+            responses:
+                "202":
+                    description: Accepted asynchronously
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - supervisor
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/test-proposal.schema.json
+    /internal/v1/build/request:
+        post:
+            operationId: requestBuild
+            summary: Schedule build from verified source tree
+            tags:
+                - trusted-service
+            parameters: []
+            responses:
+                "202":
+                    description: Accepted asynchronously
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - coordinator
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/build-request.schema.json
+    /internal/v1/build/result:
+        post:
+            operationId: reportBuild
+            summary: Trusted builder reports binaries and build provenance
+            tags:
+                - trusted-service
+            parameters: []
+            responses:
+                "202":
+                    description: Accepted asynchronously
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - builder
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/build-result.schema.json
+    /internal/v1/oracle/request:
+        post:
+            operationId: requestOracle
+            summary: Request trusted correctness mesh
+            tags:
+                - trusted-service
+            parameters: []
+            responses:
+                "202":
+                    description: Accepted asynchronously
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - coordinator
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/oracle-request.schema.json
+    /internal/v1/oracle/result:
+        post:
+            operationId: reportOracle
+            summary: Trusted oracle reports tests
+            tags:
+                - trusted-service
+            parameters: []
+            responses:
+                "202":
+                    description: Accepted asynchronously
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - oracle
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/oracle-result.schema.json
+    /internal/v1/benchmark/lease:
+        post:
+            operationId: reserveBenchHost
+            summary: Claim exclusive benchmark host lease
+            tags:
+                - trusted-service
+            parameters: []
+            responses:
+                "202":
+                    description: Accepted asynchronously
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - scheduler
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/benchmark-lease-request.schema.json
+    /internal/v1/benchmark/request:
+        post:
+            operationId: requestBenchmark
+            summary: Schedule frozen paired benchmark
+            tags:
+                - trusted-service
+            parameters: []
+            responses:
+                "202":
+                    description: Accepted asynchronously
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - coordinator
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/benchmark-request.schema.json
+    /internal/v1/benchmark/result:
+        post:
+            operationId: reportBenchmark
+            summary: Trusted runner submits measurements
+            tags:
+                - trusted-service
+            parameters: []
+            responses:
+                "202":
+                    description: Accepted asynchronously
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - runner
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/benchmark-result.schema.json
+    /internal/v1/evaluation/result:
+        post:
+            operationId: reportEvaluation
+            summary: Trusted evaluator submits statistical verdict
+            tags:
+                - trusted-service
+            parameters: []
+            responses:
+                "202":
+                    description: Accepted asynchronously
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - evaluator
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/evaluation-result.schema.json
+    /internal/v1/feedback/prepare:
+        post:
+            operationId: prepareFeedback
+            summary: Prepare privacy-filtered worker feedback
+            tags:
+                - trusted-service
+            parameters: []
+            responses:
+                "202":
+                    description: Accepted asynchronously
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - feedback-authority
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/feedback-capsule.schema.json
+    /internal/v1/research/paper:
+        post:
+            operationId: stagePaper
+            summary: Stage draft for independent review
+            tags:
+                - trusted-service
+            parameters: []
+            responses:
+                "202":
+                    description: Accepted asynchronously
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - publisher
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/paper-stage-request.schema.json
+    /internal/v1/publication/attest:
+        post:
+            operationId: publishAttestation
+            summary: Authorize scoped release or denial
+            tags:
+                - trusted-service
+            parameters: []
+            responses:
+                "202":
+                    description: Accepted asynchronously
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - publication-authority
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/attestation.schema.json
+    /internal/v1/identity/issue:
+        post:
+            operationId: issueCredential
+            summary: Issue short-lived service credential under explicit scope
+            tags:
+                - trusted-service
+            parameters: []
+            responses:
+                "202":
+                    description: Accepted asynchronously
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - identity-authority
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/identity-issuance-request.schema.json
+    /internal/v1/identity/revoke:
+        post:
+            operationId: revokeCredential
+            summary: Revoke scoped service credential
+            tags:
+                - trusted-service
+            parameters: []
+            responses:
+                "202":
+                    description: Accepted asynchronously
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - identity-authority
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/identity-revoke-request.schema.json
+    /internal/v1/attestations/record:
+        post:
+            operationId: recordAttestation
+            summary: Verify signature and append authority receipt
+            tags:
+                - trusted-service
+            parameters: []
+            responses:
+                "202":
+                    description: Accepted asynchronously
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - attestation-service
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/attestation.schema.json
+    /internal/v1/ledger/append:
+        post:
+            operationId: appendLedgerEvent
+            summary: Append conditional event with expected sequence
+            tags:
+                - trusted-service
+            parameters: []
+            responses:
+                "202":
+                    description: Accepted asynchronously
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - coordinator
+                - ledger-gateway
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/event-append-request.schema.json
+    /internal/v1/telemetry/control/ingest:
+        post:
+            operationId: ingestControlTelemetry
+            summary: Private control-plane telemetry intake
+            tags:
+                - trusted-service
+            parameters: []
+            responses:
+                "202":
+                    description: Accepted asynchronously
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - otel-control-gateway
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/telemetry-batch.schema.json
+    /internal/v1/telemetry/product/ingest:
+        post:
+            operationId: ingestProductTelemetry
+            summary: Isolated diagnostic-only product telemetry intake
+            tags:
+                - trusted-service
+            parameters: []
+            responses:
+                "202":
+                    description: Accepted asynchronously
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - otel-product-gateway
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/telemetry-batch.schema.json
+    /internal/v1/repos/admit:
+        post:
+            operationId: v61RecordRepositoryAdmission
+            summary: Register admitted source snapshot and constraints
+            tags:
+                - v61-internal
+            parameters:
+                - name: Idempotency-Key
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+                - name: X-Policy-Epoch
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/v61-repository-admission.schema.json
+            responses:
+                "202":
+                    description:
+                        Received by trusted service; not an authorization or execution
+                        verdict
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Trusted-service-only error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - source-adapter
+            security:
+                - serviceMutualTLS: []
+    /internal/v1/artifacts/policy/bind:
+        post:
+            operationId: v61RecordArtifactPolicy
+            summary: Bind immutable artifact rights and custody policy
+            tags:
+                - v61-internal
+            parameters:
+                - name: Idempotency-Key
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+                - name: X-Policy-Epoch
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/v61-artifact-policy.schema.json
+            responses:
+                "202":
+                    description:
+                        Received by trusted service; not an authorization or execution
+                        verdict
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Trusted-service-only error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - custody-policy
+            security:
+                - serviceMutualTLS: []
+    /internal/v1/holders/attest:
+        post:
+            operationId: v61RecordHolderCapability
+            summary: Declare holder environment and validated capacity
+            tags:
+                - v61-internal
+            parameters:
+                - name: Idempotency-Key
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+                - name: X-Policy-Epoch
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/v61-holder-capability.schema.json
+            responses:
+                "202":
+                    description:
+                        Received by trusted service; not an authorization or execution
+                        verdict
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Trusted-service-only error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - holder-supervisor
+            security:
+                - serviceMutualTLS: []
+    /internal/v1/custody/preflight:
+        post:
+            operationId: v61RecordCustodyRequest
+            summary: Request transfer authorization from broker
+            tags:
+                - v61-internal
+            parameters:
+                - name: Idempotency-Key
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+                - name: X-Policy-Epoch
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/v61-custody-request.schema.json
+            responses:
+                "202":
+                    description:
+                        Received by trusted service; not an authorization or execution
+                        verdict
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Trusted-service-only error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - custody-broker
+            security:
+                - serviceMutualTLS: []
+    /internal/v1/custody/decide:
+        post:
+            operationId: v61RecordCustodyDecision
+            summary: Record trusted policy decision, not caller-supplied approval
+            tags:
+                - v61-internal
+            parameters:
+                - name: Idempotency-Key
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+                - name: X-Policy-Epoch
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/v61-custody-decision.schema.json
+            responses:
+                "202":
+                    description:
+                        Received by trusted service; not an authorization or execution
+                        verdict
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Trusted-service-only error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - policy-service
+            security:
+                - serviceMutualTLS: []
+    /internal/v1/custody/commit:
+        post:
+            operationId: v61RecordCustodyReceipt
+            summary: Commit verified custody delivery after lease+policy checks
+            tags:
+                - v61-internal
+            parameters:
+                - name: Idempotency-Key
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+                - name: X-Policy-Epoch
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/v61-custody-receipt.schema.json
+            responses:
+                "202":
+                    description:
+                        Received by trusted service; not an authorization or execution
+                        verdict
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Trusted-service-only error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - custody-broker
+            security:
+                - serviceMutualTLS: []
+    /internal/v1/custody/reserve:
+        post:
+            operationId: v61RecordStorageLease
+            summary: Reserve destination storage under fencing
+            tags:
+                - v61-internal
+            parameters:
+                - name: Idempotency-Key
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+                - name: X-Policy-Epoch
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/v61-storage-lease.schema.json
+            responses:
+                "202":
+                    description:
+                        Received by trusted service; not an authorization or execution
+                        verdict
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Trusted-service-only error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - storage-broker
+            security:
+                - serviceMutualTLS: []
+    /internal/v1/licenses/register:
+        post:
+            operationId: v61RecordLicenseGrant
+            summary: Store owner-reviewed license/EULA terms
+            tags:
+                - v61-internal
+            parameters:
+                - name: Idempotency-Key
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+                - name: X-Policy-Epoch
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/v61-license-grant.schema.json
+            responses:
+                "202":
+                    description:
+                        Received by trusted service; not an authorization or execution
+                        verdict
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Trusted-service-only error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - license-registry
+            security:
+                - serviceMutualTLS: []
+    /internal/v1/embargoes/register:
+        post:
+            operationId: v61RecordEmbargoRule
+            summary: Store signed embargo policy
+            tags:
+                - v61-internal
+            parameters:
+                - name: Idempotency-Key
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+                - name: X-Policy-Epoch
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/v61-embargo-rule.schema.json
+            responses:
+                "202":
+                    description:
+                        Received by trusted service; not an authorization or execution
+                        verdict
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Trusted-service-only error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - policy-service
+            security:
+                - serviceMutualTLS: []
+    /internal/v1/trade/restrict:
+        post:
+            operationId: v61RecordTradeRestriction
+            summary: Store signed non-trade graph edge
+            tags:
+                - v61-internal
+            parameters:
+                - name: Idempotency-Key
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+                - name: X-Policy-Epoch
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/v61-trade-restriction.schema.json
+            responses:
+                "202":
+                    description:
+                        Received by trusted service; not an authorization or execution
+                        verdict
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Trusted-service-only error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - policy-service
+            security:
+                - serviceMutualTLS: []
+    /internal/v1/research/track:
+        post:
+            operationId: v61RecordResearchTrack
+            summary: Record independent researcher assignment
+            tags:
+                - v61-internal
+            parameters:
+                - name: Idempotency-Key
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+                - name: X-Policy-Epoch
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/v61-research-track.schema.json
+            responses:
+                "202":
+                    description:
+                        Received by trusted service; not an authorization or execution
+                        verdict
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Trusted-service-only error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - coordinator
+            security:
+                - serviceMutualTLS: []
+    /internal/v1/research/view/compile:
+        post:
+            operationId: v61RecordResearchView
+            summary: Record policy-filtered source view
+            tags:
+                - v61-internal
+            parameters:
+                - name: Idempotency-Key
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+                - name: X-Policy-Epoch
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/v61-research-view.schema.json
+            responses:
+                "202":
+                    description:
+                        Received by trusted service; not an authorization or execution
+                        verdict
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Trusted-service-only error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - context-projector
+            security:
+                - serviceMutualTLS: []
+    /internal/v1/research/task-context:
+        post:
+            operationId: v61RecordTaskContextPlan
+            summary: Stage an offline worker context and local tools
+            tags:
+                - v61-internal
+            parameters:
+                - name: Idempotency-Key
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+                - name: X-Policy-Epoch
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/v61-task-context-plan.schema.json
+            responses:
+                "202":
+                    description:
+                        Received by trusted service; not an authorization or execution
+                        verdict
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Trusted-service-only error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - supervisor
+            security:
+                - serviceMutualTLS: []
+    /internal/v1/research/intent/ingest:
+        post:
+            operationId: v61RecordExperimentIntent
+            summary: Ingest untrusted hypothesis only
+            tags:
+                - v61-internal
+            parameters:
+                - name: Idempotency-Key
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+                - name: X-Policy-Epoch
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/v61-experiment-intent.schema.json
+            responses:
+                "202":
+                    description:
+                        Received by trusted service; not an authorization or execution
+                        verdict
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Trusted-service-only error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - supervisor
+            security:
+                - serviceMutualTLS: []
+    /internal/v1/experiments/spec/compile:
+        post:
+            operationId: v61RecordExperimentSpec
+            summary: Record experiment spec compiled by trusted software
+            tags:
+                - v61-internal
+            parameters:
+                - name: Idempotency-Key
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+                - name: X-Policy-Epoch
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/v61-experiment-spec.schema.json
+            responses:
+                "202":
+                    description:
+                        Received by trusted service; not an authorization or execution
+                        verdict
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Trusted-service-only error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - experiment-compiler
+            security:
+                - serviceMutualTLS: []
+    /internal/v1/research/candidates/register:
+        post:
+            operationId: v61RecordCandidateBatch
+            summary: Register frozen baseline and candidate variant cohort
+            tags:
+                - v61-internal
+            parameters:
+                - name: Idempotency-Key
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+                - name: X-Policy-Epoch
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/v61-candidate-batch.schema.json
+            responses:
+                "202":
+                    description:
+                        Received by trusted service; not an authorization or execution
+                        verdict
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Trusted-service-only error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - coordinator
+            security:
+                - serviceMutualTLS: []
+    /internal/v1/feedback/project:
+        post:
+            operationId: v61RecordFeedbackRecord
+            summary: Record evidence-only private feedback projection
+            tags:
+                - v61-internal
+            parameters:
+                - name: Idempotency-Key
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+                - name: X-Policy-Epoch
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/v61-feedback-record.schema.json
+            responses:
+                "202":
+                    description:
+                        Received by trusted service; not an authorization or execution
+                        verdict
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Trusted-service-only error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - feedback-projector
+            security:
+                - serviceMutualTLS: []
+    /internal/v1/knowledge/release:
+        post:
+            operationId: v61RecordKnowledgeRelease
+            summary: Register authorized sanitized knowledge publication
+            tags:
+                - v61-internal
+            parameters:
+                - name: Idempotency-Key
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+                - name: X-Policy-Epoch
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/v61-knowledge-release.schema.json
+            responses:
+                "202":
+                    description:
+                        Received by trusted service; not an authorization or execution
+                        verdict
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Trusted-service-only error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - publication-bridge
+            security:
+                - serviceMutualTLS: []
+    /internal/v1/knowledge/compatibility:
+        post:
+            operationId: v61RecordReleaseCompatibility
+            summary: Record cross repo rights/semantic transfer checks
+            tags:
+                - v61-internal
+            parameters:
+                - name: Idempotency-Key
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+                - name: X-Policy-Epoch
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/v61-release-compatibility.schema.json
+            responses:
+                "202":
+                    description:
+                        Received by trusted service; not an authorization or execution
+                        verdict
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Trusted-service-only error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - policy-service
+            security:
+                - serviceMutualTLS: []
+    /internal/v1/audit/denial:
+        post:
+            operationId: v61RecordDenialAudit
+            summary: Append restricted policy incident
+            tags:
+                - v61-internal
+            parameters:
+                - name: Idempotency-Key
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+                - name: X-Policy-Epoch
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/v61-denial-audit.schema.json
+            responses:
+                "202":
+                    description:
+                        Received by trusted service; not an authorization or execution
+                        verdict
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Trusted-service-only error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - audit-service
+            security:
+                - serviceMutualTLS: []
+    /internal/v1/facts/append:
+        post:
+            operationId: v61RecordTemporalFact
+            summary: Append bitemporal fact to ledger
+            tags:
+                - v61-internal
+            parameters:
+                - name: Idempotency-Key
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+                - name: X-Policy-Epoch
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/v61-temporal-fact.schema.json
+            responses:
+                "202":
+                    description:
+                        Received by trusted service; not an authorization or execution
+                        verdict
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Trusted-service-only error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - ledger
+            security:
+                - serviceMutualTLS: []
+    /internal/v1/workers/neutral-receipt:
+        post:
+            operationId: v61RecordWorkerNeutralReceipt
+            summary: Record opaque model-facing submission acknowledgment
+            tags:
+                - v61-internal
+            parameters:
+                - name: Idempotency-Key
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+                - name: X-Policy-Epoch
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/v61-worker-neutral-receipt.schema.json
+            responses:
+                "202":
+                    description:
+                        Received by trusted service; not an authorization or execution
+                        verdict
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Trusted-service-only error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - supervisor
+            security:
+                - serviceMutualTLS: []
+    /internal/v1/research/boundary/record:
+        post:
+            operationId: v61RecordBoundaryObservation
+            summary: Record a protected model boundary observation
+            tags:
+                - v61-internal
+            parameters:
+                - name: Idempotency-Key
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+                - name: X-Policy-Epoch
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/v61-boundary-observation.schema.json
+            responses:
+                "202":
+                    description:
+                        Received by trusted service; not an authorization or execution
+                        verdict
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Trusted-service-only error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - supervisor
+            security:
+                - serviceMutualTLS: []
+    /internal/v1/curriculum/register:
+        post:
+            operationId: v61RecordCurriculumRecord
+            summary: Trusted software register curriculum
+            tags:
+                - v61-internal
+            parameters:
+                - name: Idempotency-Key
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+                - name: X-Policy-Epoch
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/v61-curriculum.schema.json
+            responses:
+                "202":
+                    description: Ingested only, no promotion promised
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - curriculum-service
+            security:
+                - serviceMutualTLS: []
+    /internal/v1/curriculum/study/assign:
+        post:
+            operationId: v61RecordStudyAssignmentRecord
+            summary: Trusted software register study-assignment
+            tags:
+                - v61-internal
+            parameters:
+                - name: Idempotency-Key
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+                - name: X-Policy-Epoch
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/v61-study-assignment.schema.json
+            responses:
+                "202":
+                    description: Ingested only, no promotion promised
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - curriculum-service
+            security:
+                - serviceMutualTLS: []
+    /internal/v1/curriculum/study/outcome:
+        post:
+            operationId: v61RecordStudyOutcomeRecord
+            summary: Trusted software register study-outcome
+            tags:
+                - v61-internal
+            parameters:
+                - name: Idempotency-Key
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+                - name: X-Policy-Epoch
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/v61-study-outcome.schema.json
+            responses:
+                "202":
+                    description: Ingested only, no promotion promised
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - study-evaluator
+            security:
+                - serviceMutualTLS: []
+    /internal/v1/resources/allocate:
+        post:
+            operationId: v61RecordPhysicalAllocationRecord
+            summary: Trusted software register physical-allocation
+            tags:
+                - v61-internal
+            parameters:
+                - name: Idempotency-Key
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+                - name: X-Policy-Epoch
+                  in: header
+                  required: true
+                  schema:
+                      type: string
+                      minLength: 1
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: ../schemas/v61-physical-allocation.schema.json
+            responses:
+                "202":
+                    description: Ingested only, no promotion promised
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/ack.schema.json
+                default:
+                    description: Error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: ../schemas/api-error.schema.json
+            x-lab-roles:
+                - resource-scheduler
+            security:
+                - serviceMutualTLS: []

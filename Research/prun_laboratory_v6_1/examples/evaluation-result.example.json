@@ -1,0 +1,16 @@
+{
+	"evaluation_id": "sample-id",
+	"benchmark_id": "sample-id",
+	"baseline_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"candidate_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"correctness_attestation_id": "sample-id",
+	"performance_attestation_id": "sample-id",
+	"effect_elapsed_pct": 0.0,
+	"effect_cpu_pct": 0.0,
+	"effect_peak_rss_pct": 0.0,
+	"confidence_interval_pct": [0.0, 0.0],
+	"regression_flags": [],
+	"decision": "eligible",
+	"statistical_protocol_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"evaluated_utc": "2026-11-21T10:00:00Z"
+}

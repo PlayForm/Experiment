@@ -1,0 +1,40 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/identity-revoke-request.schema.json",
+	"title": "identity-revoke-request",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"credential_serial": {
+			"type": "string",
+			"minLength": 1
+		},
+		"reason_code": {
+			"type": "string",
+			"enum": [
+				"compromised",
+				"role-ended",
+				"expired",
+				"replaced",
+				"policy-changed",
+				"operator-request"
+			]
+		},
+		"request_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"requested_by": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		}
+	},
+	"required": [
+		"credential_serial",
+		"reason_code",
+		"request_id",
+		"requested_by"
+	]
+}

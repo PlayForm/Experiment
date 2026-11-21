@@ -1,0 +1,10 @@
+{
+	"observation_id": "observation-a",
+	"worker_assignment_id": "task-a",
+	"local_action": "read-file",
+	"outcome": "blocked",
+	"trusted_internal_cause": "restricted path",
+	"worker_feedback_class": "generic-io",
+	"tool_receipt_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"logged_at": "2026-11-21T01:00:00Z"
+}

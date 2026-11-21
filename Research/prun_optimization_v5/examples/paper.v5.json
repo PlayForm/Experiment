@@ -1,0 +1,26 @@
+{
+	"version": 5,
+	"paper_id": "paper-1",
+	"repo_id": "playform-run",
+	"case_ids": ["case-1"],
+	"status": "internal_observation",
+	"title": "Directory walker cost on wide trees",
+	"abstract": "A provisional mechanism report that explicitly does not claim performance gains.",
+	"claim_links": [
+		{
+			"claim_id": "claim-1",
+			"evidence_ids": [],
+			"evidence_status": "unsupported"
+		}
+	],
+	"baseline_artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"methods_artifact_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+	"manuscript_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+	"limitations": ["No independent replication has yet run."],
+	"negative_results": [],
+	"sanitization_status": "pending",
+	"declassification_grant_id": null,
+	"publisher_identity": "editor-1",
+	"created_utc": "2026-11-21T00:04:00Z",
+	"signature_b64": "DEMO_UNVERIFIED_SIGNATURE"
+}

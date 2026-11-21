@@ -1,0 +1,13 @@
+{
+	"view_id": "view-a",
+	"worker_assignment_id": "task-a",
+	"source_snapshot_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"allowed_paths": ["src/"],
+	"reference_artifact_digests": [],
+	"feedback_artifact_digests": [],
+	"excluded_track_ids": ["track-b"],
+	"repository_id": "repo-a",
+	"view_policy_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"manifest_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"created_at": "2026-11-21T01:00:00Z"
+}

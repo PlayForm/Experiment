@@ -1,0 +1,40 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/policy-validation-result.schema.json",
+	"title": "policy-validation-result",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"policy_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"valid": {
+			"type": "boolean"
+		},
+		"violations": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			}
+		},
+		"validated_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		},
+		"validator_version": {
+			"type": "string",
+			"minLength": 1
+		}
+	},
+	"required": [
+		"policy_digest",
+		"valid",
+		"violations",
+		"validated_utc",
+		"validator_version"
+	]
+}

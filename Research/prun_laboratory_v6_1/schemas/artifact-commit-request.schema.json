@@ -1,0 +1,39 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/artifact-commit-request.schema.json",
+	"title": "artifact-commit-request",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"artifact": {
+			"$ref": "./artifact-ref.schema.json"
+		},
+		"bytes_verified_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"uploader_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"subject_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"idempotency_key": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		}
+	},
+	"required": [
+		"artifact",
+		"bytes_verified_digest",
+		"uploader_id",
+		"subject_id",
+		"idempotency_key"
+	]
+}

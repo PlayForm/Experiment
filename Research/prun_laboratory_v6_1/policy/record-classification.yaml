@@ -1,0 +1,42 @@
+version: 6
+classes:
+    - class: public-meta
+      examples:
+          - campaign status
+          - aggregate results
+          - sanitized paper
+      visible_to:
+          - observer
+          - operator
+      retention: until owner retention policy expires
+    - class: internal-meta
+      examples:
+          - service ids
+          - trace span ids
+          - issuance counts
+          - certificate serials
+      visible_to:
+          - operator
+          - authorized-auditor
+      retention: operational
+    - class: restricted
+      examples:
+          - patch diffs
+          - private research claims
+          - test counterexamples
+      visible_to:
+          - assigned workers via scoped snapshots
+          - trusted validators
+      retention: append-only encrypted
+    - class: sealed
+      examples:
+          - raw conversations
+          - tool transcripts
+          - hidden holdouts
+          - private keys
+      visible_to:
+          - named decryptor only
+      retention: encryption and deletion policy; ciphertext may persist beyond key destruction
+note:
+    Metadata is not automatically anonymous. Observer UI may see only approved projections,
+    not agent-private content.

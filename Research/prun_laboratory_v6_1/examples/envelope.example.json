@@ -1,0 +1,25 @@
+{
+	"envelope_id": "sample-id",
+	"protocol_version": 6,
+	"message_type": "sample-id",
+	"sender_credential_id": "sample-id",
+	"recipient_service_id": "sample-id",
+	"correlation_id": "sample-id",
+	"idempotency_key": "sample-id",
+	"created_utc": "2026-11-21T10:00:00Z",
+	"expires_utc": "2026-11-21T10:00:00Z",
+	"nonce": "sample-id",
+	"ciphertext": {
+		"digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+		"media_type": "sample-id",
+		"size_bytes": 1,
+		"storage_class": "private",
+		"encryption": "none",
+		"created_utc": "2026-11-21T10:00:00Z"
+	},
+	"ciphertext_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"sender_signature_b64": "sample-id",
+	"signature_scope_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"visibility": "metadata-only",
+	"tracing_correlation_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}

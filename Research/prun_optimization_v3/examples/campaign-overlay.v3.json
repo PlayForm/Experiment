@@ -1,0 +1,46 @@
+{
+	"schema_version": 3,
+	"extends_campaign_schema": 2,
+	"campaign_id": "local-adaptive-scheduler-v1",
+	"status": "illustrative_overlay_not_executable",
+	"scheduler": {
+		"fanout": 5,
+		"agent_pool_idle": 2,
+		"max_agent_concurrency": 5,
+		"max_parallel_measurements_per_bench_host": 1,
+		"measurement_isolation": "dedicated_host_preferred",
+		"control_cpu_set": "0-1",
+		"bench_cpu_set": "2-5"
+	},
+	"agent_isolation": {
+		"patcher_full_repo_access": false,
+		"patcher_can_read_holdout": false,
+		"patcher_can_read_peers": false,
+		"patcher_can_benchmark": false,
+		"patcher_requires_committed_patch": true,
+		"source_view_policy": "worktree_scope_and_symbol_dependencies"
+	},
+	"novelty_gate": {
+		"identity_version": "canonical-rust-v1",
+		"exact_cache": true,
+		"syntax_similarity": true,
+		"embedding_similarity_optional": true,
+		"model_advisory_only": true,
+		"reuse_requires_same_protocol": true
+	},
+	"telemetry": {
+		"control_plane": "on",
+		"product_timing_mode": "trace-off",
+		"product_diagnostics_mode": "trace-diagnostic",
+		"rust_otlp_receiver": true,
+		"telemetry_is_not_evidence_ledger": true
+	},
+	"results": {
+		"full_trials_immutable": true,
+		"feedback_only_own_development_results": true,
+		"save_prompt_turns": true,
+		"save_stream_timing": true,
+		"signed_attestations": true,
+		"manual_release_approval": true
+	}
+}

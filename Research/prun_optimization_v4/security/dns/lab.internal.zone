@@ -1,0 +1,9 @@
+$ORIGIN lab.internal.
+$TTL 60
+@   IN SOA ns.lab.internal. operator.lab.internal. ( 2026112101 3600 600 86400 60 )
+@   IN NS  ns.lab.internal.
+ns          IN A 172.30.30.53
+relay       IN A 172.30.30.10
+coordinator IN A 172.30.30.11
+verifier    IN A 172.30.30.12
+# No sensitive key material or credential fingerprints in DNS responses.

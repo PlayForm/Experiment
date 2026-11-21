@@ -1,0 +1,66 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://contracts.example.invalid/v6.2/migration-transition.schema.json",
+	"title": "Signed immutable schema/policy migration transition",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"migration_id": {
+			"type": "string",
+			"pattern": "^(?:[A-Za-z0-9_-]{43})(?![\\s\\S])"
+		},
+		"previous_head": {
+			"type": "string",
+			"pattern": "^(?:[a-f0-9]{64})(?![\\s\\S])"
+		},
+		"schema_before": {
+			"type": "string",
+			"pattern": "^(?:[a-f0-9]{64})(?![\\s\\S])"
+		},
+		"schema_after": {
+			"type": "string",
+			"pattern": "^(?:[a-f0-9]{64})(?![\\s\\S])"
+		},
+		"policy_after": {
+			"type": "string",
+			"pattern": "^(?:[a-f0-9]{64})(?![\\s\\S])"
+		},
+		"compiler_digest": {
+			"type": "string",
+			"pattern": "^(?:[a-f0-9]{64})(?![\\s\\S])"
+		},
+		"epoch_before": {
+			"type": "integer",
+			"minimum": 1
+		},
+		"epoch_after": {
+			"type": "integer",
+			"minimum": 2
+		},
+		"phase": {
+			"type": "string",
+			"enum": ["prepared", "activated", "aborted"]
+		},
+		"approver": {
+			"type": "string",
+			"pattern": "^(?:[A-Za-z0-9_-]{43})(?![\\s\\S])"
+		},
+		"signature": {
+			"type": "string",
+			"pattern": "^(?:[A-Za-z0-9_-]{16,4096})(?![\\s\\S])"
+		}
+	},
+	"required": [
+		"migration_id",
+		"previous_head",
+		"schema_before",
+		"schema_after",
+		"policy_after",
+		"compiler_digest",
+		"epoch_before",
+		"epoch_after",
+		"phase",
+		"approver",
+		"signature"
+	]
+}

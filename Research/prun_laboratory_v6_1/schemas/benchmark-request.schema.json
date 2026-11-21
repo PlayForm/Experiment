@@ -1,0 +1,95 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/benchmark-request.schema.json",
+	"title": "benchmark-request",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"benchmark_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"experiment_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"mutation_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"baseline_binary_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"candidate_binary_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"workload_manifest_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"host_cohort_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"protocol_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"repetitions": {
+			"type": "integer",
+			"minimum": 1
+		},
+		"warmups": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"randomization_seed": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"trace_mode": {
+			"const": "off"
+		},
+		"lease_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"fencing_token": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"idempotency_key": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		}
+	},
+	"required": [
+		"benchmark_id",
+		"experiment_id",
+		"mutation_id",
+		"baseline_binary_digest",
+		"candidate_binary_digest",
+		"workload_manifest_digest",
+		"host_cohort_digest",
+		"protocol_digest",
+		"repetitions",
+		"warmups",
+		"randomization_seed",
+		"trace_mode",
+		"lease_id",
+		"fencing_token",
+		"idempotency_key"
+	]
+}

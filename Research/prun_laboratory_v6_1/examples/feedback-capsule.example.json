@@ -1,0 +1,13 @@
+{
+	"feedback_id": "sample-id",
+	"task_id": "sample-id",
+	"mutation_id": "sample-id",
+	"iteration": 1,
+	"oracle_state": "passed",
+	"evaluation_state": "eligible",
+	"permitted_failure_codes": [],
+	"allowed_result_refs": [],
+	"next_scope_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"excludes_holdout_details": true,
+	"prepared_utc": "2026-11-21T10:00:00Z"
+}

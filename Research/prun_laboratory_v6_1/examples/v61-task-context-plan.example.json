@@ -1,0 +1,18 @@
+{
+	"plan_id": "plan-a",
+	"view_id": "view-a",
+	"offline": true,
+	"task_mount_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"source_mount_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"allowed_local_tools": ["rustc", "cargo-check", "ripgrep"],
+	"scratch_bytes_limit": 12345678,
+	"process_limit": 64,
+	"network_mode": "none",
+	"output_manifest_schema": "patch-proposal.v6",
+	"prohibited_context_classes": [
+		"lab-topology",
+		"certificates",
+		"sealed-tests"
+	],
+	"supervisor_attestation": "0000000000000000000000000000000000000000000000000000000000000000"
+}

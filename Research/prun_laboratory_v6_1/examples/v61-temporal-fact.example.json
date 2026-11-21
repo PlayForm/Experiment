@@ -1,0 +1,14 @@
+{
+	"fact_id": "fact-a",
+	"subject_id": "artifact-a",
+	"event_time": "2026-11-21T01:00:00Z",
+	"observed_at": "2026-11-21T01:00:00Z",
+	"valid_from": "2026-11-21T01:00:00Z",
+	"valid_to": null,
+	"recorded_at": "2026-11-21T01:00:00Z",
+	"supersedes_fact_id": null,
+	"source_event_id": "event-a",
+	"clock_domain": "utc",
+	"clock_uncertainty_ns": 1000000,
+	"fact_payload_digest": "0000000000000000000000000000000000000000000000000000000000000000"
+}

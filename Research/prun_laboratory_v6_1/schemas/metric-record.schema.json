@@ -1,0 +1,66 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/metric-record.schema.json",
+	"title": "metric-record",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"metric_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"plane": {
+			"type": "string",
+			"enum": ["control", "product"]
+		},
+		"name": {
+			"type": "string",
+			"minLength": 1
+		},
+		"unit": {
+			"type": "string",
+			"minLength": 1
+		},
+		"kind": {
+			"type": "string",
+			"enum": ["counter", "gauge", "histogram"]
+		},
+		"value": {
+			"type": "number"
+		},
+		"observed_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		},
+		"resource_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"attributes": {
+			"type": "object",
+			"additionalProperties": {
+				"type": "string",
+				"minLength": 0
+			}
+		},
+		"sample_authority": {
+			"type": "string",
+			"enum": ["telemetry", "trusted-runner"]
+		}
+	},
+	"required": [
+		"metric_id",
+		"plane",
+		"name",
+		"unit",
+		"kind",
+		"value",
+		"observed_utc",
+		"resource_id",
+		"attributes",
+		"sample_authority"
+	]
+}

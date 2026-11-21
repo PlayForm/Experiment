@@ -1,0 +1,18 @@
+sequenceDiagram
+    participant K as Rust coordinator
+    participant S as Trusted supervisor
+    participant M as Offline model worker
+    participant C as Encrypted CAS
+    participant O as Trusted oracle
+    participant B as Trusted runner
+    K->>S: Scoped TaskBundle + lease (mTLS)
+    S->>M: Read-only task mount (no network)
+    M-->>S: Write-only output scratch (patch/claim)
+    S->>C: Seal transcripts, tool calls and patch
+    S-->>K: TaskReceipt + output digest
+    K->>O: Immutable candidate + trusted tests
+    O-->>K: Signed OracleResult
+    K->>B: Frozen benchmark request + exclusive lease
+    B-->>K: Signed raw samples
+    K->>S: Scoped filtered feedback capsule
+    S->>M: New read-only feedback mount

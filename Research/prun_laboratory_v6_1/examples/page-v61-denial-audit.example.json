@@ -1,0 +1,21 @@
+{
+	"items": [
+		{
+			"audit_id": "audit-a",
+			"request_id": "xfer-1",
+			"decision_id": "decision-1",
+			"actor_id": "worker-17",
+			"action": "artifact-open",
+			"artifact_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+			"policy_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+			"reason_code": "embargo",
+			"risk_class": "legal",
+			"worker_notified": false,
+			"operator_visibility": "restricted",
+			"event_time": "2026-11-21T01:00:00Z",
+			"recorded_at": "2026-11-21T01:00:00Z"
+		}
+	],
+	"next_cursor": null,
+	"has_more": false
+}

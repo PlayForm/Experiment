@@ -1,0 +1,17 @@
+{
+	"receipt": {
+		"task_id": "sample-id",
+		"assignment_id": "sample-id",
+		"output_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+		"output_kind": "patch",
+		"tool_transcript_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+		"conversation_manifest_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+		"worker_image_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+		"supervisor_id": "sample-id",
+		"result_state": "submitted",
+		"completed_utc": "2026-11-21T10:00:00Z"
+	},
+	"lease_id": "sample-id",
+	"fencing_token": 1,
+	"request_id": "sample-id"
+}

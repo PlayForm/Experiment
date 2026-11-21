@@ -1,0 +1,97 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/experiment.schema.json",
+	"title": "experiment",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"experiment_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"campaign_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"mutation_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"baseline_mutation_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"source_snapshot_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"workload_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"hardware_cohort_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"build_recipe_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"protocol_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"state": {
+			"type": "string",
+			"enum": [
+				"planned",
+				"validating",
+				"building",
+				"testing",
+				"queued",
+				"running",
+				"evaluating",
+				"complete",
+				"rejected",
+				"inconclusive"
+			]
+		},
+		"benchmark_id": {
+			"type": ["string", "null"]
+		},
+		"created_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		},
+		"updated_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"experiment_id",
+		"campaign_id",
+		"mutation_id",
+		"baseline_mutation_id",
+		"source_snapshot_id",
+		"workload_digest",
+		"hardware_cohort_digest",
+		"build_recipe_digest",
+		"protocol_digest",
+		"state",
+		"benchmark_id",
+		"created_utc",
+		"updated_utc"
+	]
+}

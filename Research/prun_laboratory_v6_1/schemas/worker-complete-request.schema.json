@@ -1,0 +1,27 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/worker-complete-request.schema.json",
+	"title": "worker-complete-request",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"receipt": {
+			"$ref": "./task-receipt.schema.json"
+		},
+		"lease_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"fencing_token": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"request_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		}
+	},
+	"required": ["receipt", "lease_id", "fencing_token", "request_id"]
+}

@@ -1,0 +1,110 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://prun.local/schemas/feedback-capsule.v3.json",
+	"title": "PlayForm/Run feedback-capsule v3",
+	"type": "object",
+	"additionalProperties": false,
+	"required": [
+		"schema_version",
+		"capsule_id",
+		"recipient_work_order_id",
+		"proposal_id",
+		"evaluation_status",
+		"dataset_visibility",
+		"baseline_binary_sha256",
+		"candidate_binary_sha256",
+		"evidence_sha256",
+		"policy_sha256",
+		"issued_utc"
+	],
+	"properties": {
+		"schema_version": {
+			"const": 3
+		},
+		"capsule_id": {
+			"type": "string",
+			"minLength": 1
+		},
+		"recipient_work_order_id": {
+			"type": "string",
+			"minLength": 1
+		},
+		"proposal_id": {
+			"type": "string",
+			"minLength": 1
+		},
+		"evaluation_status": {
+			"enum": [
+				"oracle_failed",
+				"benchmark_win",
+				"benchmark_loss",
+				"inconclusive",
+				"invalid",
+				"cache_hit",
+				"not_yet_measured"
+			]
+		},
+		"dataset_visibility": {
+			"const": "own_development_only"
+		},
+		"baseline_binary_sha256": {
+			"type": "string",
+			"pattern": "^[0-9a-f]{64}$"
+		},
+		"candidate_binary_sha256": {
+			"type": "string",
+			"pattern": "^[0-9a-f]{64}$"
+		},
+		"evidence_sha256": {
+			"type": "string",
+			"pattern": "^[0-9a-f]{64}$"
+		},
+		"policy_sha256": {
+			"type": "string",
+			"pattern": "^[0-9a-f]{64}$"
+		},
+		"issued_utc": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"speedup_ratio": {
+			"type": ["number", "null"],
+			"exclusiveMinimum": 0
+		},
+		"ci_low": {
+			"type": ["number", "null"]
+		},
+		"ci_high": {
+			"type": ["number", "null"]
+		},
+		"failure_categories": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			}
+		},
+		"aggregate_hints": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			}
+		},
+		"next_action": {
+			"enum": [
+				"revise_as_new_mutation",
+				"stop_lane",
+				"confirm_later",
+				"await_review",
+				"repair_correctness"
+			]
+		},
+		"sealed_holdout_included": {
+			"const": false
+		},
+		"related_analysis_id": {
+			"type": ["string", "null"]
+		}
+	}
+}

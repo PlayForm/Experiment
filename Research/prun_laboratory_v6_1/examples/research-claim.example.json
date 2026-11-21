@@ -1,0 +1,23 @@
+{
+	"claim_id": "sample-id",
+	"case_id": "sample-id",
+	"task_id": "sample-id",
+	"stance": "proponent",
+	"hypothesis": "sample-id",
+	"predicted_effect_pct": 0.0,
+	"prediction_probability": 0.0,
+	"conditions": [],
+	"falsification_tests": [],
+	"references": [],
+	"claim_artifact": {
+		"digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+		"media_type": "sample-id",
+		"size_bytes": 1,
+		"storage_class": "private",
+		"encryption": "none",
+		"created_utc": "2026-11-21T10:00:00Z"
+	},
+	"conflict_of_interest": "sample-id",
+	"blind_cohort_id": "sample-id",
+	"created_utc": "2026-11-21T10:00:00Z"
+}

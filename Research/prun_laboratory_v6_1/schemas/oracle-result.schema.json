@@ -1,0 +1,59 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/oracle-result.schema.json",
+	"title": "oracle-result",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"oracle_run_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"state": {
+			"type": "string",
+			"enum": ["passed", "failed", "inconclusive", "infrastructure_error"]
+		},
+		"tests": {
+			"type": "array",
+			"items": {
+				"$ref": "./test-observation.schema.json"
+			}
+		},
+		"trusted_manifest_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"runner_image_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"result_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"signed_attestation_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"completed_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"oracle_run_id",
+		"state",
+		"tests",
+		"trusted_manifest_digest",
+		"runner_image_digest",
+		"result_digest",
+		"signed_attestation_id",
+		"completed_utc"
+	]
+}

@@ -1,0 +1,75 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/status.schema.json",
+	"title": "status",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"api_version": {
+			"const": "v6"
+		},
+		"lab_state": {
+			"type": "string",
+			"enum": [
+				"idle",
+				"ready",
+				"running",
+				"paused",
+				"draining",
+				"degraded",
+				"failed"
+			]
+		},
+		"active_campaigns": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"queued_jobs": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"running_jobs": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"benchmark_host_leases": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"control_telemetry": {
+			"type": "string",
+			"enum": ["ok", "degraded", "down"]
+		},
+		"product_telemetry": {
+			"type": "string",
+			"enum": ["ok", "degraded", "down", "disabled"]
+		},
+		"event_ledger_sequence": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"last_checkpoint_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		},
+		"as_of_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"api_version",
+		"lab_state",
+		"active_campaigns",
+		"queued_jobs",
+		"running_jobs",
+		"benchmark_host_leases",
+		"control_telemetry",
+		"product_telemetry",
+		"event_ledger_sequence",
+		"last_checkpoint_utc",
+		"as_of_utc"
+	]
+}

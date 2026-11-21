@@ -1,0 +1,45 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://contracts.example.invalid/v6.2/genesis-commitment.schema.json",
+	"title": "Public commitment, not an encryption seed",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"protocol_revision": {
+			"const": "6.2"
+		},
+		"schema_digest": {
+			"type": "string",
+			"pattern": "^(?:[a-f0-9]{64})(?![\\s\\S])"
+		},
+		"policy_digest": {
+			"type": "string",
+			"pattern": "^(?:[a-f0-9]{64})(?![\\s\\S])"
+		},
+		"first_event_commitment": {
+			"type": "string",
+			"pattern": "^(?:[a-f0-9]{64})(?![\\s\\S])"
+		},
+		"issuer_public_key_digest": {
+			"type": "string",
+			"pattern": "^(?:[a-f0-9]{64})(?![\\s\\S])"
+		},
+		"created_at": {
+			"type": "string",
+			"format": "date-time"
+		},
+		"governance_signature": {
+			"type": "string",
+			"pattern": "^(?:[A-Za-z0-9_-]{16,4096})(?![\\s\\S])"
+		}
+	},
+	"required": [
+		"protocol_revision",
+		"schema_digest",
+		"policy_digest",
+		"first_event_commitment",
+		"issuer_public_key_digest",
+		"created_at",
+		"governance_signature"
+	]
+}

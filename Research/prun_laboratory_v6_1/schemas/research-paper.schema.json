@@ -1,0 +1,100 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://schemas.lab.invalid/v6/research-paper.schema.json",
+	"title": "research-paper",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"paper_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"case_ids": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1,
+				"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+			},
+			"minItems": 1
+		},
+		"title": {
+			"type": "string",
+			"minLength": 1
+		},
+		"document": {
+			"$ref": "./artifact-ref.schema.json"
+		},
+		"claims": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1,
+				"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+			}
+		},
+		"evidence_ids": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1,
+				"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+			}
+		},
+		"status": {
+			"type": "string",
+			"enum": [
+				"draft",
+				"private-reviewed",
+				"sanitization-pending",
+				"sanitized",
+				"internal-released",
+				"public-released",
+				"rejected"
+			]
+		},
+		"visibility": {
+			"type": "string",
+			"enum": ["private", "internal", "public"]
+		},
+		"revision": {
+			"type": "integer",
+			"minimum": 0
+		},
+		"sanitization_report_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"citation_manifest_digest": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[a-f0-9]{64}$"
+		},
+		"publication_attestation_id": {
+			"type": "string",
+			"minLength": 1,
+			"pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+		},
+		"created_utc": {
+			"type": "string",
+			"minLength": 1,
+			"format": "date-time"
+		}
+	},
+	"required": [
+		"paper_id",
+		"case_ids",
+		"title",
+		"document",
+		"claims",
+		"evidence_ids",
+		"status",
+		"visibility",
+		"revision",
+		"sanitization_report_digest",
+		"citation_manifest_digest",
+		"created_utc"
+	]
+}

@@ -1,0 +1,14 @@
+{
+	"feedback_id": "feedback-a",
+	"source_experiment_spec": "spec-a",
+	"authoritative_result_digests": [
+		"0000000000000000000000000000000000000000000000000000000000000000"
+	],
+	"target_track_id": "track-a",
+	"allowed_fields": ["oracle_status", "measured_speedup"],
+	"projection_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"redaction_policy_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+	"release_class": "private-track",
+	"created_by": "trusted-feedback-projector",
+	"created_at": "2026-11-21T01:00:00Z"
+}

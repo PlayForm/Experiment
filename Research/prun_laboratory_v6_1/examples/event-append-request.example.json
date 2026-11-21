@@ -1,0 +1,27 @@
+{
+	"event": {
+		"event_id": "sample-id",
+		"global_seq": 1,
+		"aggregate_id": "sample-id",
+		"aggregate_seq": 1,
+		"event_kind": "sample-id",
+		"actor": {
+			"actor_id": "sample-id",
+			"actor_kind": "owner",
+			"credential_id": "sample-id",
+			"trust_domain": "sample-id"
+		},
+		"occurred_utc": "2026-11-21T10:00:00Z",
+		"recorded_utc": "2026-11-21T10:00:00Z",
+		"correlation_id": "sample-id",
+		"idempotency_key": "sample-id",
+		"payload_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+		"prev_event_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+		"event_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+		"signature_ref": "sample-id",
+		"privacy_class": "public-meta"
+	},
+	"expected_aggregate_seq": 1,
+	"expected_last_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+	"request_id": "sample-id"
+}

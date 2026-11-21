@@ -1,0 +1,67 @@
+{
+	"capacity": {
+		"input_tokens": 100000,
+		"output_tokens": 50000,
+		"cpu_core_seconds": 12000,
+		"benchmark_seconds": 0,
+		"gpu_seconds": 0,
+		"storage_byte_days": 1000000,
+		"reference_requests": 50
+	},
+	"mandatory_stances": ["skeptic", "replicator"],
+	"max_per_model_cohort": 2,
+	"max_per_mechanism": 1,
+	"bids": [
+		{
+			"bid_id": "bid-skeptic",
+			"case_id": "case-1",
+			"stance": "skeptic",
+			"model_cohort": "cohort-a",
+			"mechanism_key": "scheduler-contention",
+			"externally_estimated_information_gain": 0.6,
+			"requested": {
+				"input_tokens": 25000,
+				"output_tokens": 5000,
+				"cpu_core_seconds": 1000,
+				"benchmark_seconds": 0,
+				"gpu_seconds": 0,
+				"storage_byte_days": 50000,
+				"reference_requests": 10
+			}
+		},
+		{
+			"bid_id": "bid-proponent",
+			"case_id": "case-1",
+			"stance": "proponent",
+			"model_cohort": "cohort-b",
+			"mechanism_key": "directory-walking",
+			"externally_estimated_information_gain": 0.9,
+			"requested": {
+				"input_tokens": 50000,
+				"output_tokens": 10000,
+				"cpu_core_seconds": 3000,
+				"benchmark_seconds": 0,
+				"gpu_seconds": 0,
+				"storage_byte_days": 50000,
+				"reference_requests": 10
+			}
+		},
+		{
+			"bid_id": "bid-replicator",
+			"case_id": "case-1",
+			"stance": "replicator",
+			"model_cohort": "cohort-c",
+			"mechanism_key": "independent-replication",
+			"externally_estimated_information_gain": 0.7,
+			"requested": {
+				"input_tokens": 20000,
+				"output_tokens": 6000,
+				"cpu_core_seconds": 1000,
+				"benchmark_seconds": 0,
+				"gpu_seconds": 0,
+				"storage_byte_days": 100000,
+				"reference_requests": 5
+			}
+		}
+	]
+}
